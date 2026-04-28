@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore — Md. Shahriar Kabir Fahim</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Marquee ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+      padding: 2.5rem 0 3rem;
+      background: var(--parchment-dark);
+      position: relative;
+    }
+    .marquee-wrap::before,
+    .marquee-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee-wrap::before { left: 0; background: linear-gradient(to right, var(--parchment-dark), transparent); }
+    .marquee-wrap::after  { right: 0; background: linear-gradient(to left, var(--parchment-dark), transparent); }
+
+    .marquee-track {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      width: max-content;
+      animation: marquee-scroll 42s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .mphoto {
+      position: relative;
+      flex-shrink: 0;
+      height: 180px;
+      filter: sepia(0.3) contrast(0.92);
+      transition: filter 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .mphoto:nth-child(odd)  { transform: rotate(-1.2deg); }
+    .mphoto:nth-child(even) { transform: rotate(0.9deg); }
+    .mphoto:hover { filter: sepia(0.05) contrast(1); transform: rotate(0deg) scale(1.04) translateY(-5px); z-index: 3; }
+    .mphoto svg { height: 180px; width: auto; display: block; }
+    .mphoto--tall svg { height: 220px; }
+    .mphoto--sq  svg { height: 190px; }
+
+    .mphoto span {
+      position: absolute;
+      bottom: -1.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-fine);
+      font-style: italic;
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Life at BRAC ── */
+    .brac-section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .brac-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 700px) { .brac-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+    .brac-text p {
+      font-size: 1rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .brac-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .brac-stat {
+      border: 1px solid var(--rule);
+      background: var(--parchment-dark);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+
+    .brac-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--sepia);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .brac-stat-label {
+      font-family: var(--font-fine);
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .brac-roles {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.25rem;
+    }
+
+    .brac-role-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--sepia-faint);
+      align-items: baseline;
+    }
+    .brac-role-item:last-child { border-bottom: none; }
+
+    .brac-role-dot {
+      flex-shrink: 0;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--sepia-light);
+      margin-top: 0.55rem;
+    }
+
+    .brac-role-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .brac-role-date {
+      font-family: var(--font-fine);
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── CV Section ── */
+    .cv-section-block {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .cv-section-block h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .cv-section-block p {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+
+    .cv-download-btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: var(--sepia);
+      border: 1px solid var(--sepia);
+      padding: 0.85rem 2.5rem;
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .cv-download-btn:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .cv-contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 2rem;
+      margin-top: 1.5rem;
+    }
+    .cv-contact-links a {
+      font-family: var(--font-fine);
+      font-size: 0.88rem;
+      color: var(--sepia);
+      border-bottom: 1px solid var(--sepia-light);
+      transition: color 0.2s;
+    }
+    .cv-contact-links a:hover { color: var(--ink); border-color: var(--ink); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="site-name">Md. Shahriar Kabir Fahim</a>
+    <p class="site-tagline">Speech Therapist · Social Entrepreneur · Development Worker · Disability Activist</p>
+    <nav>
+      <ul>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="explore.html" class="active">Explore</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main style="padding-top: 0;">
+
+  <!-- Photo Marquee -->
+  <div class="marquee-wrap">
+    <p class="section-label" style="text-align:center; padding: 0 0 1.75rem; background: var(--parchment-dark);">Photo Collage</p>
+    <div class="marquee-track">
+
+      <div class="mphoto">
+        <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="160" fill="#c8b070"/>
+          <rect x="0" y="0" width="220" height="70" fill="#d4a84a" opacity="0.5"/>
+          <rect x="10" y="30" width="30" height="130" fill="#5c3d1a" opacity="0.6"/>
+          <rect x="45" y="50" width="25" height="110" fill="#4a3010" opacity="0.55"/>
+          <rect x="75" y="20" width="40" height="140" fill="#6b4820" opacity="0.65"/>
+          <rect x="120" y="40" width="28" height="120" fill="#543818" opacity="0.6"/>
+          <rect x="155" y="35" width="35" height="125" fill="#5c3d1a" opacity="0.55"/>
+          <rect x="0" y="130" width="220" height="30" fill="#3d2810" opacity="0.5"/>
+          <ellipse cx="60" cy="128" rx="5" ry="12" fill="#2e1a08" opacity="0.7"/>
+          <ellipse cx="100" cy="132" rx="4" ry="10" fill="#2e1a08" opacity="0.65"/>
+          <rect width="220" height="160" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Dhaka Streets</span>
+      </div>
+
+      <div class="mphoto mphoto--tall">
+        <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="160" height="220" fill="#b8a060"/>
+          <rect x="0" y="0" width="160" height="90" fill="#c8b870" opacity="0.6"/>
+          <ellipse cx="50" cy="30" rx="30" ry="12" fill="#e8d8a0" opacity="0.5"/>
+          <rect x="72" y="80" width="10" height="80" fill="#3d2810" opacity="0.7"/>
+          <ellipse cx="77" cy="75" rx="35" ry="40" fill="#3d5020" opacity="0.65"/>
+          <rect x="0" y="145" width="160" height="75" fill="#5c4820" opacity="0.5"/>
+          <rect width="160" height="220" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Field Notes</span>
+      </div>
+
+      <div class="mphoto">
+        <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="160" fill="#c0a860"/>
+          <rect x="0" y="0" width="220" height="90" fill="#b89040" opacity="0.4"/>
+          <rect x="30" y="20" width="160" height="60" rx="2" fill="#8b6020" opacity="0.5"/>
+          <rect x="40" y="28" width="140" height="4" fill="#d4a84a" opacity="0.6"/>
+          <rect x="40" y="38" width="100" height="3" fill="#d4a84a" opacity="0.45"/>
+          <ellipse cx="40" cy="115" rx="8" ry="20" fill="#2e1a08" opacity="0.65"/>
+          <ellipse cx="78" cy="110" rx="7" ry="22" fill="#3d2810" opacity="0.6"/>
+          <ellipse cx="116" cy="118" rx="8" ry="18" fill="#2e1a08" opacity="0.65"/>
+          <ellipse cx="154" cy="112" rx="7" ry="20" fill="#3d2810" opacity="0.6"/>
+          <ellipse cx="192" cy="115" rx="8" ry="18" fill="#2e1a08" opacity="0.65"/>
+          <rect width="220" height="160" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Community Gathering</span>
+      </div>
+
+      <div class="mphoto mphoto--sq">
+        <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" fill="#c8a870"/>
+          <rect x="0" y="0" width="180" height="180" fill="#7a5c2e" opacity="0.3"/>
+          <rect x="85" y="80" width="8" height="60" fill="#3d2810" opacity="0.6"/>
+          <ellipse cx="89" cy="80" rx="10" ry="6" fill="#5c3d1a" opacity="0.7"/>
+          <ellipse cx="89" cy="145" rx="45" ry="25" fill="#3d2810" opacity="0.5"/>
+          <rect x="68" y="100" width="42" height="55" rx="8" fill="#7a5040" opacity="0.65"/>
+          <ellipse cx="89" cy="80" rx="22" ry="26" fill="#c8a07a" opacity="0.78"/>
+          <ellipse cx="89" cy="64" rx="22" ry="14" fill="#2e1a08" opacity="0.8"/>
+          <rect width="180" height="180" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Speaking</span>
+      </div>
+
+      <div class="mphoto">
+        <svg viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="155" fill="#b8a858"/>
+          <rect x="0" y="0" width="240" height="80" fill="#d4b840" opacity="0.5"/>
+          <ellipse cx="120" cy="95" rx="110" ry="18" fill="#8a9070" opacity="0.55"/>
+          <path d="M40 100 Q55 93 70 100" stroke="#2e1a08" stroke-width="2" fill="none" opacity="0.7"/>
+          <path d="M130 97 Q145 90 160 97" stroke="#2e1a08" stroke-width="2" fill="none" opacity="0.7"/>
+          <rect x="0" y="112" width="240" height="43" fill="#5c4820" opacity="0.55"/>
+          <ellipse cx="30" cy="82" rx="15" ry="20" fill="#3d5020" opacity="0.5"/>
+          <rect width="240" height="155" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>By the River</span>
+      </div>
+
+      <div class="mphoto mphoto--tall">
+        <svg viewBox="0 0 155 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="155" height="220" fill="#b89858"/>
+          <rect x="15" y="20" width="125" height="80" rx="2" fill="#e8d8b0" opacity="0.7"/>
+          <rect x="22" y="28" width="80" height="4" fill="#5c3d1a" opacity="0.5"/>
+          <rect x="22" y="38" width="100" height="3" fill="#5c3d1a" opacity="0.4"/>
+          <rect x="22" y="48" width="70" height="3" fill="#5c3d1a" opacity="0.4"/>
+          <rect x="10" y="140" width="135" height="10" fill="#3d2810" opacity="0.65"/>
+          <ellipse cx="40" cy="132" rx="14" ry="16" fill="#2e1a08" opacity="0.6"/>
+          <ellipse cx="78" cy="128" rx="14" ry="18" fill="#3d2810" opacity="0.6"/>
+          <ellipse cx="116" cy="132" rx="14" ry="16" fill="#2e1a08" opacity="0.6"/>
+          <rect width="155" height="220" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Workshop</span>
+      </div>
+
+      <!-- Duplicates for seamless loop -->
+      <div class="mphoto">
+        <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="160" fill="#c8b070"/>
+          <rect x="0" y="0" width="220" height="70" fill="#d4a84a" opacity="0.5"/>
+          <rect x="10" y="30" width="30" height="130" fill="#5c3d1a" opacity="0.6"/>
+          <rect x="75" y="20" width="40" height="140" fill="#6b4820" opacity="0.65"/>
+          <rect x="155" y="35" width="35" height="125" fill="#5c3d1a" opacity="0.55"/>
+          <rect x="0" y="130" width="220" height="30" fill="#3d2810" opacity="0.5"/>
+          <rect width="220" height="160" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Dhaka Streets</span>
+      </div>
+      <div class="mphoto mphoto--sq">
+        <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="180" height="180" fill="#c8a870"/>
+          <rect x="0" y="0" width="180" height="180" fill="#7a5c2e" opacity="0.3"/>
+          <rect x="85" y="80" width="8" height="60" fill="#3d2810" opacity="0.6"/>
+          <ellipse cx="89" cy="80" rx="22" ry="26" fill="#c8a07a" opacity="0.78"/>
+          <ellipse cx="89" cy="64" rx="22" ry="14" fill="#2e1a08" opacity="0.8"/>
+          <rect width="180" height="180" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Speaking</span>
+      </div>
+      <div class="mphoto">
+        <svg viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="155" fill="#b8a858"/>
+          <rect x="0" y="0" width="240" height="80" fill="#d4b840" opacity="0.5"/>
+          <ellipse cx="120" cy="95" rx="110" ry="18" fill="#8a9070" opacity="0.55"/>
+          <rect x="0" y="112" width="240" height="43" fill="#5c4820" opacity="0.55"/>
+          <rect width="240" height="155" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>By the River</span>
+      </div>
+      <div class="mphoto">
+        <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="160" fill="#c0a860"/>
+          <rect x="30" y="20" width="160" height="60" rx="2" fill="#8b6020" opacity="0.5"/>
+          <ellipse cx="78" cy="110" rx="7" ry="22" fill="#3d2810" opacity="0.6"/>
+          <ellipse cx="116" cy="118" rx="8" ry="18" fill="#2e1a08" opacity="0.65"/>
+          <ellipse cx="154" cy="112" rx="7" ry="20" fill="#3d2810" opacity="0.6"/>
+          <rect width="220" height="160" fill="none" stroke="#c8b89a" stroke-width="2"/>
+        </svg>
+        <span>Community</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Life at BRAC -->
+  <div class="container brac-section">
+    <p class="section-label">Life at BRAC</p>
+    <div class="brac-grid">
+      <div class="brac-text">
+        <p>
+          BRAC is the world's largest development organisation by scale of operations — and for Shahriar K Fahim, it has been the crucible where research, advocacy, and social innovation meet real communities. He joined BRAC's Youth Platform in 2023, mobilising young people across Bangladesh to become agents of social change.
+        </p>
+        <p>
+          In 2026, he moved into BRAC's <strong>Social Innovation Lab (SIL)</strong> as Deputy Manager — a unit dedicated to designing, testing, and scaling solutions to Bangladesh's most pressing development challenges, from disability inclusion to climate resilience.
+        </p>
+        <p>
+          His time at BRAC has deepened his conviction that the most powerful development work happens at the intersection of rigorous evidence and genuine community trust.
+        </p>
+
+        <div class="brac-roles">
+          <div class="brac-role-item">
+            <div class="brac-role-dot"></div>
+            <span class="brac-role-title">Deputy Manager, Social Innovation Lab (SIL)</span>
+            <span class="brac-role-date">2026 – present</span>
+          </div>
+          <div class="brac-role-item">
+            <div class="brac-role-dot"></div>
+            <span class="brac-role-title">Senior Officer, Youth Platform</span>
+            <span class="brac-role-date">2023 – 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="brac-stat-grid">
+          <div class="brac-stat">
+            <p class="brac-stat-num">2+</p>
+            <p class="brac-stat-label">Years at BRAC</p>
+          </div>
+          <div class="brac-stat">
+            <p class="brac-stat-num">SIL</p>
+            <p class="brac-stat-label">Social Innovation Lab — current role</p>
+          </div>
+          <div class="brac-stat">
+            <p class="brac-stat-num">Youth</p>
+            <p class="brac-stat-label">Platform — mobilising young changemakers</p>
+          </div>
+          <div class="brac-stat">
+            <p class="brac-stat-num">BD</p>
+            <p class="brac-stat-label">Bangladesh-focused development work</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download CV -->
+  <div class="container cv-section-block">
+    <hr class="rule" style="margin-bottom: 3rem;">
+    <p class="section-label" style="margin-bottom: 1rem;">Curriculum Vitae</p>
+    <h2>Want to know more?</h2>
+    <p>
+      Download the full academic CV for a complete record of education, research, employment, awards, volunteer work, and conference presentations.
+    </p>
+    <a href="uploads/Academic CV_ShahriarFahim-2-9bb4f5eb.pdf" target="_blank" class="cv-download-btn">
+      Download CV (PDF) &darr;
+    </a>
+    <div class="cv-contact-links">
+      <a href="https://www.linkedin.com/in/skabir05/" target="_blank">LinkedIn</a>
+      <a href="https://shahriar-fahim.com/lets-talk-directly/" target="_blank">Let's Talk Directly</a>
+      <a href="https://shahriar-fahim.com/contact/" target="_blank">Contact</a>
+      <a href="https://www.linkedin.com/in/skabir05/details/recommendations/" target="_blank">Recommendations</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p style="font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.75rem;">Md. Shahriar Kabir Fahim</p>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap: 0.5rem 1.5rem; margin-bottom: 1rem;">
+      <a href="https://www.facebook.com/" target="_blank">Facebook</a>
+      <a href="https://twitter.com/" target="_blank">Twitter / X</a>
+      <a href="https://t.me/" target="_blank">Telegram</a>
+      <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+      <a href="https://youtube.com/" target="_blank">YouTube</a>
+      <a href="https://www.linkedin.com/in/skabir05/" target="_blank">LinkedIn</a>
+    </div>
+    <p style="font-family:var(--font-fine);font-size:0.78rem;color:var(--muted);letter-spacing:0.05em;">
+      &copy; 2026 Md. Shahriar Kabir Fahim &nbsp;·&nbsp;
+      <a href="biography.html">About</a> &nbsp;·&nbsp;
+      <a href="https://shahriar-fahim.com/contact/" target="_blank">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

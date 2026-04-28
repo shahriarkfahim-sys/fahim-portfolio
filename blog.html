@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Shahriar K Fahim</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Filter bar ── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--rule);
+      padding: 0.35rem 0.9rem;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    .filter-btn:hover { color: var(--ink); border-color: var(--ink); }
+    .filter-btn.active { color: var(--parchment); background: var(--sepia); border-color: var(--sepia); }
+
+    /* ── Card grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .blog-card {
+      border: 1px solid var(--rule);
+      background: var(--parchment-dark);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .blog-card:hover {
+      border-color: var(--sepia-light);
+      background: var(--sepia-faint);
+      transform: translateY(-3px);
+    }
+
+    /* Card thumb — a unique sepia texture per category */
+    .card-thumb {
+      height: 130px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .card-thumb svg { width: 100%; height: 100%; display: block; }
+
+    .card-body { padding: 1.25rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+
+    .card-cat {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sepia);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      flex: 1;
+    }
+
+    .blog-card:hover .card-title { color: var(--sepia); }
+
+    .card-excerpt {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--sepia-faint);
+    }
+
+    .card-date {
+      font-family: var(--font-fine);
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .card-read {
+      font-family: var(--font-fine);
+      font-size: 0.78rem;
+      color: var(--sepia);
+    }
+
+    /* hidden cards for filter */
+    .blog-card.hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="site-name">Md. Shahriar Kabir Fahim</a>
+    <p class="site-tagline">Speech Therapist · Social Entrepreneur · Development Worker · Disability Activist</p>
+    <nav>
+      <ul>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="explore.html">Explore</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Blog</h1>
+      <p class="subtitle">19 articles on disability, climate, youth, and ideas worth sharing</p>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-bar" style="margin-top: 2rem;">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="climate">Climate Change</button>
+      <button class="filter-btn" data-cat="disability">Disability</button>
+      <button class="filter-btn" data-cat="thought">Thought-Book</button>
+      <button class="filter-btn" data-cat="books">Book Summaries</button>
+    </div>
+
+    <!-- Cards -->
+    <div class="card-grid">
+
+      <!-- Climate -->
+      <a href="https://shahriar-fahim.com/climate-poverty-and-people-my-reflection-on-bill-gates-message-for-cop30/" target="_blank" class="blog-card" data-cat="climate">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#b8c890"/>
+            <rect width="320" height="130" fill="#3d5020" opacity="0.35"/>
+            <!-- Sky -->
+            <rect x="0" y="0" width="320" height="60" fill="#7a9040" opacity="0.4"/>
+            <!-- Sun -->
+            <circle cx="260" cy="30" r="22" fill="#d4b840" opacity="0.55"/>
+            <!-- Clouds -->
+            <ellipse cx="80" cy="22" rx="40" ry="14" fill="#e8d8a0" opacity="0.45"/>
+            <ellipse cx="160" cy="15" rx="30" ry="10" fill="#e8d8a0" opacity="0.35"/>
+            <!-- Ground wave -->
+            <path d="M0 80 Q80 65 160 80 Q240 95 320 75 L320 130 L0 130 Z" fill="#5c7830" opacity="0.5"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Climate Change Matters</p>
+          <p class="card-title">Climate, Poverty, and People: My Reflection on Bill Gates' Message for COP30</p>
+          <p class="card-excerpt">A reflection on the intersection of climate change and poverty — and what the world's most urgent conversations mean for the most vulnerable.</p>
+          <div class="card-footer">
+            <span class="card-date">November 7, 2025</span>
+            <span class="card-read">6 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Disability 1 -->
+      <a href="https://shahriar-fahim.com/disability-inclusion-in-higher-education-lessons-for-us/" target="_blank" class="blog-card" data-cat="disability">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#c8b888"/>
+            <rect width="320" height="130" fill="#5c4820" opacity="0.3"/>
+            <!-- Building columns -->
+            <rect x="40" y="20" width="18" height="90" fill="#3d2810" opacity="0.5"/>
+            <rect x="80" y="20" width="18" height="90" fill="#3d2810" opacity="0.5"/>
+            <rect x="120" y="20" width="18" height="90" fill="#3d2810" opacity="0.5"/>
+            <rect x="160" y="20" width="18" height="90" fill="#3d2810" opacity="0.5"/>
+            <rect x="200" y="20" width="18" height="90" fill="#3d2810" opacity="0.5"/>
+            <rect x="240" y="20" width="18" height="90" fill="#3d2810" opacity="0.5"/>
+            <!-- Pediment -->
+            <polygon points="20,20 300,20 160,0" fill="#4a3010" opacity="0.55"/>
+            <!-- Ground -->
+            <rect x="0" y="108" width="320" height="22" fill="#2e1a08" opacity="0.4"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Disability Understanding</p>
+          <p class="card-title">Disability Inclusion in Higher Education: Lessons for Us</p>
+          <p class="card-excerpt">What does meaningful inclusion look like in universities? Asking better questions about access and belonging.</p>
+          <div class="card-footer">
+            <span class="card-date">September 29, 2025</span>
+            <span class="card-read">4 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Disability 2 -->
+      <a href="https://shahriar-fahim.com/how-screen-time-shapes-childrens-speech-a-lesson-from-my-thesis/" target="_blank" class="blog-card" data-cat="disability">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#b8a870"/>
+            <rect width="320" height="130" fill="#4a3818" opacity="0.28"/>
+            <!-- Screen shape -->
+            <rect x="90" y="20" width="140" height="90" rx="6" fill="#3d5068" opacity="0.55"/>
+            <rect x="98" y="28" width="124" height="66" rx="3" fill="#6a8090" opacity="0.5"/>
+            <!-- Light glow from screen -->
+            <ellipse cx="160" cy="61" rx="55" ry="30" fill="#a0c8d8" opacity="0.2"/>
+            <!-- Child silhouette -->
+            <ellipse cx="160" cy="55" rx="12" ry="14" fill="#1a1208" opacity="0.5"/>
+            <rect x="152" y="68" width="16" height="22" rx="4" fill="#1a1208" opacity="0.45"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Disability Understanding</p>
+          <p class="card-title">How Screen Time Shapes Children's Speech: A Lesson from My Thesis</p>
+          <p class="card-excerpt">My research on screen time and speech development — what it means for families, educators, and clinicians.</p>
+          <div class="card-footer">
+            <span class="card-date">August 31, 2025</span>
+            <span class="card-read">6 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Thought-book -->
+      <a href="https://shahriar-fahim.com/how-political-storytelling-manipulates-youth-in-bangladesh/" target="_blank" class="blog-card" data-cat="thought">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#c09858"/>
+            <rect width="320" height="130" fill="#5c3810" opacity="0.3"/>
+            <!-- Crowd/people -->
+            <ellipse cx="40" cy="90" rx="14" ry="30" fill="#2e1a08" opacity="0.6"/>
+            <ellipse cx="80" cy="85" rx="13" ry="32" fill="#3d2810" opacity="0.55"/>
+            <ellipse cx="120" cy="92" rx="14" ry="28" fill="#2e1a08" opacity="0.6"/>
+            <ellipse cx="160" cy="86" rx="13" ry="30" fill="#3d2810" opacity="0.55"/>
+            <ellipse cx="200" cy="90" rx="14" ry="28" fill="#2e1a08" opacity="0.6"/>
+            <ellipse cx="240" cy="85" rx="13" ry="32" fill="#3d2810" opacity="0.55"/>
+            <ellipse cx="280" cy="88" rx="14" ry="30" fill="#2e1a08" opacity="0.6"/>
+            <!-- Banner -->
+            <rect x="60" y="10" width="200" height="30" rx="2" fill="#8b6020" opacity="0.6"/>
+            <rect x="70" y="18" width="140" height="4" fill="#d4a84a" opacity="0.5"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">My Thought-Book</p>
+          <p class="card-title">How Political Storytelling Manipulates Youth in Bangladesh</p>
+          <p class="card-excerpt">How political narratives capture the minds of young people — and what youth can do to reclaim their own stories.</p>
+          <div class="card-footer">
+            <span class="card-date">August 29, 2025</span>
+            <span class="card-read">6 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Books 1 -->
+      <a href="https://shahriar-fahim.com/outliers-by-malcolm-gladwell-a-book-summary-for-youth/" target="_blank" class="blog-card" data-cat="books">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#b89060"/>
+            <rect width="320" height="130" fill="#4a3010" opacity="0.25"/>
+            <!-- Book stack -->
+            <rect x="80" y="30" width="160" height="22" rx="2" fill="#7a3818" opacity="0.7"/>
+            <rect x="85" y="55" width="150" height="20" rx="2" fill="#3d5020" opacity="0.7"/>
+            <rect x="78" y="78" width="164" height="22" rx="2" fill="#4a3868" opacity="0.7"/>
+            <!-- Spine lines -->
+            <line x1="80" y1="30" x2="80" y2="52" stroke="#c8a070" stroke-width="1.5" opacity="0.5"/>
+            <line x1="85" y1="55" x2="85" y2="75" stroke="#c8a070" stroke-width="1.5" opacity="0.5"/>
+            <line x1="78" y1="78" x2="78" y2="100" stroke="#c8a070" stroke-width="1.5" opacity="0.5"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.07"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Book Summary for Youth</p>
+          <p class="card-title">Outliers by Malcolm Gladwell — A Book Summary for Youth</p>
+          <p class="card-excerpt">What really makes high-achievers successful? Gladwell's provocative argument, distilled for young readers.</p>
+          <div class="card-footer">
+            <span class="card-date">August 17, 2025</span>
+            <span class="card-read">7 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Books 2 -->
+      <a href="https://shahriar-fahim.com/the-art-of-war-by-sun-tzu-a-book-summary-for-youth/" target="_blank" class="blog-card" data-cat="books">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#a88858"/>
+            <rect width="320" height="130" fill="#3d2810" opacity="0.3"/>
+            <!-- Brush stroke / calligraphy feel -->
+            <path d="M60 100 Q100 30 160 65 Q220 100 280 20" stroke="#2e1a08" stroke-width="4" fill="none" opacity="0.4" stroke-linecap="round"/>
+            <path d="M60 100 Q100 30 160 65 Q220 100 280 20" stroke="#c8a070" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+            <!-- Grid / strategy -->
+            <line x1="100" y1="20" x2="100" y2="110" stroke="#b8935a" stroke-width="0.5" opacity="0.3"/>
+            <line x1="160" y1="20" x2="160" y2="110" stroke="#b8935a" stroke-width="0.5" opacity="0.3"/>
+            <line x1="220" y1="20" x2="220" y2="110" stroke="#b8935a" stroke-width="0.5" opacity="0.3"/>
+            <line x1="60" y1="50" x2="280" y2="50" stroke="#b8935a" stroke-width="0.5" opacity="0.3"/>
+            <line x1="60" y1="80" x2="280" y2="80" stroke="#b8935a" stroke-width="0.5" opacity="0.3"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.07"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Book Summary for Youth</p>
+          <p class="card-title">The Art of War by Sun Tzu — A Book Summary for Youth</p>
+          <p class="card-excerpt">Ancient wisdom on strategy and self-discipline, read through the lens of a young person navigating a competitive world.</p>
+          <div class="card-footer">
+            <span class="card-date">August 17, 2025</span>
+            <span class="card-read">4 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Books 3 -->
+      <a href="https://shahriar-fahim.com/the-alchemist-by-paulo-coelho-a-book-summary-for-youth/" target="_blank" class="blog-card" data-cat="books">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#c8a858"/>
+            <rect width="320" height="130" fill="#5c4010" opacity="0.25"/>
+            <!-- Desert dunes -->
+            <path d="M0 90 Q80 50 160 80 Q240 110 320 60 L320 130 L0 130 Z" fill="#8b6020" opacity="0.55"/>
+            <path d="M0 110 Q100 80 200 100 Q260 112 320 90 L320 130 L0 130 Z" fill="#5c3d10" opacity="0.45"/>
+            <!-- Star -->
+            <circle cx="260" cy="25" r="4" fill="#d4b840" opacity="0.7"/>
+            <circle cx="80" cy="18" r="3" fill="#d4b840" opacity="0.55"/>
+            <circle cx="160" cy="12" r="2.5" fill="#d4b840" opacity="0.5"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Book Summary for Youth</p>
+          <p class="card-title">The Alchemist by Paulo Coelho — A Book Summary for Youth</p>
+          <p class="card-excerpt">On following your Personal Legend and why the journey matters more than the destination.</p>
+          <div class="card-footer">
+            <span class="card-date">August 17, 2025</span>
+            <span class="card-read">5 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Books 4 -->
+      <a href="https://shahriar-fahim.com/eat-that-frog-by-brian-tracy-a-book-summary-for-youth/" target="_blank" class="blog-card" data-cat="books">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#a8b870"/>
+            <rect width="320" height="130" fill="#384820" opacity="0.3"/>
+            <!-- Clock -->
+            <circle cx="160" cy="65" r="45" fill="none" stroke="#3d2810" stroke-width="2" opacity="0.45"/>
+            <circle cx="160" cy="65" r="38" fill="#e8dcc0" opacity="0.3"/>
+            <line x1="160" y1="65" x2="160" y2="32" stroke="#2e1a08" stroke-width="2.5" opacity="0.5"/>
+            <line x1="160" y1="65" x2="185" y2="72" stroke="#2e1a08" stroke-width="2" opacity="0.5"/>
+            <circle cx="160" cy="65" r="3" fill="#2e1a08" opacity="0.6"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Book Summary for Youth</p>
+          <p class="card-title">Eat That Frog by Brian Tracy — A Book Summary for Youth</p>
+          <p class="card-excerpt">Stop procrastinating. Tracy's classic productivity framework, made practical for students and young professionals.</p>
+          <div class="card-footer">
+            <span class="card-date">August 16, 2025</span>
+            <span class="card-read">7 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Books 5 -->
+      <a href="https://shahriar-fahim.com/the-ministry-of-utmost-happiness-by-arundhati-roy-a-book-summary-for-youth/" target="_blank" class="blog-card" data-cat="books">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#b89878"/>
+            <rect width="320" height="130" fill="#4a2818" opacity="0.28"/>
+            <!-- Cityscape silhouette -->
+            <rect x="20" y="50" width="20" height="80" fill="#2e1a08" opacity="0.55"/>
+            <rect x="50" y="35" width="25" height="95" fill="#3d2810" opacity="0.5"/>
+            <polygon points="62,35 72,20 82,35" fill="#3d2810" opacity="0.5"/>
+            <rect x="85" y="55" width="18" height="75" fill="#2e1a08" opacity="0.5"/>
+            <rect x="115" y="40" width="30" height="90" fill="#3d2810" opacity="0.55"/>
+            <rect x="155" y="60" width="22" height="70" fill="#2e1a08" opacity="0.5"/>
+            <rect x="190" y="30" width="28" height="100" fill="#3d2810" opacity="0.55"/>
+            <rect x="230" y="50" width="20" height="80" fill="#2e1a08" opacity="0.5"/>
+            <rect x="260" y="42" width="25" height="88" fill="#3d2810" opacity="0.5"/>
+            <rect x="295" y="58" width="20" height="72" fill="#2e1a08" opacity="0.5"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Book Summary for Youth</p>
+          <p class="card-title">The Ministry of Utmost Happiness by Arundhati Roy — A Book Summary for Youth</p>
+          <p class="card-excerpt">Roy's sprawling meditation on identity and resistance in South Asia — for readers ready for complexity.</p>
+          <div class="card-footer">
+            <span class="card-date">August 16, 2025</span>
+            <span class="card-read">6 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Books 6 -->
+      <a href="https://shahriar-fahim.com/the-100-startup-by-chris-guillebeau-a-book-summary-for-youth/" target="_blank" class="blog-card" data-cat="books">
+        <div class="card-thumb">
+          <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="130" fill="#c0a860"/>
+            <rect width="320" height="130" fill="#4a3808" opacity="0.25"/>
+            <!-- Rocket/launch -->
+            <path d="M160 100 L148 60 Q160 20 172 60 Z" fill="#3d2810" opacity="0.55"/>
+            <path d="M148 75 L130 95 L155 80 Z" fill="#5c3010" opacity="0.5"/>
+            <path d="M172 75 L190 95 L165 80 Z" fill="#5c3010" opacity="0.5"/>
+            <!-- Flame -->
+            <ellipse cx="160" cy="106" rx="8" ry="12" fill="#c87820" opacity="0.55"/>
+            <!-- Stars -->
+            <circle cx="80" cy="25" r="2" fill="#d4b840" opacity="0.6"/>
+            <circle cx="240" cy="18" r="2.5" fill="#d4b840" opacity="0.6"/>
+            <circle cx="130" cy="12" r="1.5" fill="#d4b840" opacity="0.5"/>
+            <circle cx="200" cy="30" r="2" fill="#d4b840" opacity="0.5"/>
+            <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="card-cat">Book Summary for Youth</p>
+          <p class="card-title">The $100 Startup by Chris Guillebeau — A Book Summary for Youth</p>
+          <p class="card-excerpt">You don't need a lot of money to start something meaningful. A blueprint for young changemakers.</p>
+          <div class="card-footer">
+            <span class="card-date">August 16, 2025</span>
+            <span class="card-read">6 min read</span>
+          </div>
+        </div>
+      </a>
+
+    </div><!-- end card-grid -->
+
+    <div class="ornament" style="margin-top: 3rem;">· · ·</div>
+    <p style="text-align:center; font-family:var(--font-fine); font-style:italic; color:var(--muted); font-size:0.9rem;">
+      More articles at <a href="https://shahriar-fahim.com/blog/" target="_blank" style="color:var(--sepia);">shahriar-fahim.com/blog</a>
+    </p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.75rem;">Md. Shahriar Kabir Fahim</p>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap: 0.5rem 1.5rem; margin-bottom: 1rem;">
+      <a href="https://www.facebook.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Facebook</a>
+      <a href="https://twitter.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Twitter / X</a>
+      <a href="https://t.me/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Telegram</a>
+      <a href="https://www.instagram.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+      <a href="https://youtube.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">YouTube</a>
+      <a href="https://www.linkedin.com/in/skabir05/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+    </div>
+    <p style="font-family:var(--font-fine);font-size:0.78rem;color:var(--muted);letter-spacing:0.05em;">
+      &copy; 2026 Md. Shahriar Kabir Fahim &nbsp;·&nbsp;
+      <a href="biography.html" style="color:var(--muted);">About</a> &nbsp;·&nbsp;
+      <a href="https://shahriar-fahim.com/contact/" target="_blank" style="color:var(--muted);">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.blog-card').forEach(card => {
+        card.classList.toggle('hidden', cat !== 'all' && card.dataset.cat !== cat);
+      });
+    });
+  });
+</script>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — Shahriar K Fahim</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Tabs ── */
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 3rem;
+    }
+    .tab-btn {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.85rem 2rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--sepia); border-bottom-color: var(--sepia); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Shared ── */
+    .bib-intro { margin-bottom: 2.5rem; }
+    .bib-intro p { font-size: 1rem; color: var(--ink-light); line-height: 1.8; }
+
+    .bib-photo {
+      float: right;
+      margin: 0 0 1.5rem 2.5rem;
+      width: 180px;
+      border: 1px solid var(--rule);
+    }
+    .bib-photo svg { display: block; width: 100%; }
+
+    .bib-section-head {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .bib-list { list-style: none; padding: 0; margin: 0 0 2rem; }
+    .bib-list li {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: var(--ink-light);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--sepia-faint);
+    }
+    .bib-list li:last-child { border-bottom: none; }
+    .bib-list li em { font-style: italic; color: var(--ink); }
+    .bib-list li a { color: var(--sepia); border-bottom: 1px solid var(--sepia-light); transition: color 0.2s; }
+    .bib-list li a:hover { color: var(--ink); border-color: var(--ink); }
+    .bib-year { font-family: var(--font-fine); font-weight: 500; color: var(--sepia); margin-right: 0.15rem; }
+
+    @media (max-width: 560px) {
+      .bib-photo { float: none; width: 120px; margin: 0 auto 1.5rem; }
+      .tab-btn { padding: 0.75rem 1.1rem; font-size: 0.72rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="site-name">Md. Shahriar Kabir Fahim</a>
+    <p class="site-tagline">Speech Therapist · Social Entrepreneur · Development Worker · Disability Activist</p>
+    <nav>
+      <ul>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="publications.html" class="active">Publications</a></li>
+        <li><a href="biography.html">Biography</a></li>
+        <li><a href="explore.html">Explore</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Publications</h1>
+    </div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="research">Research</button>
+      <button class="tab-btn" data-tab="publications">Publications</button>
+    </div>
+
+    <!-- ── Research ── -->
+    <div class="tab-panel active" id="tab-research">
+
+      <div class="bib-intro">
+        <div class="bib-photo">
+          <svg viewBox="0 0 180 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="180" height="220" fill="#e0d4b0"/>
+            <rect width="180" height="220" fill="#7a5c2e" opacity="0.12"/>
+            <line x1="20" y1="40" x2="160" y2="40" stroke="#b8935a" stroke-width="0.6" opacity="0.5"/>
+            <line x1="20" y1="58" x2="160" y2="58" stroke="#b8935a" stroke-width="0.6" opacity="0.4"/>
+            <line x1="20" y1="76" x2="160" y2="76" stroke="#b8935a" stroke-width="0.6" opacity="0.4"/>
+            <line x1="20" y1="94" x2="160" y2="94" stroke="#b8935a" stroke-width="0.6" opacity="0.4"/>
+            <line x1="20" y1="112" x2="140" y2="112" stroke="#b8935a" stroke-width="0.6" opacity="0.4"/>
+            <line x1="20" y1="130" x2="155" y2="130" stroke="#b8935a" stroke-width="0.6" opacity="0.35"/>
+            <line x1="20" y1="148" x2="120" y2="148" stroke="#b8935a" stroke-width="0.6" opacity="0.3"/>
+            <line x1="35" y1="20" x2="35" y2="200" stroke="#c8705a" stroke-width="0.8" opacity="0.4"/>
+            <rect x="45" y="25" width="110" height="8" rx="1" fill="#5c3d1a" opacity="0.45"/>
+            <rect x="20" y="170" width="140" height="1" fill="#b8935a" opacity="0.3"/>
+            <rect width="180" height="220" fill="none" stroke="#c8b89a" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <p>
+          Md. Shahriar Kabir Fahim's research focuses on communication disorders, disability inclusion, and social development in Bangladesh. His work spans clinical speech-language pathology, augmentative and alternative communication (AAC), and disaster response for persons with disabilities, grounded in fieldwork across Bangladesh.
+        </p>
+      </div>
+
+      <h2 class="bib-section-head">Research Interests</h2>
+      <ul class="bib-list">
+        <li><span class="bib-year">—</span> Developmental Language Disorders (DLD) — awareness and attitudes</li>
+        <li><span class="bib-year">—</span> Screen time and speech-language development in children</li>
+        <li><span class="bib-year">—</span> Augmentative and Alternative Communication (AAC) practices in Bangladesh</li>
+        <li><span class="bib-year">—</span> Disability-inclusive disaster response and humanitarian action</li>
+        <li><span class="bib-year">—</span> Communication access for persons with disabilities in low-resource settings</li>
+        <li><span class="bib-year">—</span> Youth mobilisation and social innovation in development contexts</li>
+      </ul>
+
+      <h2 class="bib-section-head">Current Research Projects</h2>
+      <ul class="bib-list">
+        <li>
+          <span class="bib-year">(Under review)</span> Fahim SK. <em>Association between Screen Time and Articulation Difficulty among Children in Bangladesh: A Comparative Study between Typical and Atypical Children.</em> Submitted for journal review.
+        </li>
+        <li>
+          <span class="bib-year">(Ongoing)</span> Fahim SK. <em>Disability-Inclusive Disaster Response: Examining the Experiences of Persons with Disabilities During Cyclone Remal in Khulna, Bangladesh.</em>
+        </li>
+        <li>
+          <span class="bib-year">(Ongoing)</span> Fahim SK. <em>AAC Recommendation Practices among Speech-Language Pathologists in Urban Areas of Bangladesh.</em>
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- ── Publications ── -->
+    <div class="tab-panel" id="tab-publications">
+
+      <div class="bib-intro">
+        <p>A growing body of published research and public writing on communication disorders, disability, and social development. Fahim's peer-reviewed work appears in international journals, alongside essays and book summaries at <a href="https://shahriar-fahim.com/blog/" target="_blank" style="color:var(--sepia);border-bottom:1px solid var(--sepia-light);">shahriar-fahim.com</a>.</p>
+      </div>
+
+      <h2 class="bib-section-head">Peer-Reviewed Publications</h2>
+      <ul class="bib-list">
+        <li>
+          <span class="bib-year">(2025)</span> Fahim, S. K., Billah, M., &amp; Hasnat, A. <em>Awareness, knowledge, and attitudes towards Developmental Language Disorders (DLD) among public university students in Bangladesh.</em> <em>Journal of Child Language Acquisition and Development — JCLAD</em>, pp. 1381–1401. <a href="https://doi.org/10.5281/zenodo.18099355" target="_blank">doi.org/10.5281/zenodo.18099355</a>
+        </li>
+        <li>
+          <span class="bib-year">(Under review)</span> Fahim, S. K. <em>Association between Screen Time and Articulation Difficulty among Children in Bangladesh: A Comparative Study between Typical and Atypical Children.</em> Submitted for journal review.
+        </li>
+      </ul>
+      <ul class="bib-list">
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/climate-poverty-and-people-my-reflection-on-bill-gates-message-for-cop30/" target="_blank">Climate, Poverty, and People: My Reflection on Bill Gates' Message for COP30.</a></em> Climate Change Matters. November 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/disability-inclusion-in-higher-education-lessons-for-us/" target="_blank">Disability Inclusion in Higher Education: Lessons for Us.</a></em> Disability Understanding. September 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/how-screen-time-shapes-childrens-speech-a-lesson-from-my-thesis/" target="_blank">How Screen Time Shapes Children's Speech: A Lesson from My Thesis.</a></em> Disability Understanding. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/how-political-storytelling-manipulates-youth-in-bangladesh/" target="_blank">How Political Storytelling Manipulates Youth in Bangladesh.</a></em> My Thought-Book. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/outliers-by-malcolm-gladwell-a-book-summary-for-youth/" target="_blank">Outliers by Malcolm Gladwell — A Book Summary for Youth.</a></em> Book Summary for Youth. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-art-of-war-by-sun-tzu-a-book-summary-for-youth/" target="_blank">The Art of War by Sun Tzu — A Book Summary for Youth.</a></em> Book Summary for Youth. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-alchemist-by-paulo-coelho-a-book-summary-for-youth/" target="_blank">The Alchemist by Paulo Coelho — A Book Summary for Youth.</a></em> Book Summary for Youth. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/eat-that-frog-by-brian-tracy-a-book-summary-for-youth/" target="_blank">Eat That Frog by Brian Tracy — A Book Summary for Youth.</a></em> Book Summary for Youth. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-ministry-of-utmost-happiness-by-arundhati-roy-a-book-summary-for-youth/" target="_blank">The Ministry of Utmost Happiness by Arundhati Roy — A Book Summary for Youth.</a></em> Book Summary for Youth. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-100-startup-by-chris-guillebeau-a-book-summary-for-youth/" target="_blank">The $100 Startup by Chris Guillebeau — A Book Summary for Youth.</a></em> Book Summary for Youth. August 2025.
+        </li>
+      </ul>
+
+      <h2 class="bib-section-head">Essays &amp; Public Writing</h2>
+      <ul class="bib-list">
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/climate-poverty-and-people-my-reflection-on-bill-gates-message-for-cop30/" target="_blank">Climate, Poverty, and People: My Reflection on Bill Gates' Message for COP30.</a></em> Climate Change Matters. November 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/disability-inclusion-in-higher-education-lessons-for-us/" target="_blank">Disability Inclusion in Higher Education: Lessons for Us.</a></em> Disability Understanding. September 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/how-screen-time-shapes-childrens-speech-a-lesson-from-my-thesis/" target="_blank">How Screen Time Shapes Children's Speech: A Lesson from My Thesis.</a></em> Disability Understanding. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/how-political-storytelling-manipulates-youth-in-bangladesh/" target="_blank">How Political Storytelling Manipulates Youth in Bangladesh.</a></em> My Thought-Book. August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/outliers-by-malcolm-gladwell-a-book-summary-for-youth/" target="_blank">Outliers by Malcolm Gladwell — A Book Summary for Youth.</a></em> August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-alchemist-by-paulo-coelho-a-book-summary-for-youth/" target="_blank">The Alchemist by Paulo Coelho — A Book Summary for Youth.</a></em> August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/eat-that-frog-by-brian-tracy-a-book-summary-for-youth/" target="_blank">Eat That Frog by Brian Tracy — A Book Summary for Youth.</a></em> August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-ministry-of-utmost-happiness-by-arundhati-roy-a-book-summary-for-youth/" target="_blank">The Ministry of Utmost Happiness by Arundhati Roy — A Book Summary for Youth.</a></em> August 2025.
+        </li>
+        <li>
+          <span class="bib-year">(2025)</span> Fahim SK. <em><a href="https://shahriar-fahim.com/the-100-startup-by-chris-guillebeau-a-book-summary-for-youth/" target="_blank">The $100 Startup by Chris Guillebeau — A Book Summary for Youth.</a></em> August 2025.
+        </li>
+      </ul>
+
+      <h2 class="bib-section-head">Social Ventures</h2>
+      <ul class="bib-list">
+        <li>
+          <span class="bib-year">(2020s)</span> <em>Connecting Disorders.</em> A social venture empowering individuals with disabilities through innovative, community-driven solutions. <a href="http://www.connectingdisorders.org" target="_blank">connectingdisorders.org</a>
+        </li>
+        <li>
+          <span class="bib-year">(2024)</span> <em>Amrai Bangladesh Team.</em> A volunteer force for positive activism in Bangladesh. <a href="https://www.facebook.com/groups/527214363314440" target="_blank">Facebook Community</a>
+        </li>
+        <li>
+          <span class="bib-year">(2020s)</span> <em>The Fifth Gear.</em> Bridging the gap between academia and professional success. <a href="https://shahriar-fahim.com/the-fifth-gear/" target="_blank">shahriar-fahim.com/the-fifth-gear</a>
+        </li>
+      </ul>
+
+      <h2 class="bib-section-head">Awards &amp; Recognition</h2>
+      <ul class="bib-list">
+        <li><span class="bib-year">(2023)</span> <em>Top 9 — Springboard 7.0</em> for "Jotner Dokan." UNDP &amp; Citi Foundation.</li>
+        <li><span class="bib-year">(2022)</span> <em>Amra Notun Young Changemakers' Award.</em> BRAC.</li>
+        <li><span class="bib-year">(2021)</span> <em>Goalkeepers Award Nomination.</em> BRAC Youth Platform.</li>
+        <li><span class="bib-year">—</span> <em>Merit Scholarship for Academic Undergraduate Performance.</em> University of Dhaka.</li>
+        <li><span class="bib-year">—</span> <em>34 Awards</em> for cultural and extra-curricular activities since high school.</li>
+      </ul>
+
+      <div class="ornament">· · ·</div>
+      <p style="text-align:center;font-family:var(--font-fine);font-style:italic;font-size:0.9rem;color:var(--muted);">
+        Full archive at <a href="https://shahriar-fahim.com/blog/" target="_blank" style="color:var(--sepia);">shahriar-fahim.com</a>
+      </p>
+
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.75rem;">Md. Shahriar Kabir Fahim</p>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap: 0.5rem 1.5rem; margin-bottom: 1rem;">
+      <a href="https://www.facebook.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Facebook</a>
+      <a href="https://twitter.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Twitter / X</a>
+      <a href="https://t.me/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Telegram</a>
+      <a href="https://www.instagram.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+      <a href="https://youtube.com/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">YouTube</a>
+      <a href="https://www.linkedin.com/in/skabir05/" target="_blank" style="font-family:var(--font-fine);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;" onmouseover="this.style.color='var(--sepia)'" onmouseout="this.style.color='var(--muted)'">LinkedIn</a>
+    </div>
+    <p style="font-family:var(--font-fine);font-size:0.78rem;color:var(--muted);letter-spacing:0.05em;">
+      &copy; 2026 Md. Shahriar Kabir Fahim &nbsp;·&nbsp;
+      <a href="biography.html" style="color:var(--muted);">About</a> &nbsp;·&nbsp;
+      <a href="https://shahriar-fahim.com/contact/" target="_blank" style="color:var(--muted);">Contact</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+<script src="site.js"></script>
+</body>
+</html>
