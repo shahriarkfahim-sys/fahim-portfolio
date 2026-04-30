@@ -213,6 +213,42 @@
       transition: color 0.2s;
     }
     .cv-contact-links a:hover { color: var(--ink); border-color: var(--ink); }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .topic-grid { grid-template-columns: 1fr; }
+    }
+
+    .topic-card {
+      border: 1px solid var(--rule);
+      padding: 1.5rem 1.25rem;
+      background: var(--parchment-dark);
+      transition: background 0.25s, border-color 0.25s;
+      cursor: pointer;
+      display: block;
+    }
+
+    .topic-card:hover {
+      background: var(--sepia-faint);
+      border-color: var(--sepia-light);
+    }
+
+    .topic-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .topic-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
   </style>
 </head>
 <body>
@@ -377,6 +413,20 @@
         <span>Community</span>
       </div>
 
+    </div>
+  </div>
+
+  <div class="container" style="padding: 4rem 0;">
+    <p class="section-label">Explore More</p>
+    <div class="topic-grid">
+      <a href="volunteer-projects.html" class="topic-card">
+        <h3>Volunteer &amp; Projects</h3>
+        <p>Explore Shahriar's community work, campaigns, and volunteer-led initiatives.</p>
+      </a>
+      <a href="honours-awards.html" class="topic-card">
+        <h3>Honours &amp; Awards</h3>
+        <p>Read recognitions, awards, and honours earned across academic and social impact work.</p>
+      </a>
     </div>
   </div>
 
