@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+      - export DEPLOYPATH=/home/pirjpvcn/public_html/fahim-portfolio
+          - /bin/cp -R $TRAVIS_BUILD_DIR/. $DEPLOYPATH
