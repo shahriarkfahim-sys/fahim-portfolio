@@ -121,10 +121,68 @@ nav a.active {
   border-bottom-color: var(--sepia-light);
 }
 
+nav li {
+  position: relative;
+}
+
+.nav-dropdown {
+  padding-bottom: 0.5rem;
+}
+
+.nav-submenu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 50%;
+  z-index: 120;
+  min-width: 9.5rem;
+  padding: 0.45rem 0;
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+  box-shadow: 0 0.55rem 1.2rem rgba(26, 18, 8, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 0.35rem);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.nav-submenu a {
+  display: block;
+  padding: 0.45rem 0.8rem;
+  border-bottom: 0;
+  color: var(--ink-light);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a:focus {
+  background: var(--sepia-faint);
+  color: var(--sepia);
+  border-bottom: 0;
+}
+
 .header-social { display: none; }
 
 @media (max-width: 700px) {
   nav ul { gap: 1.25rem; }
+  .nav-submenu {
+    left: auto;
+    right: 0;
+    transform: translateY(0.35rem);
+  }
+  .nav-dropdown:hover .nav-submenu,
+  .nav-dropdown:focus-within .nav-submenu {
+    transform: translateY(0);
+  }
 }
 
 header .site-name {
@@ -354,11 +412,22 @@ h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
 }
 
 /* ── Biography ── */
+.biography-container {
+  max-width: 1120px;
+}
+
+.biography-page .page-header {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .bio-grid {
   display: grid;
-  grid-template-columns: 220px 220px;
-  gap: 3rem;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
   align-items: start;
+  margin-bottom: 3.25rem;
 }
 
 .bio-photo {
@@ -383,14 +452,14 @@ h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
 }
 
 .bio-text {
-  width: 220px;
+  max-width: 780px;
   min-width: 0;
 }
 
 .bio-text p {
-  margin-bottom: 1.2rem;
-  font-size: 1rem;
-  line-height: 1.8;
+  margin-bottom: 1.1rem;
+  font-size: clamp(0.98rem, 0.55vw + 0.86rem, 1.08rem);
+  line-height: 1.85;
   color: var(--ink-light);
 }
 
@@ -531,7 +600,12 @@ footer a:hover { color: var(--sepia); }
 @media (max-width: 640px) {
   html { font-size: 18px; }
   .bio-grid { grid-template-columns: 1fr; }
-  .bio-photo { max-width: 180px; margin: 0 auto; }
+  .bio-photo {
+    max-width: 220px;
+    width: min(70vw, 220px);
+    margin: 0 auto;
+  }
+  .bio-text { max-width: none; }
   .hero-quote blockquote { font-size: 1.25rem; }
   nav ul { gap: 1.5rem; }
 }
