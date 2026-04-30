@@ -1,0 +1,76 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/contact/:path*",
+      "destination": "/biography.html",
+      "permanent": false
+    },
+    {
+      "source": "/lets-talk-directly/:path*",
+      "destination": "/biography.html",
+      "permanent": false
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/the-fifth-gear/:path*",
+      "destination": "/publications.html",
+      "permanent": false
+    },
+    {
+      "source": "/climate-poverty-and-people-my-reflection-on-bill-gates-message-for-cop30/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/disability-inclusion-in-higher-education-lessons-for-us/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/how-screen-time-shapes-childrens-speech-a-lesson-from-my-thesis/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/how-political-storytelling-manipulates-youth-in-bangladesh/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/outliers-by-malcolm-gladwell-a-book-summary-for-youth/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/the-art-of-war-by-sun-tzu-a-book-summary-for-youth/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/the-alchemist-by-paulo-coelho-a-book-summary-for-youth/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/eat-that-frog-by-brian-tracy-a-book-summary-for-youth/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/the-ministry-of-utmost-happiness-by-arundhati-roy-a-book-summary-for-youth/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    },
+    {
+      "source": "/the-100-startup-by-chris-guillebeau-a-book-summary-for-youth/:path*",
+      "destination": "/blog.html",
+      "permanent": false
+    }
+  ]
+}
