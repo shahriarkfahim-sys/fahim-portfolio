@@ -1,76 +1,82 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/publications",
+      "destination": "/publications.html"
+    },
+    {
+      "source": "/biography",
+      "destination": "/biography.html"
+    },
+    {
+      "source": "/explore",
+      "destination": "/explore.html"
+    },
+    {
+      "source": "/volunteer-projects",
+      "destination": "/volunteer-projects.html"
+    },
+    {
+      "source": "/honours-awards",
+      "destination": "/honours-awards.html"
+    },
     {
       "source": "/contact/:path*",
-      "destination": "/biography.html",
-      "permanent": false
+      "destination": "/biography.html"
     },
     {
       "source": "/lets-talk-directly/:path*",
-      "destination": "/biography.html",
-      "permanent": false
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/biography.html"
     },
     {
       "source": "/the-fifth-gear/:path*",
-      "destination": "/publications.html",
-      "permanent": false
+      "destination": "/publications.html"
     },
     {
       "source": "/climate-poverty-and-people-my-reflection-on-bill-gates-message-for-cop30/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/disability-inclusion-in-higher-education-lessons-for-us/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/how-screen-time-shapes-childrens-speech-a-lesson-from-my-thesis/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/how-political-storytelling-manipulates-youth-in-bangladesh/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/outliers-by-malcolm-gladwell-a-book-summary-for-youth/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/the-art-of-war-by-sun-tzu-a-book-summary-for-youth/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/the-alchemist-by-paulo-coelho-a-book-summary-for-youth/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/eat-that-frog-by-brian-tracy-a-book-summary-for-youth/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/the-ministry-of-utmost-happiness-by-arundhati-roy-a-book-summary-for-youth/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     },
     {
       "source": "/the-100-startup-by-chris-guillebeau-a-book-summary-for-youth/:path*",
-      "destination": "/blog.html",
-      "permanent": false
+      "destination": "/blog.html"
     }
   ]
 }
