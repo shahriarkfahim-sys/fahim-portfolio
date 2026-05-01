@@ -256,6 +256,69 @@
       letter-spacing: 0.04em;
     }
 
+    .marquee-wrap--logos {
+      padding-top: 2.9rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .marquee-track--logos {
+      animation-duration: 90s;
+    }
+
+    .logo-card {
+      position: relative;
+      flex-shrink: 0;
+      width: 260px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.45rem;
+      background: rgba(255, 252, 244, 0.82);
+      border: 1px solid var(--rule);
+      box-shadow: 0 12px 30px rgba(35, 24, 10, 0.12);
+      filter: sepia(0.16) contrast(0.96);
+      transition: filter 0.3s, transform 0.3s;
+      overflow: visible;
+    }
+
+    .logo-card:nth-child(odd) { transform: rotate(-0.8deg); }
+    .logo-card:nth-child(even) { transform: rotate(0.7deg); }
+    .logo-card:hover {
+      filter: sepia(0) contrast(1);
+      transform: rotate(0deg) scale(1.03) translateY(-4px);
+      z-index: 3;
+    }
+
+    .logo-card img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .logo-card--wide { width: 330px; }
+    .logo-card--tall {
+      width: 210px;
+      height: 210px;
+    }
+
+    .logo-card span {
+      position: absolute;
+      z-index: 2;
+      bottom: -1.45rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-fine);
+      font-style: italic;
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
     @media (max-width: 640px) {
       .marquee-title { margin-bottom: 1.5rem; }
       .mphoto {
@@ -270,6 +333,16 @@
       .mphoto--sq {
         width: 156px;
         height: 156px;
+      }
+      .logo-card {
+        width: 210px;
+        height: 130px;
+        padding: 1rem;
+      }
+      .logo-card--wide { width: 260px; }
+      .logo-card--tall {
+        width: 170px;
+        height: 170px;
       }
     }
 
@@ -649,6 +722,72 @@ Otolaryngology-Head & Neck Surgery, Bangladesh Medical University</p>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Contribution till date -->
+  <div class="marquee-wrap marquee-wrap--logos">
+    <p class="marquee-title">Contribution till date</p>
+    <div class="marquee-track marquee-track--logos">
+      <div class="logo-card logo-card--tall">
+        <img src="assets/photos/contribution-01.png" alt="Saifur's logo" loading="lazy">
+        <span>Saifur's</span>
+      </div>
+      <div class="logo-card logo-card--wide">
+        <img src="assets/photos/contribution-02.png" alt="BRAC logo" loading="lazy">
+        <span>BRAC</span>
+      </div>
+      <div class="logo-card logo-card--tall">
+        <img src="assets/photos/contribution-03.jpg" alt="University of Dhaka logo" loading="lazy">
+        <span>University of Dhaka</span>
+      </div>
+      <div class="logo-card logo-card--tall">
+        <img src="assets/photos/contribution-04.jpg" alt="Connecting Disorders logo" loading="lazy">
+        <span>Connecting Disorders</span>
+      </div>
+      <div class="logo-card logo-card--tall">
+        <img src="assets/photos/contribution-05.jpg" alt="Kothabdu logo" loading="lazy">
+        <span>Kothabdu</span>
+      </div>
+      <div class="logo-card logo-card--tall">
+        <img src="assets/photos/contribution-06.jpg" alt="Giga Tech logo" loading="lazy">
+        <span>Giga Tech</span>
+      </div>
+      <div class="logo-card logo-card--tall">
+        <img src="assets/photos/contribution-07.png" alt="Amra Notun logo" loading="lazy">
+        <span>Amra Notun</span>
+      </div>
+
+      <div class="logo-card logo-card--tall" aria-hidden="true">
+        <img src="assets/photos/contribution-01.png" alt="" loading="lazy">
+        <span>Saifur's</span>
+      </div>
+      <div class="logo-card logo-card--wide" aria-hidden="true">
+        <img src="assets/photos/contribution-02.png" alt="" loading="lazy">
+        <span>BRAC</span>
+      </div>
+      <div class="logo-card logo-card--tall" aria-hidden="true">
+        <img src="assets/photos/contribution-03.jpg" alt="" loading="lazy">
+        <span>University of Dhaka</span>
+      </div>
+      <div class="logo-card logo-card--tall" aria-hidden="true">
+        <img src="assets/photos/contribution-04.jpg" alt="" loading="lazy">
+        <span>Connecting Disorders</span>
+      </div>
+      <div class="logo-card logo-card--tall" aria-hidden="true">
+        <img src="assets/photos/contribution-05.jpg" alt="" loading="lazy">
+        <span>Kothabdu</span>
+      </div>
+      <div class="logo-card logo-card--tall" aria-hidden="true">
+        <img src="assets/photos/contribution-06.jpg" alt="" loading="lazy">
+        <span>Giga Tech</span>
+      </div>
+      <div class="logo-card logo-card--tall" aria-hidden="true">
+        <img src="assets/photos/contribution-07.png" alt="" loading="lazy">
+        <span>Amra Notun</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Awards -->
   <div class="container" style="padding-top: 0; padding-bottom: 3.5rem;">
     <hr class="rule" style="margin-bottom: 3.5rem;">
