@@ -6,6 +6,7 @@ Use this folder for site-ready photo attachments.
 - `gallery-01.jpg`, `gallery-02.jpg`, etc. for the Explore photo collage.
 - `gallery-01.jpg` through `gallery-15.jpg` for the homepage photo carousel.
 - `contribution-01.png` through `contribution-07.png`/`.jpg` for the homepage Contribution till date carousel.
+- `bio-story-01.jpg` through `bio-story-06.jpg` for the biography story photo rail.
 - Keep original raw uploads in `uploads/` if you still need them as source files.
 
 Recommended image sizes:
