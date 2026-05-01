@@ -168,7 +168,7 @@
       gap: 1.5rem;
       align-items: center;
       width: max-content;
-      animation: marquee-scroll 38s linear infinite;
+      animation: marquee-scroll 120s linear infinite;
     }
 
     .marquee-track:hover { animation-play-state: paused; }
@@ -196,6 +196,7 @@
       content: '';
       position: absolute;
       inset: 0;
+      z-index: 0;
       background:
         linear-gradient(to bottom, rgba(216, 190, 112, 0.88) 0 48%, rgba(119, 94, 48, 0.54) 48% 100%),
         linear-gradient(115deg, transparent 0 45%, rgba(255, 244, 205, 0.24) 45% 55%, transparent 55% 100%);
@@ -222,16 +223,13 @@
     .mphoto img {
       position: absolute;
       inset: 0;
+      z-index: 1;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
       border: 1px solid var(--rule);
-    }
-
-    .mphoto--missing img {
-      display: none;
     }
 
     .mphoto--wide { width: 320px; }
@@ -246,6 +244,7 @@
 
     .mphoto span {
       position: absolute;
+      z-index: 2;
       bottom: -1.45rem;
       left: 50%;
       transform: translateX(-50%);
@@ -442,124 +441,124 @@
     <p class="marquee-title">Photo Collage</p>
     <div class="marquee-track">
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-01.jpg" alt="Stage performance with microphones" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-01.jpg" alt="Stage performance with microphones" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>On Stage</span>
       </div>
       <div class="mphoto mphoto--sq">
-        <img src="assets/photos/gallery-02.jpg" alt="Holding the Amra Notun Young Changemakers Award" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-02.jpg" alt="Holding the Amra Notun Young Changemakers Award" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Young Changemaker</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-03.jpg" alt="Portrait at a table with a cup" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-03.jpg" alt="Portrait at a table with a cup" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Coffee Notes</span>
       </div>
       <div class="mphoto mphoto--tall">
-        <img src="assets/photos/gallery-04.jpg" alt="Receiving books and a handwritten note" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-04.jpg" alt="Receiving books and a handwritten note" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Books &amp; Ideas</span>
       </div>
       <div class="mphoto mphoto--tall">
-        <img src="assets/photos/gallery-05.jpg" alt="Group photo after an event" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-05.jpg" alt="Group photo after an event" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>With Colleagues</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-06.jpg" alt="Wearing a race medal at an outdoor event" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-06.jpg" alt="Wearing a race medal at an outdoor event" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Rise Up Run</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-07.jpg" alt="Clinical work at a computer in a lab coat" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-07.jpg" alt="Clinical work at a computer in a lab coat" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Clinical Desk</span>
       </div>
       <div class="mphoto">
-        <img src="assets/photos/gallery-08.jpg" alt="Group photo in a garden" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-08.jpg" alt="Group photo in a garden" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Gathering</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-09.jpg" alt="Community discussion at night" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-09.jpg" alt="Community discussion at night" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Community Talk</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-10.jpg" alt="Group photo at BRAC Innovation Week" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-10.jpg" alt="Group photo at BRAC Innovation Week" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>BRAC Innovation</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-11.jpg" alt="Field visit beside a project board" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-11.jpg" alt="Field visit beside a project board" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Field Visit</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-12.jpg" alt="Craft table with three participants" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-12.jpg" alt="Craft table with three participants" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Jotner Dokan</span>
       </div>
       <div class="mphoto mphoto--tall">
-        <img src="assets/photos/gallery-13.jpg" alt="Clinical ear examination" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-13.jpg" alt="Clinical ear examination" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Speech Therapy</span>
       </div>
       <div class="mphoto mphoto--wide">
-        <img src="assets/photos/gallery-14.jpg" alt="Paragliding over a mountain landscape" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-14.jpg" alt="Paragliding over a mountain landscape" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Paragliding</span>
       </div>
       <div class="mphoto mphoto--tall">
-        <img src="assets/photos/gallery-15.jpg" alt="Standing with a community member in a village courtyard" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-15.jpg" alt="Standing with a community member in a village courtyard" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Village Visit</span>
       </div>
 
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-01.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-01.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>On Stage</span>
       </div>
       <div class="mphoto mphoto--sq" aria-hidden="true">
-        <img src="assets/photos/gallery-02.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-02.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Young Changemaker</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-03.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-03.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Coffee Notes</span>
       </div>
       <div class="mphoto mphoto--tall" aria-hidden="true">
-        <img src="assets/photos/gallery-04.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-04.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Books &amp; Ideas</span>
       </div>
       <div class="mphoto mphoto--tall" aria-hidden="true">
-        <img src="assets/photos/gallery-05.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-05.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>With Colleagues</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-06.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-06.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Rise Up Run</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-07.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-07.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Clinical Desk</span>
       </div>
       <div class="mphoto" aria-hidden="true">
-        <img src="assets/photos/gallery-08.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-08.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Gathering</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-09.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-09.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Community Talk</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-10.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-10.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>BRAC Innovation</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-11.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-11.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Field Visit</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-12.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-12.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Jotner Dokan</span>
       </div>
       <div class="mphoto mphoto--tall" aria-hidden="true">
-        <img src="assets/photos/gallery-13.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-13.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Speech Therapy</span>
       </div>
       <div class="mphoto mphoto--wide" aria-hidden="true">
-        <img src="assets/photos/gallery-14.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-14.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Paragliding</span>
       </div>
       <div class="mphoto mphoto--tall" aria-hidden="true">
-        <img src="assets/photos/gallery-15.jpg" alt="" loading="lazy" onerror="this.hidden = true; this.closest('.mphoto').classList.add('mphoto--missing')">
+        <img src="assets/photos/gallery-15.jpg" alt="" loading="lazy" onerror="this.onerror = null; this.src = 'assets/photos/IMG_2045.jpg'">
         <span>Village Visit</span>
       </div>
     </div>
