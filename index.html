@@ -424,6 +424,7 @@
     }
 
     .tl-hover-details {
+      width: min(520px, calc(50vw - 3.5rem));
       max-height: 0;
       opacity: 0;
       overflow: hidden;
@@ -436,6 +437,10 @@
       box-shadow: 0 12px 28px rgba(35, 24, 10, 0);
       transform: translateY(-0.35rem);
       transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease, padding 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .tl-left .tl-hover-details {
+      margin-left: auto;
     }
 
     .tl-hover-details li {
@@ -467,7 +472,7 @@
 
     .tl-hoverable:hover .tl-hover-details,
     .tl-hoverable:focus-within .tl-hover-details {
-      max-height: 34rem;
+      max-height: 60rem;
       opacity: 1;
       margin-top: 0.75rem;
       padding: 0.8rem 0.95rem 0.85rem;
@@ -480,6 +485,7 @@
       .timeline::before { left: 14px; }
       .tl-item { flex-direction: column !important; padding: 0 0 0 2.5rem !important; }
       .tl-left .tl-content, .tl-right .tl-content { text-align: left; }
+      .tl-hover-details { width: 100%; }
       .tl-dot { left: 10px; transform: none; }
     }
 
@@ -708,11 +714,16 @@
 
     <div class="timeline">
 
-      <div class="tl-item tl-left">
-        <div class="tl-content">
+      <div class="tl-item tl-left tl-hoverable">
+        <div class="tl-content" tabindex="0">
           <p class="tl-title">Deputy Manager</p>
           <p class="tl-org">Social Innovation Lab, BRAC</p>
           <p class="tl-date">2026-Present</p>
+          <ul class="tl-hover-details" aria-label="Deputy Manager achievements at Social Innovation Lab, BRAC">
+            <li>Prototype, test, and adapt innovative solutions in collaboration with BRAC programs to drive large-scale, community-level change through social innovation.</li>
+            <li>Leading an assignment with BRAC's Integrated Development Program (IDP) to explore, refine, and pilot graduation criteria for Village Development Organizations (VDOs), with the goal of scaling the program for broader community impact.</li>
+            <li>Collaborating with the Ultra Poor Graduation (UPG) program's Disability Inclusion team to pilot "Shuborno-Sathi" - an initiative empowering local persons with disabilities to access and secure both national and private support systems.</li>
+          </ul>
         </div>
         <div class="tl-dot"></div>
       </div>
@@ -744,21 +755,29 @@
         <div class="tl-dot"></div>
       </div>
 
-      <div class="tl-item tl-right">
+      <div class="tl-item tl-right tl-hoverable">
         <div class="tl-dot"></div>
-        <div class="tl-content">
+        <div class="tl-content" tabindex="0">
           <p class="tl-title">Clinical Intern, Speech Therapy</p>
           <p class="tl-org">Incredible Pvt. Ltd.</p>
           <p class="tl-date">2023</p>
+          <ul class="tl-hover-details" aria-label="Clinical Intern achievements at Incredible Pvt. Ltd.">
+            <li>Executed clinical assignments under supervisor guidance, applying evidence-based therapeutic techniques.</li>
+            <li>Contributed both independently and collaboratively, maintaining high attention to detail in all assessments.</li>
+            <li>Developed strong rapport with clients and assisted in crafting individualized treatment plans.</li>
+          </ul>
         </div>
       </div>
 
-      <div class="tl-item tl-left">
-        <div class="tl-content">
+      <div class="tl-item tl-left tl-hoverable">
+        <div class="tl-content" tabindex="0">
           <p class="tl-title">Clinical Intern, Speech Therapy</p>
-          <p class="tl-org">
-Otolaryngology-Head & Neck Surgery, Bangladesh Medical University</p>
+          <p class="tl-org">Otolaryngology-Head &amp; Neck Surgery, Bangladesh Medical University</p>
           <p class="tl-date">2023</p>
+          <ul class="tl-hover-details" aria-label="Clinical Intern achievements at Bangladesh Medical University">
+            <li>Accumulated 450+ clinical hours in a hospital setting, gaining comprehensive hands-on experience in audiology and speech therapy.</li>
+            <li>Operated 20+ specialized diagnostic instruments across audiology and speech therapy, demonstrating technical adaptability and precision.</li>
+          </ul>
         </div>
         <div class="tl-dot"></div>
       </div>
