@@ -7,14 +7,23 @@
   <link rel="stylesheet" href="style.css">
   <style>
     /* ── Photo Memories ── */
-    .explore-layout {
+    .explore-shell {
       max-width: 1120px;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .explore-layout {
       display: grid;
       grid-template-columns: minmax(190px, 260px) minmax(0, 1fr);
       gap: clamp(1.75rem, 4vw, 3rem);
       align-items: start;
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+    }
+
+    .explore-intro {
+      padding-bottom: 3.5rem;
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid var(--rule);
     }
 
     .explore-photo-rail {
@@ -278,76 +287,78 @@
 </header>
 
 <main style="padding-top: 0;">
-  <div class="container explore-layout">
-    <aside class="explore-photo-rail" aria-label="Explore photo memories">
-      <figure class="story-photo">
-        <img
-          src="assets/photos/explore-memory-01-560.jpg"
-          srcset="assets/photos/explore-memory-01-560.jpg 560w, assets/photos/explore-memory-01-1120.jpg 1120w"
-          sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
-          width="560"
-          height="420"
-          alt="Community conversation during a field visit"
-          loading="lazy"
-          decoding="async">
-        <figcaption>Field Conversation</figcaption>
-      </figure>
-      <figure class="story-photo story-photo--tilt-right">
-        <img
-          src="assets/photos/explore-memory-02-560.jpg"
-          srcset="assets/photos/explore-memory-02-560.jpg 560w, assets/photos/explore-memory-02-1120.jpg 1120w"
-          sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
-          width="560"
-          height="420"
-          alt="Volunteer team after campus painting work"
-          loading="lazy"
-          decoding="async">
-        <figcaption>Volunteer Action</figcaption>
-      </figure>
-      <figure class="story-photo">
-        <img
-          src="assets/photos/explore-memory-03-560.jpg"
-          srcset="assets/photos/explore-memory-03-560.jpg 560w, assets/photos/explore-memory-03-1120.jpg 1120w"
-          sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
-          width="560"
-          height="420"
-          alt="Explaining a field site plan with BRAC colleagues"
-          loading="lazy"
-          decoding="async">
-        <figcaption>Field Learning</figcaption>
-      </figure>
-      <figure class="story-photo story-photo--tilt-right">
-        <img
-          src="assets/photos/explore-memory-04-560.jpg"
-          srcset="assets/photos/explore-memory-04-560.jpg 560w, assets/photos/explore-memory-04-1120.jpg 1120w"
-          sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
-          width="560"
-          height="268"
-          alt="Community discussion in a village courtyard"
-          loading="lazy"
-          decoding="async">
-        <figcaption>Community Visit</figcaption>
-      </figure>
-    </aside>
+  <div class="container explore-shell">
+    <section class="explore-intro">
+      <p class="section-label">Explore More</p>
+      <div class="topic-grid">
+        <a href="#volunteering" class="topic-card">
+          <h3>Volunteering</h3>
+          <p>Explore Shahriar's community leadership, positive activism, and volunteer-led initiatives.</p>
+        </a>
+        <a href="#projects" class="topic-card">
+          <h3>Projects</h3>
+          <p>Review coordination and co-founder work across language, emergency response, and education projects.</p>
+        </a>
+        <a href="honours-awards.html" class="topic-card">
+          <h3>Honours &amp; Awards</h3>
+          <p>Read recognitions, awards, and honours earned across academic and social impact work.</p>
+        </a>
+      </div>
+    </section>
 
-    <div class="explore-content">
-      <section class="explore-section">
-        <p class="section-label">Explore More</p>
-        <div class="topic-grid">
-          <a href="#volunteering" class="topic-card">
-            <h3>Volunteering</h3>
-            <p>Explore Shahriar's community leadership, positive activism, and volunteer-led initiatives.</p>
-          </a>
-          <a href="#projects" class="topic-card">
-            <h3>Projects</h3>
-            <p>Review coordination and co-founder work across language, emergency response, and education projects.</p>
-          </a>
-          <a href="honours-awards.html" class="topic-card">
-            <h3>Honours &amp; Awards</h3>
-            <p>Read recognitions, awards, and honours earned across academic and social impact work.</p>
-          </a>
-        </div>
-      </section>
+    <div class="explore-layout">
+      <aside class="explore-photo-rail" aria-label="Explore photo memories">
+        <figure class="story-photo">
+          <img
+            src="assets/photos/explore-memory-01-560.jpg"
+            srcset="assets/photos/explore-memory-01-560.jpg 560w, assets/photos/explore-memory-01-1120.jpg 1120w"
+            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
+            width="560"
+            height="420"
+            alt="Community conversation during a field visit"
+            loading="lazy"
+            decoding="async">
+          <figcaption>Field Conversation</figcaption>
+        </figure>
+        <figure class="story-photo story-photo--tilt-right">
+          <img
+            src="assets/photos/explore-memory-02-560.jpg"
+            srcset="assets/photos/explore-memory-02-560.jpg 560w, assets/photos/explore-memory-02-1120.jpg 1120w"
+            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
+            width="560"
+            height="420"
+            alt="Volunteer team after campus painting work"
+            loading="lazy"
+            decoding="async">
+          <figcaption>Volunteer Action</figcaption>
+        </figure>
+        <figure class="story-photo">
+          <img
+            src="assets/photos/explore-memory-03-560.jpg"
+            srcset="assets/photos/explore-memory-03-560.jpg 560w, assets/photos/explore-memory-03-1120.jpg 1120w"
+            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
+            width="560"
+            height="420"
+            alt="Explaining a field site plan with BRAC colleagues"
+            loading="lazy"
+            decoding="async">
+          <figcaption>Field Learning</figcaption>
+        </figure>
+        <figure class="story-photo story-photo--tilt-right">
+          <img
+            src="assets/photos/explore-memory-04-560.jpg"
+            srcset="assets/photos/explore-memory-04-560.jpg 560w, assets/photos/explore-memory-04-1120.jpg 1120w"
+            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 240px"
+            width="560"
+            height="268"
+            alt="Community discussion in a village courtyard"
+            loading="lazy"
+            decoding="async">
+          <figcaption>Community Visit</figcaption>
+        </figure>
+      </aside>
+
+      <div class="explore-content">
 
   <!-- Volunteering -->
   <section class="cv-section explore-conferences explore-section" id="volunteering">
