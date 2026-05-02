@@ -346,6 +346,7 @@
       position: relative;
       max-width: 700px;
       margin: 0 auto;
+      --tl-detail-width: min(520px, calc(50vw - 3.5rem));
     }
 
     .timeline::before {
@@ -416,6 +417,8 @@
 
     .tl-content {
       outline: none;
+      width: 100%;
+      min-width: 0;
     }
 
     .tl-hoverable .tl-content:focus-visible {
@@ -424,7 +427,7 @@
     }
 
     .tl-hover-details {
-      width: min(520px, calc(50vw - 3.5rem));
+      width: var(--tl-detail-width);
       max-height: 0;
       opacity: 0;
       overflow: hidden;
@@ -440,7 +443,7 @@
     }
 
     .tl-left .tl-hover-details {
-      margin-left: auto;
+      margin-left: calc(100% - var(--tl-detail-width));
     }
 
     .tl-hover-details li {
@@ -482,10 +485,11 @@
     }
 
     @media (max-width: 600px) {
+      .timeline { --tl-detail-width: 100%; }
       .timeline::before { left: 14px; }
       .tl-item { flex-direction: column !important; padding: 0 0 0 2.5rem !important; }
       .tl-left .tl-content, .tl-right .tl-content { text-align: left; }
-      .tl-hover-details { width: 100%; }
+      .tl-left .tl-hover-details { margin-left: 0; }
       .tl-dot { left: 10px; transform: none; }
     }
 
@@ -746,11 +750,17 @@
         </div>
       </div>
 
-      <div class="tl-item tl-left">
-        <div class="tl-content">
+      <div class="tl-item tl-left tl-hoverable">
+        <div class="tl-content" tabindex="0">
           <p class="tl-title">Speech &amp; Language Therapist</p>
           <p class="tl-org">Sunrise Autism Care (Contractual)</p>
           <p class="tl-date">2024</p>
+          <ul class="tl-hover-details" aria-label="Speech and Language Therapist achievements at Sunrise Autism Care">
+            <li>Assessed, diagnosed, and delivered individualized therapy sessions to 150+ clients, including children with autism, non-verbal individuals, and mixed age groups.</li>
+            <li>Developed and implemented personalized treatment plans tailored to each client's communication needs, functional goals, and developmental stage.</li>
+            <li>Conducted structured assessments to identify speech, language, and communication challenges, translating findings into actionable therapy objectives.</li>
+            <li>Adapted therapeutic approaches for non-verbal clients, utilizing augmentative and alternative communication (AAC) strategies to support expressive communication.</li>
+          </ul>
         </div>
         <div class="tl-dot"></div>
       </div>
