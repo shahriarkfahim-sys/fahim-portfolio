@@ -414,6 +414,68 @@
       color: var(--muted);
     }
 
+    .tl-content {
+      outline: none;
+    }
+
+    .tl-hoverable .tl-content:focus-visible {
+      outline: 1px solid var(--sepia-light);
+      outline-offset: 0.35rem;
+    }
+
+    .tl-hover-details {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-top: 0;
+      padding: 0 0.95rem;
+      list-style-position: outside;
+      text-align: left;
+      background: var(--parchment-dark);
+      border: 1px solid transparent;
+      box-shadow: 0 12px 28px rgba(35, 24, 10, 0);
+      transform: translateY(-0.35rem);
+      transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s ease, padding 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+    .tl-hover-details li {
+      margin-left: 0.9rem;
+      margin-bottom: 0.45rem;
+      font-family: var(--font-fine);
+      font-size: 0.72rem;
+      line-height: 1.55;
+      color: var(--ink-light);
+    }
+
+    .tl-hover-details li:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-hoverable .tl-content {
+      cursor: pointer;
+    }
+
+    .tl-hoverable:hover .tl-title,
+    .tl-hoverable:focus-within .tl-title {
+      color: var(--ink);
+    }
+
+    .tl-hoverable:hover .tl-dot,
+    .tl-hoverable:focus-within .tl-dot {
+      background: var(--sepia);
+    }
+
+    .tl-hoverable:hover .tl-hover-details,
+    .tl-hoverable:focus-within .tl-hover-details {
+      max-height: 34rem;
+      opacity: 1;
+      margin-top: 0.75rem;
+      padding: 0.8rem 0.95rem 0.85rem;
+      border-color: var(--rule);
+      box-shadow: 0 12px 28px rgba(35, 24, 10, 0.1);
+      transform: translateY(0);
+    }
+
     @media (max-width: 600px) {
       .timeline::before { left: 14px; }
       .tl-item { flex-direction: column !important; padding: 0 0 0 2.5rem !important; }
@@ -655,12 +717,21 @@
         <div class="tl-dot"></div>
       </div>
 
-      <div class="tl-item tl-right">
+      <div class="tl-item tl-right tl-hoverable">
         <div class="tl-dot"></div>
-        <div class="tl-content">
+        <div class="tl-content" tabindex="0">
           <p class="tl-title">Senior Officer,</p>
           <p class="tl-org">Youth Platform, BRAC</p>
           <p class="tl-date">2023-2025</p>
+          <ul class="tl-hover-details" aria-label="Senior Officer achievements at Youth Platform, BRAC">
+            <li>Led 34 content facilitators toward social impact goals, championing youth-led creative action across the platform.</li>
+            <li>Grew social media presence by millions of engagements and 10,000+ organic followers in 2025 through data-informed strategy.</li>
+            <li>Forged internal and external partnerships to broaden program reach and unlock new operational areas.</li>
+            <li>Delivered 110+ training sessions across 12 modules for 400+ youth, achieving a 90% participant satisfaction rate.</li>
+            <li>Mentored young champions in facilitation, project management, business scale-up, and content creation.</li>
+            <li>Guided 51 community projects from concept to launch - 7 earned national recognition and awards.</li>
+            <li>Directed communications for high-profile national youth events, ensuring seamless execution and strong engagement.</li>
+          </ul>
         </div>
       </div>
 
