@@ -6,80 +6,106 @@
   <title>Explore — Md. Shahriar Kabir Fahim</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── Photo Memories ── */
-    .explore-shell {
-      width: min(100% - 4rem, 1520px);
-      max-width: none;
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
-
-    .explore-layout {
-      display: grid;
-      grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
-      gap: clamp(3.5rem, 6vw, 6rem);
-      align-items: start;
-    }
-
-    .explore-intro {
-      padding-bottom: 3.5rem;
-      margin-bottom: 3.5rem;
+    /* ── Photo Collage ── */
+    .explore-collage {
+      overflow: hidden;
+      border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
+      padding: 3rem 0 3.45rem;
+      margin-bottom: 4rem;
+      background: var(--parchment-dark);
+      position: relative;
     }
 
-    .explore-photo-rail {
+    .explore-collage::before,
+    .explore-collage::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .explore-collage::before {
+      left: 0;
+      background: linear-gradient(to right, var(--parchment-dark), transparent);
+    }
+
+    .explore-collage::after {
+      right: 0;
+      background: linear-gradient(to left, var(--parchment-dark), transparent);
+    }
+
+    .explore-collage-title {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      margin-bottom: 2.15rem;
+    }
+
+    .explore-collage-track {
       display: flex;
-      flex-direction: column;
-      gap: clamp(2.4rem, 8vh, 5.5rem);
-      padding-top: 0.25rem;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(1rem, 2vw, 1.7rem);
+      width: max-content;
+      min-width: 100%;
+      padding: 0 2rem;
     }
 
-    .explore-photo-rail .story-photo {
-      width: min(100%, 320px);
+    .collage-photo {
+      position: relative;
+      flex: 0 0 auto;
+      width: clamp(190px, 21vw, 300px);
+      filter: sepia(0.18) contrast(0.96);
+      transition: filter 0.25s, transform 0.25s;
     }
 
-    .explore-photo-rail .story-photo img {
+    .collage-photo:nth-child(even) {
+      width: clamp(230px, 28vw, 380px);
+      margin-top: 0.55rem;
+    }
+
+    .collage-photo:hover {
+      filter: sepia(0.04) contrast(1);
+      transform: translateY(-4px);
+      z-index: 3;
+    }
+
+    .collage-photo img {
+      width: 100%;
       aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border: 2px solid var(--rule);
+      box-shadow: 0 14px 30px rgba(35, 24, 10, 0.12);
+      display: block;
     }
 
-    .explore-section {
-      padding: 0 0 3.5rem;
-      margin-bottom: 3.5rem;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .explore-section:last-child {
-      margin-bottom: 0;
-      border-bottom: none;
+    .collage-photo figcaption {
+      margin-top: 0.45rem;
+      font-family: var(--font-fine);
+      font-style: italic;
+      font-size: 0.78rem;
+      line-height: 1.25;
+      text-align: center;
+      color: var(--muted);
     }
 
     @media (max-width: 700px) {
-      .explore-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .explore-photo-rail {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.8rem 1rem;
-        max-width: 520px;
-        margin: 0 auto;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .explore-photo-rail {
-        grid-template-columns: 1fr;
-      }
-
-      .explore-photo-rail .story-photo {
-        width: min(78vw, 240px);
-        margin: 0 auto;
+      .explore-collage-track {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
       }
     }
 
     /* ── Life at BRAC ── */
-    .brac-section { padding-top: 0; }
+    .brac-section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
 
     .brac-grid {
       display: grid;
@@ -168,7 +194,7 @@
 
     /* ── CV Section ── */
     .cv-section-block {
-      padding: 0;
+      padding: 4rem 0;
       text-align: center;
     }
 
@@ -233,7 +259,10 @@
       .topic-grid { grid-template-columns: 1fr; }
     }
 
-    .explore-conferences { padding-bottom: 3.5rem; }
+    .explore-conferences {
+      padding: 0 0 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
 
     .topic-card {
       border: 1px solid var(--rule);
@@ -288,81 +317,81 @@
 </header>
 
 <main style="padding-top: 0;">
-  <div class="container explore-shell">
-    <section class="explore-intro">
-      <p class="section-label">Explore More</p>
-      <div class="topic-grid">
-        <a href="#volunteering" class="topic-card">
-          <h3>Volunteering</h3>
-          <p>Explore Shahriar's community leadership, positive activism, and volunteer-led initiatives.</p>
-        </a>
-        <a href="#projects" class="topic-card">
-          <h3>Projects</h3>
-          <p>Review coordination and co-founder work across language, emergency response, and education projects.</p>
-        </a>
-        <a href="honours-awards.html" class="topic-card">
-          <h3>Honours &amp; Awards</h3>
-          <p>Read recognitions, awards, and honours earned across academic and social impact work.</p>
-        </a>
-      </div>
-    </section>
+  <div class="container" style="padding: 4rem 0;">
+    <p class="section-label">Explore More</p>
+    <div class="topic-grid">
+      <a href="#volunteering" class="topic-card">
+        <h3>Volunteering</h3>
+        <p>Explore Shahriar's community leadership, positive activism, and volunteer-led initiatives.</p>
+      </a>
+      <a href="#projects" class="topic-card">
+        <h3>Projects</h3>
+        <p>Review coordination and co-founder work across language, emergency response, and education projects.</p>
+      </a>
+      <a href="honours-awards.html" class="topic-card">
+        <h3>Honours &amp; Awards</h3>
+        <p>Read recognitions, awards, and honours earned across academic and social impact work.</p>
+      </a>
+    </div>
+  </div>
 
-    <div class="explore-layout">
-      <aside class="explore-photo-rail" aria-label="Explore photo memories">
-        <figure class="story-photo">
-          <img
-            src="assets/photos/explore-memory-01-560.jpg"
-            srcset="assets/photos/explore-memory-01-560.jpg 560w, assets/photos/explore-memory-01-1120.jpg 1120w"
-            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 320px"
-            width="560"
-            height="420"
-            alt="Community conversation during a field visit"
-            loading="lazy"
-            decoding="async">
-          <figcaption>Field Conversation</figcaption>
-        </figure>
-        <figure class="story-photo story-photo--tilt-right">
-          <img
-            src="assets/photos/explore-memory-02-560.jpg"
-            srcset="assets/photos/explore-memory-02-560.jpg 560w, assets/photos/explore-memory-02-1120.jpg 1120w"
-            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 320px"
-            width="560"
-            height="420"
-            alt="Volunteer team after campus painting work"
-            loading="lazy"
-            decoding="async">
-          <figcaption>Volunteer Action</figcaption>
-        </figure>
-        <figure class="story-photo">
-          <img
-            src="assets/photos/explore-memory-03-560.jpg"
-            srcset="assets/photos/explore-memory-03-560.jpg 560w, assets/photos/explore-memory-03-1120.jpg 1120w"
-            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 320px"
-            width="560"
-            height="420"
-            alt="Explaining a field site plan with BRAC colleagues"
-            loading="lazy"
-            decoding="async">
-          <figcaption>Field Learning</figcaption>
-        </figure>
-        <figure class="story-photo story-photo--tilt-right">
-          <img
-            src="assets/photos/explore-memory-04-560.jpg"
-            srcset="assets/photos/explore-memory-04-560.jpg 560w, assets/photos/explore-memory-04-1120.jpg 1120w"
-            sizes="(max-width: 420px) 78vw, (max-width: 700px) calc((100vw - 5rem) / 2), 320px"
-            width="560"
-            height="268"
-            alt="Community discussion in a village courtyard"
-            loading="lazy"
-            decoding="async">
-          <figcaption>Community Visit</figcaption>
-        </figure>
-      </aside>
-
-      <div class="explore-content">
+  <!-- Photo Collage -->
+  <section class="explore-collage" aria-label="Photo collage">
+    <p class="section-label explore-collage-title">Photo Collage</p>
+    <div class="explore-collage-track">
+      <figure class="collage-photo">
+        <img
+          src="assets/photos/explore-memory-01-560.jpg"
+          srcset="assets/photos/explore-memory-01-560.jpg 560w, assets/photos/explore-memory-01-1120.jpg 1120w"
+          sizes="(max-width: 700px) 62vw, 21vw"
+          width="560"
+          height="420"
+          alt="Community conversation during a field visit"
+          loading="lazy"
+          decoding="async">
+        <figcaption>With farmers, Satkhira</figcaption>
+      </figure>
+      <figure class="collage-photo">
+        <img
+          src="assets/photos/explore-memory-02-560.jpg"
+          srcset="assets/photos/explore-memory-02-560.jpg 560w, assets/photos/explore-memory-02-1120.jpg 1120w"
+          sizes="(max-width: 700px) 68vw, 28vw"
+          width="560"
+          height="420"
+          alt="Volunteer team after campus painting work"
+          loading="lazy"
+          decoding="async">
+        <figcaption>Volunteer Action</figcaption>
+      </figure>
+      <figure class="collage-photo">
+        <img
+          src="assets/photos/explore-memory-03-560.jpg"
+          srcset="assets/photos/explore-memory-03-560.jpg 560w, assets/photos/explore-memory-03-1120.jpg 1120w"
+          sizes="(max-width: 700px) 62vw, 21vw"
+          width="560"
+          height="420"
+          alt="Explaining a field site plan with BRAC colleagues"
+          loading="lazy"
+          decoding="async">
+        <figcaption>Field Learning</figcaption>
+      </figure>
+      <figure class="collage-photo">
+        <img
+          src="assets/photos/explore-memory-04-560.jpg"
+          srcset="assets/photos/explore-memory-04-560.jpg 560w, assets/photos/explore-memory-04-1120.jpg 1120w"
+          sizes="(max-width: 700px) 68vw, 28vw"
+          width="560"
+          height="268"
+          alt="Community discussion in a village courtyard"
+          loading="lazy"
+          decoding="async">
+        <figcaption>Community Visit</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <!-- Volunteering -->
-  <section class="cv-section explore-conferences explore-section" id="volunteering">
+  <div class="container cv-section explore-conferences" id="volunteering">
     <p class="cv-group-label">Volunteer Experience</p>
 
     <div class="cv-entry">
@@ -380,10 +409,10 @@
         <p class="cv-place">Organization of Islamic Cooperation</p>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Projects -->
-  <section class="cv-section explore-conferences explore-section" id="projects">
+  <div class="container cv-section explore-conferences" id="projects">
     <p class="cv-group-label">Projects</p>
 
     <div class="cv-entry">
@@ -409,10 +438,10 @@
         <p class="cv-place">A community project to enhance child moral education</p>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Life at BRAC -->
-  <section class="brac-section explore-section" id="life-at-brac">
+  <div class="container brac-section" id="life-at-brac">
     <p class="section-label">Life at BRAC</p>
     <div class="brac-grid">
       <div class="brac-text">
@@ -461,10 +490,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Conferences & Seminars -->
-  <section class="cv-section explore-conferences explore-section" id="conferences-seminars">
+  <div class="container cv-section explore-conferences" id="conferences-seminars">
     <p class="cv-group-label">Conferences &amp; Seminars</p>
 
     <div class="cv-entry">
@@ -504,25 +533,24 @@
         <p class="cv-place">U.S. Embassy &amp; Gen Lab - Supporting Democracy &amp; Good Governance</p>
       </div>
     </div>
-  </section>
+  </div>
 
-      <!-- Download CV -->
-      <section class="cv-section-block explore-section" id="download-cv">
-        <p class="section-label" style="margin-bottom: 1rem;">Curriculum Vitae</p>
-        <h2>Want to know more?</h2>
-        <p>
-          Download the full academic CV for a complete record of education, research, employment, awards, volunteer work, and conference presentations.
-        </p>
-        <a href="uploads/Academic CV_ShahriarFahim-2-9bb4f5eb.pdf" target="_blank" class="cv-download-btn">
-          Download CV (PDF) &darr;
-        </a>
-        <div class="cv-contact-links">
-          <a href="https://www.linkedin.com/in/skabir05/" target="_blank">LinkedIn</a>
-          <a href="https://shahriar-fahim.com/lets-talk-directly/" target="_blank">Let's Talk Directly</a>
-          <a href="https://shahriar-fahim.com/contact/" target="_blank">Contact</a>
-          <a href="https://www.linkedin.com/in/skabir05/details/recommendations/" target="_blank">Recommendations</a>
-        </div>
-      </section>
+  <!-- Download CV -->
+  <div class="container cv-section-block" id="download-cv">
+    <hr class="rule" style="margin-bottom: 3rem;">
+    <p class="section-label" style="margin-bottom: 1rem;">Curriculum Vitae</p>
+    <h2>Want to know more?</h2>
+    <p>
+      Download the full academic CV for a complete record of education, research, employment, awards, volunteer work, and conference presentations.
+    </p>
+    <a href="uploads/Academic CV_ShahriarFahim-2-9bb4f5eb.pdf" target="_blank" class="cv-download-btn">
+      Download CV (PDF) &darr;
+    </a>
+    <div class="cv-contact-links">
+      <a href="https://www.linkedin.com/in/skabir05/" target="_blank">LinkedIn</a>
+      <a href="https://shahriar-fahim.com/lets-talk-directly/" target="_blank">Let's Talk Directly</a>
+      <a href="https://shahriar-fahim.com/contact/" target="_blank">Contact</a>
+      <a href="https://www.linkedin.com/in/skabir05/details/recommendations/" target="_blank">Recommendations</a>
     </div>
   </div>
 
