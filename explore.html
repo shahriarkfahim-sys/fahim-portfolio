@@ -47,25 +47,28 @@
 
     .explore-collage-track {
       display: flex;
-      justify-content: center;
       align-items: flex-start;
-      gap: clamp(1rem, 2vw, 1.7rem);
+      gap: 1.5rem;
       width: max-content;
-      min-width: 100%;
       padding: 0 2rem;
+      animation: explore-collage-scroll 42s linear infinite;
+    }
+
+    .explore-collage-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes explore-collage-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     .collage-photo {
       position: relative;
-      flex: 0 0 auto;
-      width: clamp(190px, 21vw, 300px);
-      filter: sepia(0.18) contrast(0.96);
+      flex: 0 0 280px;
+      width: 280px;
+      filter: sepia(0.28) contrast(0.92);
       transition: filter 0.25s, transform 0.25s;
-    }
-
-    .collage-photo:nth-child(even) {
-      width: clamp(230px, 28vw, 380px);
-      margin-top: 0.55rem;
     }
 
     .collage-photo:hover {
@@ -76,7 +79,7 @@
 
     .collage-photo img {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      height: 190px;
       object-fit: cover;
       border: 2px solid var(--rule);
       box-shadow: 0 14px 30px rgba(35, 24, 10, 0.12);
@@ -94,10 +97,13 @@
     }
 
     @media (max-width: 700px) {
-      .explore-collage-track {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
+      .collage-photo {
+        flex-basis: 230px;
+        width: 230px;
+      }
+
+      .collage-photo img {
+        height: 156px;
       }
     }
 
@@ -107,89 +113,11 @@
       border-bottom: 1px solid var(--rule);
     }
 
-    .brac-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 700px) { .brac-grid { grid-template-columns: 1fr; gap: 2rem; } }
-
     .brac-text p {
       font-size: 1rem;
       color: var(--ink-light);
       line-height: 1.8;
       margin-bottom: 1.2rem;
-    }
-
-    .brac-stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .brac-stat {
-      border: 1px solid var(--rule);
-      background: var(--parchment-dark);
-      padding: 1.25rem 1.5rem;
-      text-align: center;
-    }
-
-    .brac-stat-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      color: var(--sepia);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .brac-stat-label {
-      font-family: var(--font-fine);
-      font-size: 0.82rem;
-      font-style: italic;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .brac-roles {
-      margin-top: 1.5rem;
-      border-top: 1px solid var(--rule);
-      padding-top: 1.25rem;
-    }
-
-    .brac-role-item {
-      display: flex;
-      gap: 1rem;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--sepia-faint);
-      align-items: baseline;
-    }
-    .brac-role-item:last-child { border-bottom: none; }
-
-    .brac-role-dot {
-      flex-shrink: 0;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--sepia-light);
-      margin-top: 0.55rem;
-    }
-
-    .brac-role-title {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: var(--ink);
-    }
-
-    .brac-role-date {
-      font-family: var(--font-fine);
-      font-style: italic;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-left: auto;
-      flex-shrink: 0;
     }
 
     /* ── CV Section ── */
@@ -387,6 +315,54 @@
           decoding="async">
         <figcaption>Community Visit</figcaption>
       </figure>
+      <figure class="collage-photo" aria-hidden="true">
+        <img
+          src="assets/photos/explore-memory-01-560.jpg"
+          srcset="assets/photos/explore-memory-01-560.jpg 560w, assets/photos/explore-memory-01-1120.jpg 1120w"
+          sizes="280px"
+          width="560"
+          height="420"
+          alt=""
+          loading="lazy"
+          decoding="async">
+        <figcaption>With farmers, Satkhira</figcaption>
+      </figure>
+      <figure class="collage-photo" aria-hidden="true">
+        <img
+          src="assets/photos/explore-memory-02-560.jpg"
+          srcset="assets/photos/explore-memory-02-560.jpg 560w, assets/photos/explore-memory-02-1120.jpg 1120w"
+          sizes="280px"
+          width="560"
+          height="420"
+          alt=""
+          loading="lazy"
+          decoding="async">
+        <figcaption>Volunteer Action</figcaption>
+      </figure>
+      <figure class="collage-photo" aria-hidden="true">
+        <img
+          src="assets/photos/explore-memory-03-560.jpg"
+          srcset="assets/photos/explore-memory-03-560.jpg 560w, assets/photos/explore-memory-03-1120.jpg 1120w"
+          sizes="280px"
+          width="560"
+          height="420"
+          alt=""
+          loading="lazy"
+          decoding="async">
+        <figcaption>Field Learning</figcaption>
+      </figure>
+      <figure class="collage-photo" aria-hidden="true">
+        <img
+          src="assets/photos/explore-memory-04-560.jpg"
+          srcset="assets/photos/explore-memory-04-560.jpg 560w, assets/photos/explore-memory-04-1120.jpg 1120w"
+          sizes="280px"
+          width="560"
+          height="268"
+          alt=""
+          loading="lazy"
+          decoding="async">
+        <figcaption>Community Visit</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -443,52 +419,16 @@
   <!-- Life at BRAC -->
   <div class="container brac-section" id="life-at-brac">
     <p class="section-label">Life at BRAC</p>
-    <div class="brac-grid">
-      <div class="brac-text">
-        <p>
-          BRAC is the world's largest development organisation by scale of operations — and for Shahriar K Fahim, it has been the crucible where research, advocacy, and social innovation meet real communities. He joined BRAC's Youth Platform in 2023, mobilising young people across Bangladesh to become agents of social change.
-        </p>
-        <p>
-          In 2026, he moved into BRAC's <strong>Social Innovation Lab (SIL)</strong> as Deputy Manager — a unit dedicated to designing, testing, and scaling solutions to Bangladesh's most pressing development challenges, from disability inclusion to climate resilience.
-        </p>
-        <p>
-          His time at BRAC has deepened his conviction that the most powerful development work happens at the intersection of rigorous evidence and genuine community trust.
-        </p>
-
-        <div class="brac-roles">
-          <div class="brac-role-item">
-            <div class="brac-role-dot"></div>
-            <span class="brac-role-title">Deputy Manager, Social Innovation Lab (SIL)</span>
-            <span class="brac-role-date">2026 – present</span>
-          </div>
-          <div class="brac-role-item">
-            <div class="brac-role-dot"></div>
-            <span class="brac-role-title">Senior Officer, Youth Platform</span>
-            <span class="brac-role-date">2023 – 2025</span>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="brac-stat-grid">
-          <div class="brac-stat">
-            <p class="brac-stat-num">2+</p>
-            <p class="brac-stat-label">Years at BRAC</p>
-          </div>
-          <div class="brac-stat">
-            <p class="brac-stat-num">SIL</p>
-            <p class="brac-stat-label">Social Innovation Lab — current role</p>
-          </div>
-          <div class="brac-stat">
-            <p class="brac-stat-num">Youth</p>
-            <p class="brac-stat-label">Platform — mobilising young changemakers</p>
-          </div>
-          <div class="brac-stat">
-            <p class="brac-stat-num">BD</p>
-            <p class="brac-stat-label">Bangladesh-focused development work</p>
-          </div>
-        </div>
-      </div>
+    <div class="brac-text">
+      <p>
+        BRAC is the world's largest development organisation by scale of operations — and for Shahriar K Fahim, it has been the crucible where research, advocacy, and social innovation meet real communities. He joined BRAC's Youth Platform in 2023, mobilising young people across Bangladesh to become agents of social change.
+      </p>
+      <p>
+        In 2026, he moved into BRAC's <strong>Social Innovation Lab (SIL)</strong> as Deputy Manager — a unit dedicated to designing, testing, and scaling solutions to Bangladesh's most pressing development challenges, from disability inclusion to climate resilience.
+      </p>
+      <p>
+        His time at BRAC has deepened his conviction that the most powerful development work happens at the intersection of rigorous evidence and genuine community trust.
+      </p>
     </div>
   </div>
 
