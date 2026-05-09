@@ -561,6 +561,7 @@
 <script>
   const mediumProfileUrl = 'https://medium.com/@shahriar.k.fahim';
   const mediumRssUrl = 'https://medium.com/feed/@shahriar.k.fahim';
+  const localMediumFeedUrl = '/api/medium-feed';
   const mediumProxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
   const mediumFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(mediumRssUrl);
   let activeBlogCategory = 'all';
@@ -723,11 +724,19 @@
   }
 
   async function fetchFreshMediumPosts() {
-    const freshRssUrl = `${mediumRssUrl}?fresh=${Date.now()}`;
-    const response = await fetch(mediumProxyUrl + encodeURIComponent(freshRssUrl), { cache: 'no-store' });
+    const response = await fetch(`${localMediumFeedUrl}?fresh=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Fresh Medium feed request failed');
     const posts = postsFromMediumXml(await response.text());
     if (!posts.length) throw new Error('Fresh Medium feed returned no posts');
+    return posts;
+  }
+
+  async function fetchProxyMediumPosts() {
+    const freshRssUrl = `${mediumRssUrl}?fresh=${Date.now()}`;
+    const response = await fetch(mediumProxyUrl + encodeURIComponent(freshRssUrl), { cache: 'no-store' });
+    if (!response.ok) throw new Error('Proxy Medium feed request failed');
+    const posts = postsFromMediumXml(await response.text());
+    if (!posts.length) throw new Error('Proxy Medium feed returned no posts');
     return posts;
   }
 
@@ -748,8 +757,13 @@
       try {
         posts = await fetchFreshMediumPosts();
       } catch (freshError) {
-        console.warn('Fresh Medium feed unavailable. Trying cached JSON feed instead.', freshError);
-        posts = await fetchCachedMediumPosts();
+        console.warn('Same-site Medium feed unavailable. Trying proxy feed instead.', freshError);
+        try {
+          posts = await fetchProxyMediumPosts();
+        } catch (proxyError) {
+          console.warn('Proxy Medium feed unavailable. Trying cached JSON feed instead.', proxyError);
+          posts = await fetchCachedMediumPosts();
+        }
       }
 
       if (!posts.length) return;
