@@ -59,9 +59,11 @@
       overflow: hidden;
       border-bottom: 1px solid var(--rule);
       position: relative;
+      background: var(--sepia-faint);
     }
 
     .card-thumb svg { width: 100%; height: 100%; display: block; }
+    .card-thumb img { width: 100%; height: 100%; display: block; object-fit: cover; filter: sepia(0.18) contrast(0.95); }
 
     .card-body { padding: 1.25rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
 
@@ -153,7 +155,7 @@
 
     <div class="page-header">
       <h1>Blog</h1>
-      <p class="subtitle">19 articles on disability, climate, youth, and ideas worth sharing</p>
+      <p class="subtitle" id="blog-subtitle">Articles on disability, climate, youth, and ideas worth sharing</p>
     </div>
 
     <!-- Filter -->
@@ -166,7 +168,7 @@
     </div>
 
     <!-- Cards -->
-    <div class="card-grid">
+    <div class="card-grid" id="blog-grid">
 
       <!-- Climate -->
       <a href="https://medium.com/@shahriar.k.fahim" target="_blank" rel="noopener noreferrer" class="blog-card" data-cat="climate">
@@ -489,16 +491,158 @@
 </footer>
 
 <script>
+  const mediumProfileUrl = 'https://medium.com/@shahriar.k.fahim';
+  const mediumFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://medium.com/feed/@shahriar.k.fahim');
+  let activeBlogCategory = 'all';
+
+  function applyBlogFilter() {
+    document.querySelectorAll('.blog-card').forEach(card => {
+      card.classList.toggle('hidden', activeBlogCategory !== 'all' && card.dataset.cat !== activeBlogCategory);
+    });
+  }
+
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const cat = btn.dataset.cat;
-      document.querySelectorAll('.blog-card').forEach(card => {
-        card.classList.toggle('hidden', cat !== 'all' && card.dataset.cat !== cat);
-      });
+      activeBlogCategory = btn.dataset.cat;
+      applyBlogFilter();
     });
   });
+
+  function textFromHtml(html) {
+    const template = document.createElement('template');
+    template.innerHTML = html || '';
+    return template.content.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function getMediumThumbnail(post) {
+    if (post.thumbnail) return post.thumbnail;
+    const match = (post.description || post.content || '').match(/<img[^>]+src="([^">]+)"/i);
+    return match ? match[1] : '';
+  }
+
+  function getBlogCategory(post) {
+    const source = `${post.title || ''} ${(post.categories || []).join(' ')}`.toLowerCase();
+    if (source.includes('climate')) return 'climate';
+    if (source.includes('disability') || source.includes('inclusion') || source.includes('screen time') || source.includes('speech')) return 'disability';
+    if (source.includes('book') || source.includes('summary') || source.includes('alchemist') || source.includes('outliers')) return 'books';
+    return 'thought';
+  }
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return '';
+    return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function createFallbackThumb(category) {
+    const colors = {
+      climate: ['#b8c890', '#3d5020'],
+      disability: ['#c8b888', '#5c4820'],
+      books: ['#b89060', '#4a3010'],
+      thought: ['#c09858', '#5c3810']
+    };
+    const [base, shade] = colors[category] || colors.thought;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'card-thumb';
+    wrapper.innerHTML = `
+      <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="320" height="130" fill="${base}"/>
+        <rect width="320" height="130" fill="${shade}" opacity="0.3"/>
+        <path d="M0 88 Q80 58 160 82 Q240 106 320 72 L320 130 L0 130 Z" fill="${shade}" opacity="0.45"/>
+        <rect x="70" y="34" width="180" height="9" rx="4.5" fill="#f5f0e6" opacity="0.42"/>
+        <rect x="92" y="58" width="136" height="7" rx="3.5" fill="#f5f0e6" opacity="0.32"/>
+        <rect width="320" height="130" fill="#f5f0e6" opacity="0.06"/>
+      </svg>
+    `;
+    return wrapper;
+  }
+
+  function createMediumCard(post) {
+    const category = getBlogCategory(post);
+    const card = document.createElement('a');
+    card.href = post.link || mediumProfileUrl;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    card.className = 'blog-card';
+    card.dataset.cat = category;
+
+    const thumbUrl = getMediumThumbnail(post);
+    if (thumbUrl) {
+      const thumb = document.createElement('div');
+      thumb.className = 'card-thumb';
+      const img = document.createElement('img');
+      img.src = thumbUrl;
+      img.alt = '';
+      img.loading = 'lazy';
+      thumb.appendChild(img);
+      card.appendChild(thumb);
+    } else {
+      card.appendChild(createFallbackThumb(category));
+    }
+
+    const body = document.createElement('div');
+    body.className = 'card-body';
+
+    const cat = document.createElement('p');
+    cat.className = 'card-cat';
+    cat.textContent = (post.categories && post.categories[0]) || {
+      climate: 'Climate Change Matters',
+      disability: 'Disability Understanding',
+      books: 'Book Summary for Youth',
+      thought: 'My Thought-Book'
+    }[category];
+
+    const title = document.createElement('p');
+    title.className = 'card-title';
+    title.textContent = post.title || 'Read on Medium';
+
+    const excerpt = document.createElement('p');
+    excerpt.className = 'card-excerpt';
+    const plainText = textFromHtml(post.description || post.content || '');
+    excerpt.textContent = plainText.length > 150 ? `${plainText.slice(0, 147).trim()}...` : plainText;
+
+    const footer = document.createElement('div');
+    footer.className = 'card-footer';
+
+    const date = document.createElement('span');
+    date.className = 'card-date';
+    date.textContent = formatDate(post.pubDate);
+
+    const read = document.createElement('span');
+    read.className = 'card-read';
+    read.textContent = 'Read on Medium';
+
+    footer.append(date, read);
+    body.append(cat, title, excerpt, footer);
+    card.appendChild(body);
+
+    return card;
+  }
+
+  async function loadMediumPosts() {
+    const grid = document.getElementById('blog-grid');
+    if (!grid) return;
+
+    try {
+      const response = await fetch(mediumFeedUrl);
+      if (!response.ok) throw new Error('Medium feed request failed');
+      const feed = await response.json();
+      if (feed.status !== 'ok' || !Array.isArray(feed.items) || !feed.items.length) return;
+
+      grid.replaceChildren(...feed.items.map(createMediumCard));
+      const subtitle = document.getElementById('blog-subtitle');
+      if (subtitle) {
+        subtitle.textContent = `${feed.items.length} latest articles from Medium on disability, climate, youth, and ideas worth sharing`;
+      }
+      applyBlogFilter();
+    } catch (error) {
+      console.warn('Could not load Medium posts. Showing saved blog cards instead.', error);
+    }
+  }
+
+  loadMediumPosts();
 </script>
 <script src="site.js"></script>
 </body>
