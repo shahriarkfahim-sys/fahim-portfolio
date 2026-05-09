@@ -560,7 +560,9 @@
 
 <script>
   const mediumProfileUrl = 'https://medium.com/@shahriar.k.fahim';
-  const mediumFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://medium.com/feed/@shahriar.k.fahim');
+  const mediumRssUrl = 'https://medium.com/feed/@shahriar.k.fahim';
+  const mediumProxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
+  const mediumFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(mediumRssUrl);
   let activeBlogCategory = 'all';
 
   function applyBlogFilter() {
@@ -689,20 +691,65 @@
     return card;
   }
 
+  function textFromXmlNode(item, tagName) {
+    const node = item.getElementsByTagName(tagName)[0];
+    return node ? node.textContent.trim() : '';
+  }
+
+  function getXmlContent(item) {
+    return textFromXmlNode(item, 'content:encoded') || textFromXmlNode(item, 'description');
+  }
+
+  function postsFromMediumXml(xmlText) {
+    const xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+    if (xml.querySelector('parsererror')) return [];
+
+    return Array.from(xml.querySelectorAll('item')).map(item => ({
+      title: textFromXmlNode(item, 'title'),
+      link: textFromXmlNode(item, 'link'),
+      pubDate: textFromXmlNode(item, 'pubDate'),
+      description: getXmlContent(item),
+      content: getXmlContent(item),
+      categories: Array.from(item.getElementsByTagName('category')).map(category => category.textContent.trim()).filter(Boolean)
+    })).filter(post => post.title && post.link);
+  }
+
+  async function fetchFreshMediumPosts() {
+    const freshRssUrl = `${mediumRssUrl}?fresh=${Date.now()}`;
+    const response = await fetch(mediumProxyUrl + encodeURIComponent(freshRssUrl), { cache: 'no-store' });
+    if (!response.ok) throw new Error('Fresh Medium feed request failed');
+    const posts = postsFromMediumXml(await response.text());
+    if (!posts.length) throw new Error('Fresh Medium feed returned no posts');
+    return posts;
+  }
+
+  async function fetchCachedMediumPosts() {
+    const response = await fetch(`${mediumFeedUrl}&fresh=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('Medium feed request failed');
+    const feed = await response.json();
+    if (feed.status !== 'ok' || !Array.isArray(feed.items) || !feed.items.length) return [];
+    return feed.items;
+  }
+
   async function loadMediumPosts() {
     const grid = document.getElementById('blog-grid');
     if (!grid) return;
 
     try {
-      const response = await fetch(mediumFeedUrl);
-      if (!response.ok) throw new Error('Medium feed request failed');
-      const feed = await response.json();
-      if (feed.status !== 'ok' || !Array.isArray(feed.items) || !feed.items.length) return;
+      let posts = [];
+      try {
+        posts = await fetchFreshMediumPosts();
+      } catch (freshError) {
+        console.warn('Fresh Medium feed unavailable. Trying cached JSON feed instead.', freshError);
+        posts = await fetchCachedMediumPosts();
+      }
 
-      grid.replaceChildren(...feed.items.map(createMediumCard));
+      if (!posts.length) return;
+
+      grid.replaceChildren(...posts.map(createMediumCard));
       const subtitle = document.getElementById('blog-subtitle');
       if (subtitle) {
-        subtitle.textContent = `${feed.items.length} latest articles from Medium on disability, climate, youth, and ideas worth sharing`;
+        subtitle.textContent = `${posts.length} latest articles from Medium on disability, climate, youth, and ideas worth sharing`;
       }
       applyBlogFilter();
     } catch (error) {
