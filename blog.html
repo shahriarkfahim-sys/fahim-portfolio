@@ -564,6 +564,9 @@
   const localMediumFeedUrl = '/api/medium-feed';
   const mediumProxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
   const mediumFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(mediumRssUrl);
+  const mediumThumbnailOverrides = {
+    'Sri Lanka Diaries: The Island That Stole My Heart': 'https://cdn-images-1.medium.com/max/1024/0*oLj0CLOoGlJyDyvG'
+  };
   let activeBlogCategory = 'all';
 
   function applyBlogFilter() {
@@ -589,6 +592,8 @@
   }
 
   function getMediumThumbnail(post) {
+    if (mediumThumbnailOverrides[post.title]) return mediumThumbnailOverrides[post.title];
+
     const html = post.content || post.description || '';
     const template = document.createElement('template');
     template.innerHTML = html;
