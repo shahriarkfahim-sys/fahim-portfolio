@@ -583,13 +583,21 @@
   function textFromHtml(html) {
     const template = document.createElement('template');
     template.innerHTML = html || '';
+    template.content.querySelectorAll('h1, h2, h3, h4, figcaption, script, style, img').forEach(node => node.remove());
     return template.content.textContent.replace(/\s+/g, ' ').trim();
   }
 
   function getMediumThumbnail(post) {
-    if (post.thumbnail) return post.thumbnail;
-    const match = (post.description || post.content || '').match(/<img[^>]+src="([^">]+)"/i);
-    return match ? match[1] : '';
+    const html = post.content || post.description || '';
+    const template = document.createElement('template');
+    template.innerHTML = html;
+
+    const contentImages = Array.from(template.content.querySelectorAll('figure img, img'))
+      .map(img => img.getAttribute('src'))
+      .filter(src => src && src.includes('cdn-images') && !src.includes('medium.com/_/stat'));
+
+    if (contentImages.length) return contentImages[0];
+    return post.thumbnail || '';
   }
 
   function getBlogCategory(post) {
