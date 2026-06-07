@@ -548,21 +548,42 @@
       justify-self: center;
       width: min(100%, 430px);
       aspect-ratio: 1;
+      overflow: visible;
+    }
+    .home-about-portrait::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       border-radius: 50%;
       background: rgba(167, 116, 52, 0.17);
       box-shadow: 0 18px 60px rgba(94, 62, 30, 0.13);
-      overflow: hidden;
     }
-    .home-about-portrait img {
+    .home-about-portrait-frame {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .home-about-portrait-frame img,
+    .home-about-portrait-pop {
       position: absolute;
       left: 50%;
-      bottom: -32%;
+      bottom: -25%;
       width: 112%;
       height: auto;
       max-width: none;
       object-fit: contain;
       object-position: bottom center;
       transform: translateX(-50%);
+    }
+    .home-about-portrait-frame img {
+      z-index: 1;
+    }
+    .home-about-portrait-pop {
+      clip-path: inset(0 0 72% 0);
+      pointer-events: none;
+      z-index: 2;
     }
     @media (max-width: 760px) {
       .home-about {
@@ -577,8 +598,9 @@
         order: 1;
         width: min(82vw, 350px);
       }
-      .home-about-portrait img {
-        bottom: -31%;
+      .home-about-portrait-frame img,
+      .home-about-portrait-pop {
+        bottom: -24%;
         width: 112%;
       }
     }
@@ -616,7 +638,10 @@
     <!-- Portrait -->
     <div class="home-about">
       <div class="home-about-portrait">
-        <img src="assets/photos/home-portrait-cutout.png" alt="Portrait of Md. Shahriar Kabir Fahim">
+        <div class="home-about-portrait-frame">
+          <img src="assets/photos/home-portrait-cutout.png" alt="Portrait of Md. Shahriar Kabir Fahim">
+        </div>
+        <img class="home-about-portrait-pop" src="assets/photos/home-portrait-cutout.png" alt="" aria-hidden="true">
       </div>
       <div class="home-about-copy">
         <p class="section-label">About</p>
