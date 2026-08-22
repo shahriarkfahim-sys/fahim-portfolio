@@ -6,14 +6,20 @@ function copyStaticFiles() {
   return {
     name: 'copy-static-files',
     closeBundle() {
-      const files = ['site.js', 'uploads'];
+      // These files are served directly rather than imported by the Vite HTML
+      // entry points. Copy them into the deployment output so Vercel can serve
+      // the dashboard redirect and the dashboard page it targets.
+      const files = ['site.js', 'uploads', 'dashboard', 'task-dashboard'];
 
       for (const file of files) {
         const source = resolve(file);
         const destination = resolve('dist', file);
 
         if (existsSync(source)) {
-          cpSync(source, destination, { recursive: true });
+          cpSync(source, destination, {
+            recursive: true,
+            filter: (path) => !path.endsWith('/.git') && !path.endsWith('/.DS_Store'),
+          });
         }
       }
     },
