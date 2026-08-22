@@ -41,6 +41,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        dashboard: 'dashboard.html',
         blog: 'blog.html',
         publications: 'publications.html',
         biography: 'biography.html',
