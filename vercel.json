@@ -27,14 +27,6 @@
       "destination": "/honours-awards.html"
     },
     {
-      "source": "/dashboard",
-      "destination": "/dashboard.html"
-    },
-    {
-      "source": "/dashboard/:path*",
-      "destination": "/dashboard.html"
-    },
-    {
       "source": "/contact/:path*",
       "destination": "/biography.html"
     },

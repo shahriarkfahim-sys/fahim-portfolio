@@ -1,26 +1,1546 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url=/task-dashboard/Task%20Dashboard.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting to Dashboard</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: Arial, sans-serif;
-      background: #f6f3ee;
-      color: #1a1208;
-    }
-    a {
-      color: #1f5fa8;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🚀 Smart Project Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        :root {
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #ffffff;
+            --bg-input: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 32px rgba(0,0,0,0.10);
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #eab308;
+            --radius: 20px;
+            --transition: 0.25s ease;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-input: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --border-color: #334155;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background var(--transition), color var(--transition);
+        }
+        .automation-banner {
+            max-width: 1400px;
+            margin: 0 auto 20px auto;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: 0 8px 30px rgba(37,99,235,0.25);
+        }
+        .automation-banner .banner-left { display: flex; align-items: center; gap: 16px; }
+        .automation-banner .banner-left i { font-size: 2rem; }
+        .automation-banner .banner-left h2 { font-size: 1.2rem; font-weight: 600; }
+        .automation-banner .banner-left p { font-size: 0.9rem; opacity: 0.9; }
+        .automation-banner .banner-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .banner-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+        .banner-status .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse-dot 2s infinite;
+        }
+        .banner-status .status-dot.inactive { background: #94a3b8; animation: none; }
+        @keyframes pulse-dot {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        .banner-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .banner-btn:hover { background: rgba(255,255,255,0.3); }
+        .banner-btn.primary {
+            background: white;
+            color: #2563eb;
+            border-color: white;
+        }
+        .banner-btn.primary:hover { background: #f0f4ff; transform: scale(1.02); }
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+        @media (max-width: 860px) { .app-container { grid-template-columns: 1fr; } }
+        .sidebar {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: background var(--transition), border var(--transition);
+            position: sticky;
+            top: 20px;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .sidebar-header h2 { font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .sidebar-header h2 i { color: var(--accent); }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            padding: 8px 14px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .theme-toggle:hover { background: var(--bg-input); }
+        .project-form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .project-form input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .project-form input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+        }
+        .project-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 0 18px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .project-form button:hover { background: var(--accent-hover); }
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .project-list::-webkit-scrollbar { width: 4px; }
+        .project-list::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+        .project-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+        }
+        .project-item:hover { background: var(--bg-input); }
+        .project-item.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .project-item .project-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            flex: 1;
+        }
+        .project-item .project-count {
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        .project-item.active .project-count { background: rgba(255,255,255,0.25); }
+        .project-delete-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        .project-delete-btn:hover { color: var(--danger); background: rgba(239,68,68,0.1); }
+        .project-webhook-status {
+            font-size: 0.6rem;
+            opacity: 0.6;
+            display: block;
+            margin-top: 2px;
+        }
+        .project-webhook-status.configured { color: var(--success); }
+        .project-webhook-status.not-configured { color: var(--text-muted); }
+        .main-content {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 28px 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: background var(--transition), border var(--transition);
+        }
+        .main-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .main-header h2 { font-size: 1.6rem; font-weight: 700; }
+        .main-header h2 small { font-weight: 400; font-size: 0.9rem; color: var(--text-muted); margin-left: 10px; }
+        .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .header-actions button {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header-actions button:hover { background: var(--border-color); color: var(--text-primary); }
+        .header-actions .btn-webhook { background: var(--accent); color: white; border-color: var(--accent); }
+        .header-actions .btn-webhook:hover { background: var(--accent-hover); }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--bg-input);
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .stat-card .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+        .stat-card .stat-value { font-size: 1.8rem; font-weight: 700; margin-top: 2px; }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .search-bar input, .search-bar select {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .search-bar input:focus, .search-bar select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.12); }
+        .search-bar input { flex: 1; min-width: 160px; }
+        .add-task-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: var(--bg-input);
+            padding: 16px 18px;
+            border-radius: 40px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+        .add-task-form input, .add-task-form select, .add-task-form textarea {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            outline: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .add-task-form input:focus, .add-task-form select:focus, .add-task-form textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
+        }
+        .add-task-form input[type="text"] { flex: 2; min-width: 160px; }
+        .add-task-form input[type="date"] { flex: 0 0 150px; }
+        .add-task-form select { flex: 0 0 130px; }
+        .add-task-form textarea { flex: 1 1 100%; min-height: 50px; resize: vertical; border-radius: 16px; }
+        .add-task-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .add-task-form button:hover { background: var(--accent-hover); transform: scale(1.02); }
+        .task-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .task-list-header h3 { font-size: 1.1rem; font-weight: 600; }
+        .task-list-header .task-count-badge {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--bg-input);
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+        .task-list { display: flex; flex-direction: column; gap: 10px; min-height: 120px; }
+        .task-item {
+            background: var(--bg-input);
+            border-radius: 20px;
+            padding: 16px 20px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: grab;
+        }
+        .task-item:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); }
+        .task-item:active { cursor: grabbing; }
+        .task-item.dragging { opacity: 0.4; border-style: dashed; }
+        .task-item.drag-over { border-color: var(--accent); border-width: 2px; background: rgba(59,130,246,0.04); }
+        .task-item.completed .task-title-text { text-decoration: line-through; color: var(--text-muted); }
+        .task-item .tag-work { border-left: 3px solid var(--accent); }
+        .task-item .tag-personal { border-left: 3px solid #8b5cf6; }
+        .task-item .tag-urgent { border-left: 3px solid var(--danger); }
+        .task-item .tag-idea { border-left: 3px solid var(--warning); }
+        .task-item .tag-other { border-left: 3px solid var(--text-muted); }
+        .task-row { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+        .task-check { width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer; margin-top: 3px; flex-shrink: 0; }
+        .task-content { flex: 1; min-width: 160px; }
+        .task-title-text { font-weight: 500; font-size: 1rem; display: block; }
+        .task-notes { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; display: block; word-break: break-word; }
+        .task-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 6px; }
+        .task-tag {
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .task-tag.tag-work { background: #dbeafe; color: #1d4ed8; }
+        .task-tag.tag-personal { background: #ede9fe; color: #7c3aed; }
+        .task-tag.tag-urgent { background: #fee2e2; color: #b91c1c; }
+        .task-tag.tag-idea { background: #fef3c7; color: #92400e; }
+        .task-tag.tag-other { background: var(--border-color); color: var(--text-muted); }
+        [data-theme="dark"] .task-tag.tag-work { background: #1e3a5f; color: #60a5fa; }
+        [data-theme="dark"] .task-tag.tag-personal { background: #2e1a47; color: #a78bfa; }
+        [data-theme="dark"] .task-tag.tag-urgent { background: #4a1a1a; color: #f87171; }
+        [data-theme="dark"] .task-tag.tag-idea { background: #3d2e00; color: #fbbf24; }
+        .task-priority {
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .priority-high { background: #fee2e2; color: #b91c1c; }
+        .priority-medium { background: #fef9c3; color: #854d0e; }
+        .priority-low { background: #dcfce7; color: #166534; }
+        [data-theme="dark"] .priority-high { background: #7f1d1d; color: #fca5a5; }
+        [data-theme="dark"] .priority-medium { background: #713f12; color: #fde047; }
+        [data-theme="dark"] .priority-low { background: #14532d; color: #86efac; }
+        .task-due { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+        .task-due.overdue { color: var(--danger); font-weight: 600; }
+        .task-actions { display: flex; gap: 4px; align-items: center; margin-left: auto; }
+        .task-actions button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        .task-actions button:hover { background: var(--border-color); color: var(--text-primary); }
+        .task-actions .delete-btn:hover { color: var(--danger); background: rgba(239,68,68,0.1); }
+        .task-actions .send-btn:hover { color: var(--accent); background: rgba(59,130,246,0.1); }
+        .subtask-section { margin-top: 10px; margin-left: 34px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
+        .subtask-input-group { display: flex; gap: 6px; }
+        .subtask-input-group input {
+            flex: 1;
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            outline: none;
+        }
+        .subtask-input-group button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 0 14px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .subtask-list { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+        .subtask-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+        .subtask-item input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+        .subtask-item .subtask-text { flex: 1; }
+        .subtask-item .subtask-text.done { text-decoration: line-through; color: var(--text-muted); }
+        .subtask-item .subtask-delete {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        .subtask-item .subtask-delete:hover { color: var(--danger); }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+        .empty-state i { font-size: 2.8rem; display: block; margin-bottom: 12px; opacity: 0.3; }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(6px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+        }
+        .modal h3 { margin-bottom: 16px; }
+        .modal textarea, .modal input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            margin-bottom: 12px;
+        }
+        .modal textarea { min-height: 100px; resize: vertical; }
+        .modal textarea:focus, .modal input:focus { border-color: var(--accent); }
+        .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+        .modal-actions button {
+            padding: 8px 24px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .modal-actions .save-btn { background: var(--accent); color: white; }
+        .modal-actions .save-btn:hover { background: var(--accent-hover); }
+        .modal-actions .cancel-btn { background: var(--bg-input); color: var(--text-secondary); }
+        .modal-actions .cancel-btn:hover { background: var(--border-color); }
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+        }
+        .toast {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        }
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--danger); }
+        .toast.info { border-left: 4px solid var(--accent); }
+        .toast.warning { border-left: 4px solid var(--warning); }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @media (max-width: 600px) {
+            .add-task-form { flex-direction: column; border-radius: 20px; }
+            .add-task-form input, .add-task-form select, .add-task-form textarea { flex: 1 1 100% !important; }
+            .main-content { padding: 18px; }
+            .task-row { flex-direction: column; }
+            .task-actions { margin-left: 0; width: 100%; justify-content: flex-end; }
+            .subtask-section { margin-left: 0; }
+            .automation-banner { flex-direction: column; text-align: center; }
+            .automation-banner .banner-left { flex-direction: column; text-align: center; }
+            .banner-right { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-  <p>Redirecting to the dashboard… If it does not open, <a href="/task-dashboard/Task%20Dashboard.html">click here</a>.</p>
+
+<!-- ===== BANNER ===== -->
+<div class="automation-banner" id="automationBanner">
+    <div class="banner-left">
+        <i class="fas fa-robot"></i>
+        <div>
+            <h2>🤖 Smart Notifications</h2>
+            <p>Work tasks → Boss • Personal tasks → Private • Each project → Different team</p>
+        </div>
+    </div>
+    <div class="banner-right">
+        <div class="banner-status">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Checking...</span>
+        </div>
+        <button class="banner-btn primary" id="sendNowBtn">
+            <i class="fas fa-paper-plane"></i> Send Daily Report
+        </button>
+    </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-tasks"></i> Projects</h2>
+            <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+        </div>
+        <div class="project-form">
+            <input type="text" id="newProjectInput" placeholder="New project..." />
+            <button id="addProjectBtn"><i class="fas fa-plus"></i></button>
+        </div>
+        <div class="project-list" id="projectList"></div>
+        <div style="margin-top:16px; border-top:1px solid var(--border-color); padding-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+            <button id="exportBtn" style="flex:1; padding:8px; border-radius:40px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-secondary); cursor:pointer; font-size:0.8rem;">
+                <i class="fas fa-download"></i> Export
+            </button>
+            <button id="importBtn" style="flex:1; padding:8px; border-radius:40px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-secondary); cursor:pointer; font-size:0.8rem;">
+                <i class="fas fa-upload"></i> Import
+            </button>
+            <input type="file" id="importFileInput" accept=".json" style="display:none;" />
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="main-header">
+            <h2 id="currentProjectTitle">Select a project <small>or create one</small></h2>
+            <div class="header-actions">
+                <button class="btn-webhook" id="projectWebhookBtn"><i class="fas fa-link"></i> Set Webhook</button>
+                <button id="deleteProjectBtn" style="color:var(--danger);"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="statTotal">0</div></div>
+            <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="statPending">0</div></div>
+            <div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" id="statCompleted">0</div></div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="🔍 Search tasks..." />
+            <select id="filterPriority">
+                <option value="all">All Priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            <select id="filterStatus">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+            </select>
+            <select id="filterTag">
+                <option value="all">All Tags</option>
+                <option value="work">💼 Work</option>
+                <option value="personal">🧑 Personal</option>
+                <option value="urgent">⚡ Urgent</option>
+                <option value="idea">💡 Idea</option>
+                <option value="other">📌 Other</option>
+            </select>
+        </div>
+
+        <div class="add-task-form">
+            <input type="text" id="taskTitleInput" placeholder="Task title..." />
+            <input type="date" id="taskDueInput" />
+            <select id="taskPrioritySelect">
+                <option value="low">🟢 Low</option>
+                <option value="medium" selected>🟡 Medium</option>
+                <option value="high">🔴 High</option>
+            </select>
+            <select id="taskTagSelect">
+                <option value="work">💼 Work</option>
+                <option value="personal">🧑 Personal</option>
+                <option value="urgent">⚡ Urgent</option>
+                <option value="idea">💡 Idea</option>
+                <option value="other">📌 Other</option>
+            </select>
+            <textarea id="taskNotesInput" placeholder="Notes (optional)"></textarea>
+            <button id="addTaskBtn"><i class="fas fa-plus"></i> Add</button>
+        </div>
+
+        <div class="task-list-header">
+            <h3>Tasks</h3>
+            <span class="task-count-badge" id="taskCountBadge">0 tasks</span>
+        </div>
+        <div class="task-list" id="taskList">
+            <div class="empty-state">
+                <i class="fas fa-clipboard-list"></i>
+                No tasks in this project. Add one above!
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ===== MODALS ===== -->
+<div class="modal-overlay" id="notesModal">
+    <div class="modal">
+        <h3><i class="fas fa-pen"></i> Edit Task Notes</h3>
+        <textarea id="modalNotesText" placeholder="Add detailed notes..."></textarea>
+        <div class="modal-actions">
+            <button class="cancel-btn" id="modalCancelBtn">Cancel</button>
+            <button class="save-btn" id="modalSaveBtn">Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="webhookModal">
+    <div class="modal">
+        <h3><i class="fas fa-link"></i> Webhook for: <span id="webhookProjectName">Loading...</span></h3>
+        <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:12px;">
+            Only <strong>WORK</strong> and <strong>URGENT</strong> tasks will be sent to this webhook.
+            Personal/idea tasks stay private.
+        </p>
+        <input type="text" id="webhookInput" placeholder="https://chat.googleapis.com/v1/spaces/..." />
+        <div class="modal-actions">
+            <button class="cancel-btn" id="webhookCancelBtn">Cancel</button>
+            <button class="save-btn" id="webhookSaveBtn">Save Webhook</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ================================================================
+//  COMPLETE JAVASCRIPT - ALL FEATURES WORKING
+// ================================================================
+
+// ===== DATA LAYER =====
+let data = {
+    projects: {},
+    currentProjectId: null,
+    nextId: 1
+};
+
+let editingTaskId = null;
+let editingWebhookProjectId = null;
+
+// ===== DOM REFS =====
+const projectListEl = document.getElementById('projectList');
+const currentProjectTitle = document.getElementById('currentProjectTitle');
+const taskListEl = document.getElementById('taskList');
+const statTotal = document.getElementById('statTotal');
+const statPending = document.getElementById('statPending');
+const statCompleted = document.getElementById('statCompleted');
+const taskCountBadge = document.getElementById('taskCountBadge');
+
+const newProjectInput = document.getElementById('newProjectInput');
+const addProjectBtn = document.getElementById('addProjectBtn');
+const deleteProjectBtn = document.getElementById('deleteProjectBtn');
+
+const taskTitleInput = document.getElementById('taskTitleInput');
+const taskDueInput = document.getElementById('taskDueInput');
+const taskPrioritySelect = document.getElementById('taskPrioritySelect');
+const taskTagSelect = document.getElementById('taskTagSelect');
+const taskNotesInput = document.getElementById('taskNotesInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+
+const searchInput = document.getElementById('searchInput');
+const filterPriority = document.getElementById('filterPriority');
+const filterStatus = document.getElementById('filterStatus');
+const filterTag = document.getElementById('filterTag');
+
+const themeToggle = document.getElementById('themeToggle');
+const exportBtn = document.getElementById('exportBtn');
+const importBtn = document.getElementById('importBtn');
+const importFileInput = document.getElementById('importFileInput');
+
+const modalOverlay = document.getElementById('notesModal');
+const modalNotesText = document.getElementById('modalNotesText');
+const modalSaveBtn = document.getElementById('modalSaveBtn');
+const modalCancelBtn = document.getElementById('modalCancelBtn');
+
+const webhookModal = document.getElementById('webhookModal');
+const webhookInput = document.getElementById('webhookInput');
+const webhookSaveBtn = document.getElementById('webhookSaveBtn');
+const webhookCancelBtn = document.getElementById('webhookCancelBtn');
+const webhookProjectName = document.getElementById('webhookProjectName');
+
+const projectWebhookBtn = document.getElementById('projectWebhookBtn');
+const sendNowBtn = document.getElementById('sendNowBtn');
+const statusDot = document.getElementById('statusDot');
+const statusText = document.getElementById('statusText');
+
+// ===== STORAGE =====
+function loadData() {
+    const stored = localStorage.getItem('projectDashboardData');
+    if (stored) {
+        try {
+            const parsed = JSON.parse(stored);
+            for (const pid in parsed.projects) {
+                for (const task of parsed.projects[pid].tasks) {
+                    if (!task.subtasks) task.subtasks = [];
+                }
+                if (!parsed.projects[pid].webhook) parsed.projects[pid].webhook = '';
+            }
+            data = parsed;
+        } catch(e) { resetDefaultData(); }
+    } else {
+        resetDefaultData();
+    }
+    const theme = localStorage.getItem('projectDashboardTheme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+
+function resetDefaultData() {
+    const p1 = { id: 'p1', name: 'Work Projects', webhook: '', tasks: [
+        { id: 't1', title: 'Complete Q3 report', due: '2026-08-25', priority: 'high', tag: 'work', notes: 'Need to review with team', completed: false, subtasks: [
+            { id: 'st1', text: 'Gather data from finance', done: false },
+            { id: 'st2', text: 'Create presentation', done: false }
+        ]}
+    ]};
+    const p2 = { id: 'p2', name: 'Personal Projects', webhook: '', tasks: [
+        { id: 't2', title: 'Plan weekend trip', due: '2026-08-30', priority: 'low', tag: 'personal', notes: 'Check flight prices', completed: false, subtasks: [] }
+    ]};
+    data.projects = { p1, p2 };
+    data.currentProjectId = 'p1';
+    data.nextId = 100;
+    saveData();
+}
+
+function saveData() {
+    localStorage.setItem('projectDashboardData', JSON.stringify(data));
+}
+
+// ===== HELPERS =====
+function generateId() { return 'id_' + (data.nextId++); }
+function getCurrentProject() {
+    if (!data.currentProjectId) return null;
+    return data.projects[data.currentProjectId] || null;
+}
+function getTasks() {
+    const proj = getCurrentProject();
+    return proj ? proj.tasks : [];
+}
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function isOverdue(dateStr) {
+    if (!dateStr) return false;
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const due = new Date(dateStr + 'T00:00:00');
+    return due < today;
+}
+
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle', warning: 'fa-exclamation-triangle' };
+    toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i> ${message}`;
+    container.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 4000);
+}
+
+// ===== SHOULD NOTIFY? =====
+function shouldNotify(task) {
+    // Only notify for WORK or URGENT tasks
+    return task.tag === 'work' || task.tag === 'urgent';
+}
+
+// ===== SEND TO WEBHOOK =====
+function sendToWebhook(projectId, message) {
+    const project = data.projects[projectId];
+    if (!project || !project.webhook) {
+        return false;
+    }
+    
+    const payload = { text: message };
+    fetch(project.webhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(res => {
+        if (res.ok) {
+            showToast('✅ Sent to ' + project.name + ' webhook!', 'success');
+        } else {
+            showToast('❌ Failed to send to ' + project.name, 'error');
+        }
+    })
+    .catch(err => {
+        showToast('❌ Network error: ' + err.message, 'error');
+    });
+    return true;
+}
+
+// ===== NOTIFICATION FUNCTIONS =====
+function notifyTaskAdded(task) {
+    if (!shouldNotify(task)) {
+        showToast('📝 Personal task added (no notification sent)', 'info');
+        return;
+    }
+    const proj = getCurrentProject();
+    if (!proj || !proj.webhook) {
+        showToast('⚠️ No webhook configured for this project', 'warning');
+        return;
+    }
+    const message = `📌 *New Task Added*\n` +
+        `Project: ${proj.name}\n` +
+        `Task: ${task.title}\n` +
+        `Priority: ${task.priority.toUpperCase()}\n` +
+        (task.due ? `Due: ${formatDate(task.due)}\n` : '') +
+        (task.notes ? `Notes: ${task.notes}` : '');
+    sendToWebhook(proj.id, message);
+}
+
+function notifyTaskCompleted(task) {
+    if (!shouldNotify(task)) return;
+    const proj = getCurrentProject();
+    if (!proj || !proj.webhook) return;
+    const message = `✅ *Task Completed*\n` +
+        `Project: ${proj.name}\n` +
+        `Task: ${task.title}`;
+    sendToWebhook(proj.id, message);
+}
+
+function notifySubtaskAdded(task, subtask) {
+    if (!shouldNotify(task)) return;
+    const proj = getCurrentProject();
+    if (!proj || !proj.webhook) return;
+    const message = `📌 *Subtask Added*\n` +
+        `Project: ${proj.name}\n` +
+        `Task: ${task.title}\n` +
+        `Subtask: ${subtask.text}`;
+    sendToWebhook(proj.id, message);
+}
+
+function notifySubtaskCompleted(task, subtask) {
+    if (!shouldNotify(task)) return;
+    const proj = getCurrentProject();
+    if (!proj || !proj.webhook) return;
+    const message = `✅ *Subtask Completed*\n` +
+        `Project: ${proj.name}\n` +
+        `Task: ${task.title}\n` +
+        `Subtask: ${subtask.text}`;
+    sendToWebhook(proj.id, message);
+}
+
+function notifyTaskDeleted(task) {
+    if (!shouldNotify(task)) return;
+    const proj = getCurrentProject();
+    if (!proj || !proj.webhook) return;
+    const message = `🗑️ *Task Deleted*\n` +
+        `Project: ${proj.name}\n` +
+        `Task: ${task.title}`;
+    sendToWebhook(proj.id, message);
+}
+
+// ===== RENDER =====
+function render() {
+    renderProjects();
+    renderTasks();
+    renderStats();
+    renderProjectTitle();
+}
+
+function renderProjects() {
+    const ids = Object.keys(data.projects);
+    if (ids.length === 0) {
+        projectListEl.innerHTML = `<div style="color:var(--text-muted);font-size:0.9rem;padding:12px;">No projects. Create one!</div>`;
+        return;
+    }
+    let html = '';
+    for (const pid of ids) {
+        const p = data.projects[pid];
+        const count = p.tasks.filter(t => !t.completed).length;
+        const active = pid === data.currentProjectId ? 'active' : '';
+        const hasWebhook = p.webhook && p.webhook.length > 0;
+        const webhookStatus = hasWebhook ? 'configured' : 'not-configured';
+        const webhookLabel = hasWebhook ? '🔗 Connected' : '🔌 No webhook';
+        
+        html += `
+            <div class="project-item ${active}" data-id="${pid}">
+                <span class="project-name">
+                    <i class="fas fa-folder"></i> 
+                    ${escapeHtml(p.name)}
+                    <span class="project-webhook-status ${webhookStatus}">${webhookLabel}</span>
+                </span>
+                <span class="project-count">${count}</span>
+                <button class="project-delete-btn" data-id="${pid}" title="Delete project"><i class="fas fa-times"></i></button>
+            </div>
+        `;
+    }
+    projectListEl.innerHTML = html;
+
+    document.querySelectorAll('.project-item').forEach(el => {
+        el.addEventListener('click', function(e) {
+            if (e.target.closest('.project-delete-btn')) return;
+            const id = this.dataset.id;
+            data.currentProjectId = id;
+            saveData();
+            render();
+        });
+    });
+
+    document.querySelectorAll('.project-delete-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const id = this.dataset.id;
+            if (!confirm('Delete this project and all its tasks?')) return;
+            delete data.projects[id];
+            if (data.currentProjectId === id) {
+                const keys = Object.keys(data.projects);
+                data.currentProjectId = keys.length > 0 ? keys[0] : null;
+            }
+            saveData();
+            render();
+            showToast('Project deleted', 'info');
+        });
+    });
+}
+
+function renderTasks() {
+    const tasks = getTasks();
+    const search = searchInput.value.toLowerCase();
+    const priorityFilter = filterPriority.value;
+    const statusFilter = filterStatus.value;
+    const tagFilter = filterTag.value;
+
+    let filtered = tasks.filter(t => {
+        const matchSearch = t.title.toLowerCase().includes(search) || (t.notes && t.notes.toLowerCase().includes(search));
+        const matchPriority = priorityFilter === 'all' || t.priority === priorityFilter;
+        const matchStatus = statusFilter === 'all' || (statusFilter === 'pending' ? !t.completed : t.completed);
+        const matchTag = tagFilter === 'all' || t.tag === tagFilter;
+        return matchSearch && matchPriority && matchStatus && matchTag;
+    });
+
+    taskCountBadge.textContent = `${filtered.length} tasks`;
+
+    if (filtered.length === 0) {
+        taskListEl.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-clipboard-list"></i>
+                ${tasks.length === 0 ? 'No tasks in this project. Add one above!' : 'No tasks match your filters.'}
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+    for (const task of filtered) {
+        const checked = task.completed ? 'checked' : '';
+        const completedClass = task.completed ? 'completed' : '';
+        const priorityClass = `priority-${task.priority}`;
+        const overdue = isOverdue(task.due) && !task.completed;
+        const dueClass = overdue ? 'overdue' : '';
+        const notifyIcon = shouldNotify(task) ? '<span class="notification-badge work">🔔</span>' : '<span class="notification-badge personal">🔇</span>';
+
+        html += `
+            <div class="task-item ${completedClass} tag-${task.tag}" data-id="${task.id}">
+                <div class="task-row">
+                    <input type="checkbox" class="task-check" ${checked} />
+                    <div class="task-content">
+                        <span class="task-title-text">${escapeHtml(task.title)} ${notifyIcon}</span>
+                        ${task.notes ? `<span class="task-notes">${escapeHtml(task.notes)}</span>` : ''}
+                        <div class="task-meta">
+                            <span class="task-priority ${priorityClass}">${task.priority}</span>
+                            <span class="task-tag tag-${task.tag}">${task.tag}</span>
+                            ${task.due ? `<span class="task-due ${dueClass}"><i class="far fa-calendar-alt"></i> ${formatDate(task.due)}${overdue ? ' ⚠️' : ''}</span>` : ''}
+                        </div>
+                        ${task.subtasks && task.subtasks.length > 0 ? `
+                            <div class="subtask-section">
+                                <div class="subtask-list">
+                                    ${task.subtasks.map(st => `
+                                        <div class="subtask-item" data-stid="${st.id}">
+                                            <input type="checkbox" ${st.done ? 'checked' : ''} class="subtask-check" />
+                                            <span class="subtask-text ${st.done ? 'done' : ''}">${escapeHtml(st.text)}</span>
+                                            <button class="subtask-delete"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="subtask-input-group">
+                                    <input type="text" placeholder="Add subtask..." class="subtask-input" />
+                                    <button class="subtask-add-btn"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="subtask-section">
+                                <div class="subtask-input-group">
+                                    <input type="text" placeholder="Add subtask..." class="subtask-input" />
+                                    <button class="subtask-add-btn"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        `}
+                    </div>
+                    <div class="task-actions">
+                        <button class="send-btn" title="Send this task to Chat"><i class="fas fa-paper-plane"></i></button>
+                        <button class="notes-btn" title="Edit notes"><i class="fas fa-pen"></i></button>
+                        <button class="delete-btn" title="Delete task"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    taskListEl.innerHTML = html;
+
+    // Event listeners for tasks
+    document.querySelectorAll('.task-check').forEach(cb => {
+        cb.addEventListener('change', function() {
+            const item = this.closest('.task-item');
+            const id = item.dataset.id;
+            toggleTask(id);
+        });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.task-item');
+            const id = item.dataset.id;
+            if (!confirm('Delete this task?')) return;
+            deleteTask(id);
+        });
+    });
+
+    document.querySelectorAll('.notes-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.task-item');
+            const id = item.dataset.id;
+            openNotesModal(id);
+        });
+    });
+
+    document.querySelectorAll('.send-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.task-item');
+            const id = item.dataset.id;
+            sendSingleTask(id);
+        });
+    });
+
+    // Subtasks
+    document.querySelectorAll('.subtask-add-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const section = this.closest('.subtask-section');
+            const input = section.querySelector('.subtask-input');
+            const item = section.closest('.task-item');
+            const taskId = item.dataset.id;
+            addSubtask(taskId, input.value);
+        });
+    });
+
+    document.querySelectorAll('.subtask-input').forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const section = this.closest('.subtask-section');
+                const item = section.closest('.task-item');
+                const taskId = item.dataset.id;
+                addSubtask(taskId, this.value);
+            }
+        });
+    });
+
+    document.querySelectorAll('.subtask-check').forEach(cb => {
+        cb.addEventListener('change', function() {
+            const item = this.closest('.subtask-item');
+            const stid = item.dataset.stid;
+            const taskItem = item.closest('.task-item');
+            const taskId = taskItem.dataset.id;
+            toggleSubtask(taskId, stid);
+        });
+    });
+
+    document.querySelectorAll('.subtask-delete').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.subtask-item');
+            const stid = item.dataset.stid;
+            const taskItem = item.closest('.task-item');
+            const taskId = taskItem.dataset.id;
+            deleteSubtask(taskId, stid);
+        });
+    });
+}
+
+function renderStats() {
+    const tasks = getTasks();
+    const total = tasks.length;
+    const pending = tasks.filter(t => !t.completed).length;
+    const completed = tasks.filter(t => t.completed).length;
+    statTotal.textContent = total;
+    statPending.textContent = pending;
+    statCompleted.textContent = completed;
+}
+
+function renderProjectTitle() {
+    const p = getCurrentProject();
+    if (p) {
+        const hasWebhook = p.webhook && p.webhook.length > 0;
+        const icon = hasWebhook ? '🔗' : '🔌';
+        currentProjectTitle.innerHTML = `${icon} ${escapeHtml(p.name)} <small>${Object.keys(data.projects).length} projects</small>`;
+    } else {
+        currentProjectTitle.innerHTML = 'Select a project <small>or create one</small>';
+    }
+}
+
+// ===== ACTIONS =====
+function addProject() {
+    const name = newProjectInput.value.trim();
+    if (!name) { showToast('Please enter a project name', 'error'); return; }
+    const id = generateId();
+    data.projects[id] = { id, name, webhook: '', tasks: [] };
+    data.currentProjectId = id;
+    newProjectInput.value = '';
+    saveData();
+    render();
+    showToast(`Project "${name}" created!`, 'success');
+}
+
+function addTask() {
+    const title = taskTitleInput.value.trim();
+    if (!title) { showToast('Please enter a task title', 'error'); return; }
+    const proj = getCurrentProject();
+    if (!proj) { showToast('Please select a project first', 'error'); return; }
+    const task = {
+        id: generateId(),
+        title,
+        due: taskDueInput.value || '',
+        priority: taskPrioritySelect.value,
+        tag: taskTagSelect.value,
+        notes: taskNotesInput.value || '',
+        completed: false,
+        subtasks: []
+    };
+    proj.tasks.push(task);
+    taskTitleInput.value = '';
+    taskDueInput.value = '';
+    taskNotesInput.value = '';
+    saveData();
+    render();
+    showToast(`Task "${task.title}" added!`, 'success');
+    // Notify if work/urgent
+    notifyTaskAdded(task);
+}
+
+function toggleTask(id) {
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        const wasCompleted = task.completed;
+        task.completed = !task.completed;
+        saveData();
+        render();
+        if (task.completed && !wasCompleted) {
+            notifyTaskCompleted(task);
+            showToast('✅ Task completed!', 'success');
+        } else {
+            showToast('🔄 Task reopened', 'info');
+        }
+    }
+}
+
+function deleteTask(id) {
+    const proj = getCurrentProject();
+    if (!proj) return;
+    const task = proj.tasks.find(t => t.id === id);
+    if (!task) return;
+    notifyTaskDeleted(task);
+    proj.tasks = proj.tasks.filter(t => t.id !== id);
+    saveData();
+    render();
+    showToast(`Task deleted`, 'info');
+}
+
+function addSubtask(taskId, text) {
+    text = text.trim();
+    if (!text) { showToast('Please enter a subtask', 'error'); return; }
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    if (!task.subtasks) task.subtasks = [];
+    const subtask = { id: generateId(), text, done: false };
+    task.subtasks.push(subtask);
+    saveData();
+    render();
+    showToast('Subtask added!', 'success');
+    notifySubtaskAdded(task, subtask);
+}
+
+function toggleSubtask(taskId, stid) {
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    const st = task.subtasks.find(s => s.id === stid);
+    if (st) {
+        const wasDone = st.done;
+        st.done = !st.done;
+        saveData();
+        render();
+        if (st.done && !wasDone) {
+            notifySubtaskCompleted(task, st);
+            showToast('✅ Subtask completed!', 'success');
+        } else {
+            showToast('🔄 Subtask reopened', 'info');
+        }
+    }
+}
+
+function deleteSubtask(taskId, stid) {
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    task.subtasks = task.subtasks.filter(s => s.id !== stid);
+    saveData();
+    render();
+    showToast('Subtask deleted', 'info');
+}
+
+function openNotesModal(taskId) {
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    editingTaskId = taskId;
+    modalNotesText.value = task.notes || '';
+    modalOverlay.classList.add('open');
+}
+
+function saveNotes() {
+    if (!editingTaskId) return;
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === editingTaskId);
+    if (!task) return;
+    task.notes = modalNotesText.value;
+    saveData();
+    modalOverlay.classList.remove('open');
+    render();
+    showToast('Notes saved!', 'success');
+}
+
+// ===== WEBHOOK MANAGEMENT =====
+function openWebhookModal() {
+    const proj = getCurrentProject();
+    if (!proj) { showToast('Please select a project first', 'error'); return; }
+    editingWebhookProjectId = proj.id;
+    webhookProjectName.textContent = proj.name;
+    webhookInput.value = proj.webhook || '';
+    webhookModal.classList.add('open');
+}
+
+function saveWebhook() {
+    if (!editingWebhookProjectId) return;
+    const proj = data.projects[editingWebhookProjectId];
+    if (!proj) return;
+    proj.webhook = webhookInput.value.trim();
+    saveData();
+    webhookModal.classList.remove('open');
+    render();
+    if (proj.webhook) {
+        showToast(`✅ Webhook configured for "${proj.name}"!`, 'success');
+    } else {
+        showToast('Webhook removed', 'info');
+    }
+}
+
+// ===== SEND REPORTS =====
+function sendDailyReport() {
+    let message = '📋 *Daily Task Report - ' + new Date().toLocaleDateString() + '*\n\n';
+    let hasTasks = false;
+    
+    for (const pid in data.projects) {
+        const p = data.projects[pid];
+        // Only send work/urgent tasks
+        const workTasks = p.tasks.filter(t => !t.completed && (t.tag === 'work' || t.tag === 'urgent'));
+        if (workTasks.length > 0 && p.webhook) {
+            hasTasks = true;
+            message += `*📁 ${p.name}* (${workTasks.length} pending work tasks)\n`;
+            for (const task of workTasks) {
+                const priority = task.priority.toUpperCase();
+                const due = task.due ? ` (Due: ${formatDate(task.due)})` : '';
+                message += `  • ${task.title} [${priority}]${due}\n`;
+                if (task.subtasks && task.subtasks.length > 0) {
+                    const pendingSub = task.subtasks.filter(s => !s.done);
+                    if (pendingSub.length > 0) {
+                        message += `    Subtasks: ${pendingSub.map(s => '☐ ' + s.text).join(', ')}\n`;
+                    }
+                }
+            }
+            message += '\n';
+            // Send to this project's webhook
+            sendToWebhook(pid, message);
+            message = '📋 *Daily Task Report - ' + new Date().toLocaleDateString() + '*\n\n';
+        }
+    }
+    
+    if (!hasTasks) {
+        // Send a general "no tasks" message only if there's at least one webhook configured
+        let hasAnyWebhook = false;
+        for (const pid in data.projects) {
+            if (data.projects[pid].webhook) { hasAnyWebhook = true; break; }
+        }
+        if (hasAnyWebhook) {
+            showToast('📭 No pending work tasks today!', 'info');
+        } else {
+            showToast('⚠️ No webhooks configured. Set up project webhooks first.', 'warning');
+        }
+    }
+}
+
+function sendSingleTask(taskId) {
+    const tasks = getTasks();
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) { showToast('Task not found', 'error'); return; }
+    const proj = getCurrentProject();
+    if (!proj) { showToast('No project found', 'error'); return; }
+    if (!proj.webhook) { showToast('⚠️ No webhook configured for this project', 'warning'); return; }
+    if (!shouldNotify(task)) { showToast('🔇 Personal tasks are not sent to webhook', 'info'); return; }
+    
+    const message = `📌 *Task Update*\n` +
+        `Project: ${proj.name}\n` +
+        `Task: ${task.title}\n` +
+        `Priority: ${task.priority.toUpperCase()}\n` +
+        `Status: ${task.completed ? '✅ Completed' : '⏳ Pending'}\n` +
+        (task.due ? `Due: ${formatDate(task.due)}\n` : '') +
+        (task.notes ? `Notes: ${task.notes}` : '');
+    sendToWebhook(proj.id, message);
+}
+
+// ===== AUTOMATION SCHEDULER =====
+function checkForMorningReport() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    if (hours === 9 && minutes === 0) {
+        const lastSent = localStorage.getItem('lastDailyReportSent');
+        const today = now.toDateString();
+        if (lastSent !== today) {
+            sendDailyReport();
+            localStorage.setItem('lastDailyReportSent', today);
+        }
+    }
+}
+
+// ===== INIT =====
+function init() {
+    loadData();
+    render();
+
+    // Check webhook status
+    let hasAnyWebhook = false;
+    for (const pid in data.projects) {
+        if (data.projects[pid].webhook) { hasAnyWebhook = true; break; }
+    }
+    if (hasAnyWebhook) {
+        statusDot.className = 'status-dot';
+        statusText.textContent = '✅ Webhooks configured';
+    } else {
+        statusDot.className = 'status-dot inactive';
+        statusText.textContent = '⚠️ No webhooks set';
+    }
+
+    // Start automation checker (every 30 seconds)
+    setInterval(checkForMorningReport, 30000);
+    setTimeout(checkForMorningReport, 5000);
+
+    // Event listeners
+    addProjectBtn.addEventListener('click', addProject);
+    newProjectInput.addEventListener('keypress', e => { if (e.key === 'Enter') addProject(); });
+
+    addTaskBtn.addEventListener('click', addTask);
+    taskTitleInput.addEventListener('keypress', e => { if (e.key === 'Enter') addTask(); });
+
+    deleteProjectBtn.addEventListener('click', function() {
+        const proj = getCurrentProject();
+        if (!proj) { showToast('No project selected', 'error'); return; }
+        if (!confirm('Delete this project and all its tasks?')) return;
+        delete data.projects[proj.id];
+        const keys = Object.keys(data.projects);
+        data.currentProjectId = keys.length > 0 ? keys[0] : null;
+        saveData();
+        render();
+        showToast('Project deleted', 'info');
+    });
+
+    themeToggle.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('projectDashboardTheme', next);
+        this.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
+    modalSaveBtn.addEventListener('click', saveNotes);
+    modalCancelBtn.addEventListener('click', () => modalOverlay.classList.remove('open'));
+
+    projectWebhookBtn.addEventListener('click', openWebhookModal);
+
+    webhookSaveBtn.addEventListener('click', saveWebhook);
+    webhookCancelBtn.addEventListener('click', () => webhookModal.classList.remove('open'));
+
+    sendNowBtn.addEventListener('click', sendDailyReport);
+
+    searchInput.addEventListener('input', render);
+    filterPriority.addEventListener('change', render);
+    filterStatus.addEventListener('change', render);
+    filterTag.addEventListener('change', render);
+
+    exportBtn.addEventListener('click', function() {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `dashboard-backup-${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Data exported!', 'success');
+    });
+
+    importBtn.addEventListener('click', () => importFileInput.click());
+    importFileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            try {
+                const imported = JSON.parse(ev.target.result);
+                if (imported.projects) {
+                    data = imported;
+                    saveData();
+                    render();
+                    showToast('Data imported successfully!', 'success');
+                } else {
+                    showToast('Invalid file format', 'error');
+                }
+            } catch(err) {
+                showToast('Error reading file: ' + err.message, 'error');
+            }
+        };
+        reader.readAsText(file);
+        this.value = '';
+    });
+
+    // Close modals on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('open');
+        });
+    });
+
+    console.log('🚀 Smart Dashboard ready!');
+    console.log('📊 Projects:', Object.keys(data.projects).length);
+    console.log('🔔 Work tasks will be sent to webhooks');
+    console.log('🔇 Personal tasks stay private');
+    console.log('⏰ Daily report scheduled for 9:00 AM');
+}
+
+// Run when page loads
+document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
-</html>
