@@ -23,10 +23,10 @@ function copyStaticFiles() {
       }
 
       // Vercel's clean URLs cannot reliably serve the dashboard's original
-      // filename because it contains a space. Publish that page directly at
-      // the route configured in vercel.json instead.
+      // filename because it contains a space. Publish it as a root-level HTML
+      // page, matching the other pages handled by vercel.json.
       const dashboardSource = resolve('task-dashboard', 'Task Dashboard.html');
-      const dashboardDestination = resolve('dist', 'dashboard', 'index.html');
+      const dashboardDestination = resolve('dist', 'dashboard.html');
 
       if (existsSync(dashboardSource)) {
         cpSync(dashboardSource, dashboardDestination);
