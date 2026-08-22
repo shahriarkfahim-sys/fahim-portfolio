@@ -26,11 +26,11 @@ app.get('/api/medium-feed', async (_req, res) => {
 });
 
 app.get('/dashboard', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'task-dashboard', 'Task Dashboard.html'));
+  res.sendFile(path.join(__dirname, 'dashboard', 'index.html'));
 });
 
 app.get('/dashboard/:path*', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'task-dashboard', 'Task Dashboard.html'));
+  res.sendFile(path.join(__dirname, 'dashboard', 'index.html'));
 });
 
 app.use(express.static(path.join(__dirname)));

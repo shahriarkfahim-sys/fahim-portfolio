@@ -28,11 +28,11 @@
     },
     {
       "source": "/dashboard",
-      "destination": "/task-dashboard/Task%20Dashboard.html"
+      "destination": "/dashboard/index.html"
     },
     {
       "source": "/dashboard/:path*",
-      "destination": "/task-dashboard/Task%20Dashboard.html"
+      "destination": "/dashboard/index.html"
     },
     {
       "source": "/contact/:path*",
