@@ -7,9 +7,8 @@ function copyStaticFiles() {
     name: 'copy-static-files',
     closeBundle() {
       // These files are served directly rather than imported by the Vite HTML
-      // entry points. Copy them into the deployment output so Vercel can serve
-      // the dashboard redirect and the dashboard page it targets.
-      const files = ['site.js', 'uploads', 'dashboard', 'task-dashboard'];
+      // entry points, so they need to be included in the deployment output.
+      const files = ['site.js', 'uploads'];
 
       for (const file of files) {
         const source = resolve(file);
@@ -21,6 +20,16 @@ function copyStaticFiles() {
             filter: (path) => !path.endsWith('/.git') && !path.endsWith('/.DS_Store'),
           });
         }
+      }
+
+      // Vercel's clean URLs cannot reliably serve the dashboard's original
+      // filename because it contains a space. Publish that page directly at
+      // the route configured in vercel.json instead.
+      const dashboardSource = resolve('task-dashboard', 'Task Dashboard.html');
+      const dashboardDestination = resolve('dist', 'dashboard', 'index.html');
+
+      if (existsSync(dashboardSource)) {
+        cpSync(dashboardSource, dashboardDestination);
       }
     },
   };
