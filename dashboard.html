@@ -107,10 +107,11 @@
         }
         .banner-btn.primary:hover { background: #f0f4ff; transform: scale(1.02); }
         .app-container {
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 320px 1fr;
+            grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
             gap: 24px;
             align-items: start;
         }
@@ -125,6 +126,7 @@
             position: sticky;
             top: 20px;
         }
+        .main-content { min-width: 0; }
         .sidebar-header {
             display: flex;
             justify-content: space-between;
@@ -179,7 +181,7 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            max-height: 350px;
+            max-height: 280px;
             overflow-y: auto;
             padding-right: 4px;
         }
@@ -189,7 +191,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
+            padding: 8px 10px;
             border-radius: 14px;
             cursor: pointer;
             transition: var(--transition);
@@ -207,10 +209,11 @@
             align-items: center;
             gap: 10px;
             font-weight: 500;
+            font-size: 0.82rem;
             flex: 1;
         }
         .project-item .project-count {
-            font-size: 0.75rem;
+            font-size: 0.68rem;
             background: rgba(255,255,255,0.2);
             padding: 2px 10px;
             border-radius: 30px;
@@ -228,6 +231,31 @@
             transition: var(--transition);
         }
         .project-delete-btn:hover { color: var(--danger); background: rgba(239,68,68,0.1); }
+        .project-item { flex-wrap: wrap; }
+        .project-progress { flex: 1 0 calc(100% - 35px); margin-top: 7px; height: 4px; background: var(--border-color); border-radius: 10px; overflow: hidden; }
+        .project-progress-bar { height: 100%; background: var(--success); border-radius: inherit; transition: width 0.25s ease; }
+        .project-progress-label { font-size: 0.65rem; color: var(--text-muted); margin-left: 4px; }
+        .project-color-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--project-color); }
+        .weekly-todo { border-top: 1px solid var(--border-color); margin-top: 14px; padding-top: 12px; max-height: 240px; overflow-y: auto; }
+        .weekly-modal-content { max-width: 760px; }
+        .weekly-todo h3 { font-size: 0.85rem; margin-bottom: 8px; }
+        .weekly-todo-header { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+        .home-actions { display: grid; gap: 6px; margin-top: 12px; }
+        .home-actions .weekly-send-btn { width: 100%; border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 10px; text-align: left; background: var(--bg-input); font-size: 0.78rem; }
+        .worklist-actions { display: grid; gap: 6px; }
+        .worklist-actions .weekly-send-btn { text-align: left; }
+        .weekly-send-btn { border: 0; background: transparent; color: var(--accent); cursor: pointer; font-size: 0.72rem; padding: 3px; }
+        .weekly-send-btn:hover { color: var(--accent-hover); }
+        .week-group { margin-bottom: 10px; }
+        .week-label { color: var(--text-muted); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; }
+        .weekly-task { display: grid; grid-template-columns: 14px 8px 1fr auto; gap: 5px; align-items: start; margin-top: 6px; font-size: 0.72rem; line-height: 1.25; }
+        .weekly-check, .weekly-subtask-check { width: 12px; height: 12px; accent-color: var(--accent); margin-top: 1px; }
+        .weekly-task .task-project { color: var(--text-muted); display: block; font-size: 0.64rem; }
+        .weekly-task .task-priority { padding: 2px 5px; font-size: 0.58rem; }
+        .weekly-task.is-complete > span { text-decoration: line-through; color: var(--text-muted); }
+        .weekly-subtasks { grid-column: 3 / 5; margin-top: 3px; color: var(--text-muted); }
+        .weekly-subtask { display: flex; align-items: center; gap: 4px; margin-top: 3px; }
+        .weekly-subtask.done { text-decoration: line-through; }
         .project-webhook-status {
             font-size: 0.6rem;
             opacity: 0.6;
@@ -239,7 +267,7 @@
         .main-content {
             background: var(--bg-secondary);
             border-radius: var(--radius);
-            padding: 28px 30px;
+            padding: 24px 26px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
             transition: background var(--transition), border var(--transition);
@@ -252,7 +280,7 @@
             gap: 16px;
             margin-bottom: 20px;
         }
-        .main-header h2 { font-size: 1.6rem; font-weight: 700; }
+        .main-header h2 { font-size: 1.35rem; font-weight: 700; }
         .main-header h2 small { font-weight: 400; font-size: 0.9rem; color: var(--text-muted); margin-left: 10px; }
         .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .header-actions button {
@@ -277,6 +305,10 @@
             gap: 14px;
             margin-bottom: 24px;
         }
+        .add-task-form.is-hidden { display: none; }
+        .add-task-toggle { margin-bottom: 12px; }
+        button.add-task-toggle { display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: white; border: 0; border-radius: 30px; padding: 8px 15px; cursor: pointer; font-size: 0.78rem; }
+        button.add-task-toggle:hover { background: var(--accent-hover); }
         .stat-card {
             background: var(--bg-input);
             padding: 14px 18px;
@@ -372,6 +404,37 @@
         .task-item:active { cursor: grabbing; }
         .task-item.dragging { opacity: 0.4; border-style: dashed; }
         .task-item.drag-over { border-color: var(--accent); border-width: 2px; background: rgba(59,130,246,0.04); }
+        .gantt-panel { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .gantt-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .gantt-header h3 { margin: 0; }
+        .gantt-scroll { overflow-x: auto; }
+        .gantt { min-width: 620px; }
+        .gantt-row { display: grid; grid-template-columns: 180px 1fr; align-items: center; min-height: 34px; border-bottom: 1px solid var(--border-color); }
+        .gantt-label { padding: 6px 10px 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.8rem; }
+        .gantt-track { position: relative; height: 24px; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(14.285% - 1px), var(--border-color) 14.285%); }
+        .gantt-bar { position: absolute; top: 5px; height: 14px; min-width: 8px; border-radius: 8px; background: var(--accent); }
+        .gantt-bar.completed { background: var(--success); }
+        .gantt-dates { display: grid; grid-template-columns: 180px 1fr; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 3px; }
+        .gantt-date-track { display: flex; justify-content: space-between; }
+        .calendar-panel { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .calendar-modal-panel { margin: 0; padding: 0; border: 0; }
+        .calendar-overlay { align-items: flex-start; overflow-y: auto; padding: 30px; }
+        .calendar-modal-content { max-width: 1180px; }
+        .calendar-close { float: right; }
+        .year-calendar { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 10px; }
+        .calendar-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 10px; font-size: 0.72rem; color: var(--text-secondary); }
+        .calendar-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+        .month-card { border: 1px solid var(--border-color); border-radius: 14px; padding: 10px; background: var(--bg-input); }
+        .month-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 7px; }
+        .month-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+        .calendar-weekday { color: var(--text-muted); font-size: 0.6rem; text-align: center; }
+        .calendar-day { min-height: 25px; position: relative; padding: 3px; border-radius: 5px; font-size: 0.65rem; color: var(--text-secondary); }
+        .calendar-day.has-task { background: color-mix(in srgb, var(--calendar-color) 18%, transparent); color: var(--text-primary); font-weight: 700; }
+        .calendar-day.today { outline: 1px solid var(--accent); }
+        .calendar-dots { display: flex; gap: 2px; position: absolute; bottom: 2px; left: 3px; }
+        .calendar-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--calendar-color); }
+        @media (max-width: 900px) { .year-calendar { grid-template-columns: repeat(3, minmax(170px, 1fr)); } }
+        @media (max-width: 620px) { .year-calendar { grid-template-columns: repeat(2, minmax(145px, 1fr)); } }
         .task-item.completed .task-title-text { text-decoration: line-through; color: var(--text-muted); }
         .task-item .tag-work { border-left: 3px solid var(--accent); }
         .task-item .tag-personal { border-left: 3px solid #8b5cf6; }
@@ -496,8 +559,10 @@
             box-shadow: 0 30px 80px rgba(0,0,0,0.3);
             border: 1px solid var(--border-color);
         }
+        .modal.calendar-modal-content { max-width: 1180px; }
+        .modal.weekly-modal-content { max-width: 760px; }
         .modal h3 { margin-bottom: 16px; }
-        .modal textarea, .modal input {
+        .modal textarea, .modal input, .modal select {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
@@ -509,7 +574,7 @@
             margin-bottom: 12px;
         }
         .modal textarea { min-height: 100px; resize: vertical; }
-        .modal textarea:focus, .modal input:focus { border-color: var(--accent); }
+        .modal textarea:focus, .modal input:focus, .modal select:focus { border-color: var(--accent); }
         .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
         .modal-actions button {
             padding: 8px 24px;
@@ -553,6 +618,13 @@
             to { transform: translateX(0); opacity: 1; }
         }
         @media (max-width: 600px) {
+            body { padding: 10px; }
+            .app-container { gap: 12px; }
+            .sidebar { position: static; padding: 16px 14px; }
+            .sidebar-header { margin-bottom: 14px; }
+            .sidebar-header h2 { font-size: 1.1rem; }
+            .project-list { max-height: 220px; }
+            .weekly-todo { max-height: 190px; margin-top: 10px; }
             .add-task-form { flex-direction: column; border-radius: 20px; }
             .add-task-form input, .add-task-form select, .add-task-form textarea { flex: 1 1 100% !important; }
             .main-content { padding: 18px; }
@@ -567,26 +639,6 @@
 </head>
 <body>
 
-<!-- ===== BANNER ===== -->
-<div class="automation-banner" id="automationBanner">
-    <div class="banner-left">
-        <i class="fas fa-robot"></i>
-        <div>
-            <h2>🤖 Smart Notifications</h2>
-            <p>Work tasks → Boss • Personal tasks → Private • Each project → Different team</p>
-        </div>
-    </div>
-    <div class="banner-right">
-        <div class="banner-status">
-            <span class="status-dot" id="statusDot"></span>
-            <span id="statusText">Checking...</span>
-        </div>
-        <button class="banner-btn primary" id="sendNowBtn">
-            <i class="fas fa-paper-plane"></i> Send Daily Report
-        </button>
-    </div>
-</div>
-
 <!-- ===== APP ===== -->
 <div class="app-container">
     <aside class="sidebar">
@@ -599,14 +651,15 @@
             <button id="addProjectBtn"><i class="fas fa-plus"></i></button>
         </div>
         <div class="project-list" id="projectList"></div>
-        <div style="margin-top:16px; border-top:1px solid var(--border-color); padding-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
-            <button id="exportBtn" style="flex:1; padding:8px; border-radius:40px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-secondary); cursor:pointer; font-size:0.8rem;">
-                <i class="fas fa-download"></i> Export
-            </button>
-            <button id="importBtn" style="flex:1; padding:8px; border-radius:40px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-secondary); cursor:pointer; font-size:0.8rem;">
-                <i class="fas fa-upload"></i> Import
-            </button>
-            <input type="file" id="importFileInput" accept=".json" style="display:none;" />
+        <div class="home-actions">
+            <div class="worklist-actions">
+                <button class="weekly-send-btn" id="weeklyTasksBtn"><i class="far fa-calendar-check"></i> This week's tasks</button>
+                <button class="weekly-send-btn" id="overdueTasksBtn"><i class="fas fa-triangle-exclamation"></i> Crossed deadline tasks</button>
+                <button class="weekly-send-btn" id="todayTasksBtn"><i class="fas fa-sun"></i> Today's worklist</button>
+                <button class="weekly-send-btn" id="doneTodayBtn"><i class="fas fa-check-double"></i> What I have done today</button>
+            </div>
+            <button class="weekly-send-btn" id="myCalendarBtn"><i class="far fa-calendar-alt"></i> My Calendar</button>
+            <button class="weekly-send-btn" id="activityBtn"><i class="fas fa-clock-rotate-left"></i> Activity history</button>
         </div>
     </aside>
 
@@ -614,6 +667,7 @@
         <div class="main-header">
             <h2 id="currentProjectTitle">Select a project <small>or create one</small></h2>
             <div class="header-actions">
+                <button id="editProjectBtn" title="Edit project name"><i class="fas fa-pen"></i> Edit name</button>
                 <button class="btn-webhook" id="projectWebhookBtn"><i class="fas fa-link"></i> Set Webhook</button>
                 <button id="deleteProjectBtn" style="color:var(--danger);"><i class="fas fa-trash"></i> Delete</button>
             </div>
@@ -646,10 +700,18 @@
                 <option value="idea">💡 Idea</option>
                 <option value="other">📌 Other</option>
             </select>
+            <select id="sortTasks" title="Sort tasks">
+                <option value="manual">Manual order</option>
+                <option value="deadline">Deadline</option>
+                <option value="priority">Priority</option>
+                <option value="status">Status</option>
+            </select>
         </div>
 
-        <div class="add-task-form">
+        <button class="header-actions button add-task-toggle" id="addTaskToggle"><i class="fas fa-plus"></i> Add task</button>
+        <div class="add-task-form is-hidden" id="addTaskForm">
             <input type="text" id="taskTitleInput" placeholder="Task title..." />
+            <input type="date" id="taskStartInput" title="Start date" />
             <input type="date" id="taskDueInput" />
             <select id="taskPrioritySelect">
                 <option value="low">🟢 Low</option>
@@ -677,18 +739,42 @@
                 No tasks in this project. Add one above!
             </div>
         </div>
+        <section class="gantt-panel" id="ganttPanel">
+            <div class="gantt-header"><h3>Project timeline</h3><span class="task-count-badge" id="ganttRange"></span></div>
+            <div id="ganttChart"></div>
+        </section>
     </main>
 </div>
 
 <!-- ===== MODALS ===== -->
 <div class="modal-overlay" id="notesModal">
     <div class="modal">
-        <h3><i class="fas fa-pen"></i> Edit Task Notes</h3>
+        <h3><i class="fas fa-pen"></i> Edit Task</h3>
+        <input type="text" id="modalTaskTitle" placeholder="Task title..." />
+        <input type="date" id="modalTaskStart" title="Start date" />
+        <input type="date" id="modalTaskDue" />
+        <select id="modalTaskPriority">
+            <option value="low">🟢 Low</option>
+            <option value="medium">🟡 Medium</option>
+            <option value="high">🔴 High</option>
+        </select>
+        <select id="modalTaskStatus">
+            <option value="pending">Not started / In progress</option>
+            <option value="completed">Completed</option>
+        </select>
         <textarea id="modalNotesText" placeholder="Add detailed notes..."></textarea>
         <div class="modal-actions">
             <button class="cancel-btn" id="modalCancelBtn">Cancel</button>
             <button class="save-btn" id="modalSaveBtn">Save</button>
         </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="activityModal">
+    <div class="modal weekly-modal-content">
+        <button class="calendar-close" id="activityCloseBtn" title="Close activity"><i class="fas fa-times"></i></button>
+        <h3><i class="fas fa-clock-rotate-left"></i> Daily activity</h3>
+        <div id="activityList"></div>
     </div>
 </div>
 
@@ -707,6 +793,44 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="projectNameModal">
+    <div class="modal">
+        <h3><i class="fas fa-folder"></i> Edit Project Name</h3>
+        <input type="text" id="projectNameInput" placeholder="Project name..." />
+        <div class="modal-actions">
+            <button class="cancel-btn" id="projectNameCancelBtn">Cancel</button>
+            <button class="save-btn" id="projectNameSaveBtn">Save</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay calendar-overlay" id="calendarModal">
+    <div class="modal calendar-modal-content">
+        <button class="calendar-close" id="calendarCloseBtn" title="Close calendar"><i class="fas fa-times"></i></button>
+        <section class="calendar-modal-panel" id="calendarPanel">
+            <div class="gantt-header"><h3>2026 yearly calendar</h3><span class="task-count-badge">Deadlines by project</span></div>
+            <div class="calendar-legend" id="calendarLegend"></div>
+            <div class="year-calendar" id="yearCalendar"></div>
+        </section>
+    </div>
+</div>
+
+<div class="modal-overlay" id="worklistModal">
+    <div class="modal weekly-modal-content">
+        <button class="calendar-close" id="worklistCloseBtn" title="Close worklist"><i class="fas fa-times"></i></button>
+        <section class="weekly-todo" style="border:0;margin:0;padding:0;max-height:none;">
+            <div class="weekly-todo-header">
+                <h3 id="worklistTitle"><i class="far fa-calendar-check"></i> This week's work</h3>
+                <div>
+                    <button class="weekly-send-btn" id="worklistWebhookBtn" title="Set worklist webhook"><i class="fas fa-link"></i></button>
+                    <button class="weekly-send-btn" id="sendWorklistBtn" title="Send worklist"><i class="fas fa-paper-plane"></i> Send</button>
+                </div>
+            </div>
+            <div id="worklistContent"></div>
+        </section>
+    </div>
+</div>
+
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
@@ -718,7 +842,8 @@
 let data = {
     projects: {},
     currentProjectId: null,
-    nextId: 1
+    nextId: 1,
+    worklistWebhook: ''
 };
 
 let editingTaskId = null;
@@ -738,24 +863,53 @@ const addProjectBtn = document.getElementById('addProjectBtn');
 const deleteProjectBtn = document.getElementById('deleteProjectBtn');
 
 const taskTitleInput = document.getElementById('taskTitleInput');
+const taskStartInput = document.getElementById('taskStartInput');
 const taskDueInput = document.getElementById('taskDueInput');
 const taskPrioritySelect = document.getElementById('taskPrioritySelect');
 const taskTagSelect = document.getElementById('taskTagSelect');
 const taskNotesInput = document.getElementById('taskNotesInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
+const addTaskForm = document.getElementById('addTaskForm');
+const addTaskToggle = document.getElementById('addTaskToggle');
 
 const searchInput = document.getElementById('searchInput');
 const filterPriority = document.getElementById('filterPriority');
 const filterStatus = document.getElementById('filterStatus');
 const filterTag = document.getElementById('filterTag');
+const sortTasks = document.getElementById('sortTasks');
 
 const themeToggle = document.getElementById('themeToggle');
-const exportBtn = document.getElementById('exportBtn');
-const importBtn = document.getElementById('importBtn');
-const importFileInput = document.getElementById('importFileInput');
+const editProjectBtn = document.getElementById('editProjectBtn');
+const projectNameModal = document.getElementById('projectNameModal');
+const projectNameInput = document.getElementById('projectNameInput');
+const projectNameSaveBtn = document.getElementById('projectNameSaveBtn');
+const projectNameCancelBtn = document.getElementById('projectNameCancelBtn');
+const myCalendarBtn = document.getElementById('myCalendarBtn');
+const activityBtn = document.getElementById('activityBtn');
+const activityModal = document.getElementById('activityModal');
+const activityCloseBtn = document.getElementById('activityCloseBtn');
+const activityList = document.getElementById('activityList');
+const calendarModal = document.getElementById('calendarModal');
+const calendarCloseBtn = document.getElementById('calendarCloseBtn');
+const weeklyTasksBtn = document.getElementById('weeklyTasksBtn');
+const overdueTasksBtn = document.getElementById('overdueTasksBtn');
+const todayTasksBtn = document.getElementById('todayTasksBtn');
+const doneTodayBtn = document.getElementById('doneTodayBtn');
+const worklistModal = document.getElementById('worklistModal');
+const worklistCloseBtn = document.getElementById('worklistCloseBtn');
+const worklistTitle = document.getElementById('worklistTitle');
+const worklistContent = document.getElementById('worklistContent');
+const sendWorklistBtn = document.getElementById('sendWorklistBtn');
+const worklistWebhookBtn = document.getElementById('worklistWebhookBtn');
+let currentWorklistMode = 'week';
 
 const modalOverlay = document.getElementById('notesModal');
 const modalNotesText = document.getElementById('modalNotesText');
+const modalTaskTitle = document.getElementById('modalTaskTitle');
+const modalTaskStart = document.getElementById('modalTaskStart');
+const modalTaskDue = document.getElementById('modalTaskDue');
+const modalTaskPriority = document.getElementById('modalTaskPriority');
+const modalTaskStatus = document.getElementById('modalTaskStatus');
 const modalSaveBtn = document.getElementById('modalSaveBtn');
 const modalCancelBtn = document.getElementById('modalCancelBtn');
 
@@ -766,9 +920,6 @@ const webhookCancelBtn = document.getElementById('webhookCancelBtn');
 const webhookProjectName = document.getElementById('webhookProjectName');
 
 const projectWebhookBtn = document.getElementById('projectWebhookBtn');
-const sendNowBtn = document.getElementById('sendNowBtn');
-const statusDot = document.getElementById('statusDot');
-const statusText = document.getElementById('statusText');
 
 // ===== STORAGE =====
 function loadData() {
@@ -783,6 +934,8 @@ function loadData() {
                 if (!parsed.projects[pid].webhook) parsed.projects[pid].webhook = '';
             }
             data = parsed;
+            if (!data.worklistWebhook) data.worklistWebhook = '';
+            if (!Array.isArray(data.activity)) data.activity = [];
         } catch(e) { resetDefaultData(); }
     } else {
         resetDefaultData();
@@ -805,11 +958,18 @@ function resetDefaultData() {
     data.projects = { p1, p2 };
     data.currentProjectId = 'p1';
     data.nextId = 100;
+    data.activity = [];
     saveData();
 }
 
 function saveData() {
     localStorage.setItem('projectDashboardData', JSON.stringify(data));
+}
+
+function logActivity(message) {
+    if (!Array.isArray(data.activity)) data.activity = [];
+    data.activity.unshift({ message, timestamp: new Date().toISOString() });
+    data.activity = data.activity.slice(0, 100);
 }
 
 // ===== HELPERS =====
@@ -827,6 +987,122 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let quoted = false;
+    for (let index = 0; index < text.length; index += 1) {
+        const character = text[index];
+        if (character === '"') {
+            if (quoted && text[index + 1] === '"') { cell += '"'; index += 1; }
+            else quoted = !quoted;
+        } else if (character === ',' && !quoted) {
+            row.push(cell.trim()); cell = '';
+        } else if ((character === '\n' || character === '\r') && !quoted) {
+            if (character === '\r' && text[index + 1] === '\n') index += 1;
+            row.push(cell.trim());
+            if (row.some(value => value)) rows.push(row);
+            row = []; cell = '';
+        } else cell += character;
+    }
+    if (cell || row.length) { row.push(cell.trim()); if (row.some(value => value)) rows.push(row); }
+    if (rows.length < 2) return [];
+    const headers = rows.shift().map(header => header.toLowerCase().replace(/[\s_-]+/g, ''));
+    return rows.map(values => Object.fromEntries(headers.map((header, index) => [header, values[index] || ''])));
+}
+
+function trackerDate(value) {
+    const match = value.trim().match(/^(\d{1,2})\s+([A-Za-z]{3})[,.]?\s+(\d{2,4})$/);
+    if (!match) return '';
+    const year = match[3].length === 2 ? `20${match[3]}` : match[3];
+    const date = new Date(`${match[2]} ${match[1]}, ${year}`);
+    return Number.isNaN(date.getTime()) ? '' : date.toISOString().slice(0, 10);
+}
+
+function importTrackerCsv(text, replaceExisting = false) {
+    const rows = parseCsv(text);
+    const projects = {};
+    let currentProject = null;
+    rows.forEach(row => {
+        const values = Object.values(row);
+        const firstValue = (values[0] || '').replace(/\s+/g, ' ').trim();
+        const projectMatch = firstValue.match(/^Task\s+([1-4]):\s*(.*)$/i);
+        if (projectMatch) {
+            const id = `tracker-task-${projectMatch[1]}`;
+            currentProject = { id, name: firstValue, webhook: '', tasks: [] };
+            projects[id] = currentProject;
+            return;
+        }
+        if (!currentProject) return;
+        const title = (values[1] || '').replace(/\s+/g, ' ').trim();
+        if (!title || title === 'Task Details') return;
+        const progress = (values[3] || '').trim();
+        const due = trackerDate(values[2] || '');
+        currentProject.tasks.push({
+            id: generateId(),
+            title,
+            due,
+            priority: progress === '🔴' ? 'high' : progress === '🟢' ? 'low' : 'medium',
+            tag: 'work',
+            notes: values.find((value, index) => index > 3 && value && !/^(January|February|March|April|May|June|July|August|September|October|November|December)$/i.test(value)) || '',
+            progress,
+            progressPercent: progress === '🟢' ? 100 : progress === '🟡' ? 50 : 0,
+            completed: progress === '🟢',
+            subtasks: []
+        });
+    });
+    const importedProjects = Object.values(projects).filter(project => project.tasks.length);
+    if (!importedProjects.length) throw new Error('No Task 1-4 sections were found');
+    if (replaceExisting) data.projects = {};
+    importedProjects.forEach(project => { data.projects[project.id] = project; });
+    data.currentProjectId = importedProjects[0].id;
+    saveData();
+    render();
+    showToast(`${importedProjects.length} projects loaded from previous work`, 'success');
+}
+
+async function loadPreviousWork(replaceExisting = false) {
+    try {
+        const response = await fetch('/assets/photos/Task%20Tracker_%20IDP%20graduation%20Criteria%20-%20Master%20Tracker.csv');
+        if (!response.ok) throw new Error('The saved work file could not be loaded');
+        importTrackerCsv(await response.text(), replaceExisting);
+    } catch (error) {
+        showToast(`Error loading previous work: ${error.message}`, 'error');
+    }
+}
+
+function importCsv(text) {
+    const rows = parseCsv(text);
+    if (!rows.length) throw new Error('CSV must include a header row and at least one data row');
+    const getValue = (row, names) => names.map(name => row[name]).find(value => value !== undefined && value !== '') || '';
+    let importedTasks = 0;
+    rows.forEach(row => {
+        const projectName = getValue(row, ['project', 'projectname', 'category']) || 'Imported Work';
+        const projectId = Object.keys(data.projects).find(id => data.projects[id].name.toLowerCase() === projectName.toLowerCase()) || generateId();
+        if (!data.projects[projectId]) data.projects[projectId] = { id: projectId, name: projectName, webhook: '', tasks: [] };
+        const title = getValue(row, ['task', 'title', 'taskname', 'name']);
+        if (!title) return;
+        const status = getValue(row, ['status', 'completed', 'done']).toLowerCase();
+        data.projects[projectId].tasks.push({
+            id: generateId(),
+            title,
+            due: getValue(row, ['due', 'duedate', 'date', 'deadline']),
+            priority: getValue(row, ['priority', 'importance']).toLowerCase() || 'medium',
+            tag: getValue(row, ['tag', 'type']).toLowerCase() || 'work',
+            notes: getValue(row, ['notes', 'description', 'details']),
+            completed: ['true', 'yes', 'done', 'completed', '1'].includes(status),
+            subtasks: []
+        });
+        importedTasks += 1;
+    });
+    if (!importedTasks) throw new Error('No task/title column with task data was found');
+    data.currentProjectId = data.currentProjectId || Object.keys(data.projects)[0];
+    saveData();
+    render();
+    showToast(`${importedTasks} task${importedTasks === 1 ? '' : 's'} imported from CSV`, 'success');
 }
 function formatDate(dateStr) {
     if (!dateStr) return '';
@@ -860,21 +1136,23 @@ function shouldNotify(task) {
 // ===== SEND TO WEBHOOK =====
 function sendToWebhook(projectId, message) {
     const project = data.projects[projectId];
-    if (!project || !project.webhook) {
+    const webhook = projectId === 'worklist' ? data.worklistWebhook : project?.webhook;
+    const destinationName = projectId === 'worklist' ? 'worklist webhook' : `${project.name} webhook`;
+    if (!webhook) {
         return false;
     }
     
     const payload = { text: message };
-    fetch(project.webhook, {
+    fetch(webhook, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     })
     .then(res => {
         if (res.ok) {
-            showToast('✅ Sent to ' + project.name + ' webhook!', 'success');
+            showToast('✅ Sent to ' + destinationName + '!', 'success');
         } else {
-            showToast('❌ Failed to send to ' + project.name, 'error');
+            showToast('❌ Failed to send to ' + destinationName, 'error');
         }
     })
     .catch(err => {
@@ -948,9 +1226,51 @@ function notifyTaskDeleted(task) {
 // ===== RENDER =====
 function render() {
     renderProjects();
+    renderWorklist(currentWorklistMode);
+    renderActivity();
     renderTasks();
+    renderGantt();
+    renderYearCalendar();
     renderStats();
     renderProjectTitle();
+}
+
+function renderActivity() {
+    if (!data.activity?.length) {
+        activityList.innerHTML = '<div class="empty-state">No activity recorded yet.</div>';
+        return;
+    }
+    activityList.innerHTML = data.activity.map(entry => `<div class="weekly-task"><span class="project-color-dot"></span><span>${escapeHtml(entry.message)}<span class="task-project">${new Date(entry.timestamp).toLocaleString()}</span></span></div>`).join('');
+}
+
+function renderWorklist(mode) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay());
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 7);
+    const titles = { week: 'This week\'s work', overdue: 'Crossed deadline tasks', today: 'Today\'s worklist', done: 'What I have done today' };
+    const icons = { week: 'fa-calendar-check', overdue: 'fa-triangle-exclamation', today: 'fa-sun', done: 'fa-check-double' };
+    worklistTitle.innerHTML = `<i class="far ${icons[mode] || icons.week}"></i> ${titles[mode] || titles.week}`;
+    const matches = [];
+    Object.entries(data.projects).forEach(([projectId, project]) => project.tasks.forEach(task => {
+        const due = task.due ? new Date(`${task.due}T00:00:00`) : null;
+        const completedToday = task.completed && task.completedAt && task.completedAt.slice(0, 10) === today.toISOString().slice(0, 10);
+        const subtaskDoneToday = (task.subtasks || []).some(subtask => subtask.done && subtask.doneAt && subtask.doneAt.slice(0, 10) === today.toISOString().slice(0, 10));
+        const include = mode === 'done' ? completedToday || subtaskDoneToday : mode === 'overdue' ? !task.completed && due && due < today : mode === 'today' ? !task.completed && due && due.getTime() === today.getTime() : !task.completed && due && due >= weekStart && due < weekEnd;
+        if (include) matches.push({ task, projectId, projectName: project.name });
+    }));
+    if (!matches.length) { worklistContent.innerHTML = '<div class="empty-state">No matching work.</div>'; return; }
+    worklistContent.innerHTML = matches.map(({ task, projectId, projectName }) => `<div class="weekly-task${task.completed ? ' is-complete' : ''}"><input class="weekly-check" type="checkbox" data-project-id="${projectId}" data-task-id="${task.id}" ${task.completed ? 'checked' : ''}><span class="project-color-dot"></span><span>${escapeHtml(task.title)}<span class="task-project">${escapeHtml(projectName)}${task.due ? ` · ${formatDate(task.due)}` : ''}</span><span class="weekly-subtasks">${(task.subtasks || []).map(subtask => `<label class="weekly-subtask${subtask.done ? ' done' : ''}"><input class="weekly-subtask-check" type="checkbox" data-project-id="${projectId}" data-task-id="${task.id}" data-subtask-id="${subtask.id}" ${subtask.done ? 'checked' : ''}>${escapeHtml(subtask.text)}</label>`).join('')}</span></span><span class="task-priority priority-${escapeHtml(task.priority)}">${escapeHtml(task.priority)}</span></div>`).join('');
+    worklistContent.querySelectorAll('.weekly-check').forEach(input => input.addEventListener('change', () => toggleTaskForProject(input.dataset.projectId, input.dataset.taskId)));
+    worklistContent.querySelectorAll('.weekly-subtask-check').forEach(input => input.addEventListener('change', () => toggleSubtaskForProject(input.dataset.projectId, input.dataset.taskId, input.dataset.subtaskId)));
+}
+
+function openWorklist(mode) {
+    currentWorklistMode = mode;
+    renderWorklist(mode);
+    worklistModal.classList.add('open');
 }
 
 function renderProjects() {
@@ -960,23 +1280,28 @@ function renderProjects() {
         return;
     }
     let html = '';
-    for (const pid of ids) {
+    const projectColors = ['#2563eb', '#db2777', '#16a34a', '#ea580c', '#7c3aed', '#0891b2'];
+    for (const [projectIndex, pid] of ids.entries()) {
         const p = data.projects[pid];
         const count = p.tasks.filter(t => !t.completed).length;
+        const completion = p.tasks.length ? Math.round(p.tasks.reduce((total, task) => total + (task.progressPercent ?? (task.completed ? 100 : 0)), 0) / p.tasks.length) : 0;
         const active = pid === data.currentProjectId ? 'active' : '';
         const hasWebhook = p.webhook && p.webhook.length > 0;
         const webhookStatus = hasWebhook ? 'configured' : 'not-configured';
         const webhookLabel = hasWebhook ? '🔗 Connected' : '🔌 No webhook';
         
         html += `
-            <div class="project-item ${active}" data-id="${pid}">
+                <div class="project-item ${active}" data-id="${pid}">
                 <span class="project-name">
+                    <span class="project-color-dot" style="--project-color:${projectColors[projectIndex % projectColors.length]}" title="Calendar color"></span>
                     <i class="fas fa-folder"></i> 
                     ${escapeHtml(p.name)}
                     <span class="project-webhook-status ${webhookStatus}">${webhookLabel}</span>
                 </span>
                 <span class="project-count">${count}</span>
                 <button class="project-delete-btn" data-id="${pid}" title="Delete project"><i class="fas fa-times"></i></button>
+                <div class="project-progress" title="${completion}% complete"><div class="project-progress-bar" style="width:${completion}%"></div></div>
+                <span class="project-progress-label">${completion}%</span>
             </div>
         `;
     }
@@ -1007,6 +1332,35 @@ function renderProjects() {
             showToast('Project deleted', 'info');
         });
     });
+
+}
+
+function renderWeeklyTodo() {
+    const container = document.getElementById('weeklyTodoList');
+    const today = new Date();
+    const pending = [];
+    Object.entries(data.projects).forEach(([projectId, project], projectIndex) => project.tasks.forEach(task => {
+        if (!task.completed && task.due) {
+            const due = new Date(`${task.due}T00:00:00`);
+            if (due >= new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1)) pending.push({ ...task, projectId, projectName: project.name, projectColor: ['#2563eb', '#db2777', '#16a34a', '#ea580c', '#7c3aed', '#0891b2'][projectIndex % 6] });
+        }
+    }));
+    pending.sort((a, b) => a.due.localeCompare(b.due));
+    if (!pending.length) {
+        container.innerHTML = '<span style="font-size:0.72rem;color:var(--text-muted);">No pending deadlines this week.</span>';
+        return;
+    }
+    const groups = {};
+    pending.forEach(task => {
+        const due = new Date(`${task.due}T00:00:00`);
+        const weekStart = new Date(due);
+        weekStart.setDate(due.getDate() - due.getDay());
+        const label = `Week of ${formatDate(weekStart.toISOString().slice(0, 10))}`;
+        (groups[label] ||= []).push(task);
+    });
+    container.innerHTML = Object.entries(groups).map(([label, tasks]) => `<div class="week-group"><div class="week-label">${label}</div>${tasks.map(task => `<div class="weekly-task${task.completed ? ' is-complete' : ''}"><input class="weekly-check" type="checkbox" data-project-id="${task.projectId}" data-task-id="${task.id}" ${task.completed ? 'checked' : ''}><span class="project-color-dot" style="--project-color:${task.projectColor}"></span><span>${escapeHtml(task.title)}<span class="task-project">${escapeHtml(task.projectName)} · ${formatDate(task.due)}</span><span class="weekly-subtasks">${(task.subtasks || []).map(subtask => `<label class="weekly-subtask${subtask.done ? ' done' : ''}"><input class="weekly-subtask-check" type="checkbox" data-project-id="${task.projectId}" data-task-id="${task.id}" data-subtask-id="${subtask.id}" ${subtask.done ? 'checked' : ''}>${escapeHtml(subtask.text)}</label>`).join('')}</span></span><span class="task-priority priority-${escapeHtml(task.priority)}">${escapeHtml(task.priority)}</span></div>`).join('')}</div>`).join('');
+    container.querySelectorAll('.weekly-check').forEach(input => input.addEventListener('change', () => toggleTaskForProject(input.dataset.projectId, input.dataset.taskId)));
+    container.querySelectorAll('.weekly-subtask-check').forEach(input => input.addEventListener('change', () => toggleSubtaskForProject(input.dataset.projectId, input.dataset.taskId, input.dataset.subtaskId)));
 }
 
 function renderTasks() {
@@ -1023,6 +1377,11 @@ function renderTasks() {
         const matchTag = tagFilter === 'all' || t.tag === tagFilter;
         return matchSearch && matchPriority && matchStatus && matchTag;
     });
+
+    const priorityOrder = { high: 0, medium: 1, low: 2 };
+    if (sortTasks.value === 'deadline') filtered.sort((a, b) => (a.due || '9999').localeCompare(b.due || '9999'));
+    if (sortTasks.value === 'priority') filtered.sort((a, b) => (priorityOrder[a.priority] ?? 1) - (priorityOrder[b.priority] ?? 1));
+    if (sortTasks.value === 'status') filtered.sort((a, b) => Number(a.completed) - Number(b.completed));
 
     taskCountBadge.textContent = `${filtered.length} tasks`;
 
@@ -1046,7 +1405,7 @@ function renderTasks() {
         const notifyIcon = shouldNotify(task) ? '<span class="notification-badge work">🔔</span>' : '<span class="notification-badge personal">🔇</span>';
 
         html += `
-            <div class="task-item ${completedClass} tag-${task.tag}" data-id="${task.id}">
+            <div class="task-item ${completedClass} tag-${task.tag}" data-id="${task.id}" draggable="true">
                 <div class="task-row">
                     <input type="checkbox" class="task-check" ${checked} />
                     <div class="task-content">
@@ -1055,6 +1414,7 @@ function renderTasks() {
                         <div class="task-meta">
                             <span class="task-priority ${priorityClass}">${task.priority}</span>
                             <span class="task-tag tag-${task.tag}">${task.tag}</span>
+                            ${task.progress ? `<span class="task-due">${escapeHtml(task.progress)}</span>` : ''}
                             ${task.due ? `<span class="task-due ${dueClass}"><i class="far fa-calendar-alt"></i> ${formatDate(task.due)}${overdue ? ' ⚠️' : ''}</span>` : ''}
                         </div>
                         ${task.subtasks && task.subtasks.length > 0 ? `
@@ -1084,7 +1444,7 @@ function renderTasks() {
                     </div>
                     <div class="task-actions">
                         <button class="send-btn" title="Send this task to Chat"><i class="fas fa-paper-plane"></i></button>
-                        <button class="notes-btn" title="Edit notes"><i class="fas fa-pen"></i></button>
+                        <button class="notes-btn" title="Edit task"><i class="fas fa-pen"></i></button>
                         <button class="delete-btn" title="Delete task"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
@@ -1124,6 +1484,36 @@ function renderTasks() {
             const item = this.closest('.task-item');
             const id = item.dataset.id;
             sendSingleTask(id);
+        });
+    });
+
+    let draggedTaskId = null;
+    document.querySelectorAll('.task-item').forEach(el => {
+        el.addEventListener('dragstart', function(e) {
+            draggedTaskId = this.dataset.id;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+        el.addEventListener('dragend', function() { this.classList.remove('dragging'); draggedTaskId = null; });
+        el.addEventListener('dragover', function(e) { e.preventDefault(); if (this.dataset.id !== draggedTaskId) this.classList.add('drag-over'); });
+        el.addEventListener('dragleave', function() { this.classList.remove('drag-over'); });
+        el.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            const project = getCurrentProject();
+            const visibleIds = Array.from(taskListEl.querySelectorAll('.task-item')).map(item => item.dataset.id);
+            const fromIndex = visibleIds.indexOf(draggedTaskId);
+            const toIndex = visibleIds.indexOf(this.dataset.id);
+            if (!project || fromIndex < 0 || toIndex < 0 || fromIndex === toIndex) return;
+            const movedId = visibleIds.splice(fromIndex, 1)[0];
+            visibleIds.splice(toIndex, 0, movedId);
+            const taskMap = Object.fromEntries(project.tasks.map(task => [task.id, task]));
+            const reordered = [];
+            visibleIds.forEach(id => reordered.push(taskMap[id]));
+            project.tasks.forEach(task => { if (!visibleIds.includes(task.id)) reordered.push(task); });
+            project.tasks = reordered;
+            saveData();
+            render();
         });
     });
 
@@ -1170,6 +1560,66 @@ function renderTasks() {
     });
 }
 
+function renderGantt() {
+    const chart = document.getElementById('ganttChart');
+    const rangeLabel = document.getElementById('ganttRange');
+    const tasks = getTasks().filter(task => task.due);
+    if (!tasks.length) {
+        chart.innerHTML = '<div class="empty-state">Add due dates to tasks to see the project timeline.</div>';
+        rangeLabel.textContent = '';
+        return;
+    }
+    const dates = tasks.flatMap(task => [task.start || task.due, task.due].map(date => new Date(`${date}T00:00:00`)));
+    const start = new Date(Math.min(...dates));
+    const end = new Date(Math.max(...dates));
+    end.setDate(end.getDate() + 1);
+    const span = Math.max(1, Math.ceil((end - start) / 86400000));
+    const labels = Array.from({ length: Math.min(span, 8) }, (_, index) => {
+        const date = new Date(start);
+        date.setDate(start.getDate() + Math.round(index * (span - 1) / Math.max(1, Math.min(span, 8) - 1)));
+        return formatDate(date.toISOString().slice(0, 10));
+    });
+    rangeLabel.textContent = `${formatDate(start.toISOString().slice(0, 10))} - ${formatDate(end.toISOString().slice(0, 10))}`;
+    chart.innerHTML = `<div class="gantt"><div class="gantt-dates"><span></span><span class="gantt-date-track">${labels.map(label => `<span>${label}</span>`).join('')}</span></div>${tasks.map(task => {
+        const taskStart = new Date(`${(task.start || task.due)}T00:00:00`);
+        const taskEnd = new Date(`${task.due}T00:00:00`);
+        const offset = ((taskStart - start) / 86400000) / span * 100;
+        const width = Math.max(3, ((taskEnd - taskStart) / 86400000 + 1) / span * 100);
+        return `<div class="gantt-row"><span class="gantt-label" title="${escapeHtml(task.title)}">${escapeHtml(task.title)}</span><span class="gantt-track"><span class="gantt-bar ${task.completed ? 'completed' : ''}" style="left:${offset}%;width:${width}%" title="${task.start ? `From ${formatDate(task.start)} ` : ''}Due ${formatDate(task.due)}"></span></span></div>`;
+    }).join('')}</div>`;
+}
+
+function renderYearCalendar() {
+    const calendar = document.getElementById('yearCalendar');
+    const year = 2026;
+    const colors = ['#2563eb', '#db2777', '#16a34a', '#ea580c', '#7c3aed', '#0891b2'];
+    const projects = Object.values(data.projects);
+    document.getElementById('calendarLegend').innerHTML = projects.map((project, index) => `<span class="calendar-legend-item"><span class="project-color-dot" style="--project-color:${colors[index % colors.length]}"></span>${escapeHtml(project.name)}</span>`).join('');
+    const tasksByDate = {};
+    projects.forEach((project, projectIndex) => {
+        project.tasks.forEach(task => {
+            if (!task.due || !task.due.startsWith(`${year}-`)) return;
+            if (!tasksByDate[task.due]) tasksByDate[task.due] = [];
+            tasksByDate[task.due].push({ ...task, projectName: project.name, color: colors[projectIndex % colors.length] });
+        });
+    });
+    const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    calendar.innerHTML = Array.from({ length: 12 }, (_, month) => {
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        let days = weekdays.map(day => `<span class="calendar-weekday">${day}</span>`).join('');
+        for (let blank = 0; blank < firstDay; blank += 1) days += '<span></span>';
+        for (let day = 1; day <= daysInMonth; day += 1) {
+            const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const dayTasks = tasksByDate[date] || [];
+            const today = new Date().toISOString().slice(0, 10) === date ? ' today' : '';
+            const title = dayTasks.map(task => `${task.projectName}: ${task.title}`).join('\n');
+            days += `<span class="calendar-day${dayTasks.length ? ' has-task' : ''}${today}" ${title ? `title="${escapeHtml(title)}"` : ''} style="--calendar-color:${dayTasks[0]?.color || 'transparent'}">${day}${dayTasks.length ? `<span class="calendar-dots">${dayTasks.slice(0, 3).map(task => `<span class="calendar-dot" style="--calendar-color:${task.color}"></span>`).join('')}</span>` : ''}</span>`;
+        }
+        return `<div class="month-card"><div class="month-title">${new Date(year, month, 1).toLocaleString('en-US', { month: 'long' })}</div><div class="month-days">${days}</div></div>`;
+    }).join('');
+}
+
 function renderStats() {
     const tasks = getTasks();
     const total = tasks.length;
@@ -1189,6 +1639,26 @@ function renderProjectTitle() {
     } else {
         currentProjectTitle.innerHTML = 'Select a project <small>or create one</small>';
     }
+}
+
+function openProjectNameModal() {
+    const project = getCurrentProject();
+    if (!project) { showToast('Please select a project first', 'error'); return; }
+    projectNameInput.value = project.name;
+    projectNameModal.classList.add('open');
+    projectNameInput.focus();
+}
+
+function saveProjectName() {
+    const project = getCurrentProject();
+    const name = projectNameInput.value.trim();
+    if (!project) return;
+    if (!name) { showToast('Please enter a project name', 'error'); return; }
+    project.name = name;
+    saveData();
+    projectNameModal.classList.remove('open');
+    render();
+    showToast('Project name updated', 'success');
 }
 
 // ===== ACTIONS =====
@@ -1212,6 +1682,7 @@ function addTask() {
     const task = {
         id: generateId(),
         title,
+        start: taskStartInput.value || taskDueInput.value || '',
         due: taskDueInput.value || '',
         priority: taskPrioritySelect.value,
         tag: taskTagSelect.value,
@@ -1221,8 +1692,10 @@ function addTask() {
     };
     proj.tasks.push(task);
     taskTitleInput.value = '';
+    taskStartInput.value = '';
     taskDueInput.value = '';
     taskNotesInput.value = '';
+    addTaskForm.classList.add('is-hidden');
     saveData();
     render();
     showToast(`Task "${task.title}" added!`, 'success');
@@ -1236,6 +1709,10 @@ function toggleTask(id) {
     if (task) {
         const wasCompleted = task.completed;
         task.completed = !task.completed;
+        task.progressPercent = task.completed ? 100 : 0;
+        task.progress = task.completed ? '🟢' : '';
+        task.completedAt = task.completed ? new Date().toISOString() : '';
+        logActivity(`${task.completed ? 'Completed' : 'Reopened'} task: ${task.title}`);
         saveData();
         render();
         if (task.completed && !wasCompleted) {
@@ -1245,6 +1722,19 @@ function toggleTask(id) {
             showToast('🔄 Task reopened', 'info');
         }
     }
+}
+
+function toggleTaskForProject(projectId, taskId) {
+    const project = data.projects[projectId];
+    const task = project?.tasks.find(item => item.id === taskId);
+    if (!task) return;
+    task.completed = !task.completed;
+    task.progressPercent = task.completed ? 100 : 0;
+    task.progress = task.completed ? '🟢' : '';
+    task.completedAt = task.completed ? new Date().toISOString() : '';
+    logActivity(`${task.completed ? 'Completed' : 'Reopened'} task: ${task.title}`);
+    saveData();
+    render();
 }
 
 function deleteTask(id) {
@@ -1282,6 +1772,8 @@ function toggleSubtask(taskId, stid) {
     if (st) {
         const wasDone = st.done;
         st.done = !st.done;
+        st.doneAt = st.done ? new Date().toISOString() : '';
+        logActivity(`${st.done ? 'Completed' : 'Reopened'} subtask: ${st.text}`);
         saveData();
         render();
         if (st.done && !wasDone) {
@@ -1291,6 +1783,70 @@ function toggleSubtask(taskId, stid) {
             showToast('🔄 Subtask reopened', 'info');
         }
     }
+}
+
+function toggleSubtaskForProject(projectId, taskId, subtaskId) {
+    const task = data.projects[projectId]?.tasks.find(item => item.id === taskId);
+    const subtask = task?.subtasks?.find(item => item.id === subtaskId);
+    if (!subtask) return;
+    subtask.done = !subtask.done;
+    subtask.doneAt = subtask.done ? new Date().toISOString() : '';
+    logActivity(`${subtask.done ? 'Completed' : 'Reopened'} subtask: ${subtask.text}`);
+    saveData();
+    render();
+}
+
+function sendWeeklyWorklist() {
+    const lines = ['📋 Weekly Worklist'];
+    let count = 0;
+    Object.values(data.projects).forEach(project => {
+        const tasks = project.tasks.filter(task => !task.completed);
+        if (!tasks.length) return;
+        lines.push(`\n${project.name}`);
+        tasks.forEach(task => {
+            lines.push(`- ${task.title} [${task.priority.toUpperCase()}]${task.due ? ` - ${formatDate(task.due)}` : ''}`);
+            (task.subtasks || []).filter(subtask => !subtask.done).forEach(subtask => lines.push(`  - ${subtask.text}`));
+            count += 1;
+        });
+    });
+    if (!count) { showToast('No pending work to send', 'info'); return; }
+    const webhookProject = getCurrentProject();
+    if (!webhookProject?.webhook) { showToast('Set a webhook for the selected project first', 'warning'); return; }
+    sendToWebhook(webhookProject.id, lines.join('\n'));
+    showToast('Weekly worklist sent', 'success');
+}
+
+function sendWorklist(mode) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const end = new Date(today);
+    end.setDate(today.getDate() + 1);
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay());
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 7);
+    const lines = [`${worklistTitle.textContent.trim()}`];
+    let count = 0;
+    Object.values(data.projects).forEach(project => project.tasks.forEach(task => {
+        const due = task.due ? new Date(`${task.due}T00:00:00`) : null;
+        const doneToday = mode === 'done' && (task.completedAt?.slice(0, 10) === today.toISOString().slice(0, 10) || (task.subtasks || []).some(subtask => subtask.done && subtask.doneAt?.slice(0, 10) === today.toISOString().slice(0, 10)));
+        const include = mode === 'done' ? doneToday : mode === 'overdue' ? !task.completed && due && due < today : mode === 'today' ? !task.completed && due && due.getTime() === today.getTime() : !task.completed && due && due >= weekStart && due < weekEnd;
+        if (!include) return;
+        lines.push(`\n${project.name}\n- ${task.title} [${task.priority.toUpperCase()}]${task.due ? ` - ${formatDate(task.due)}` : ''}`);
+        (task.subtasks || []).filter(subtask => mode === 'done' ? subtask.done && subtask.doneAt?.slice(0, 10) === today.toISOString().slice(0, 10) : !subtask.done).forEach(subtask => lines.push(`  - ${subtask.text}`));
+        count += 1;
+    }));
+    if (!count) { showToast('No matching work to send', 'info'); return; }
+    if (!data.worklistWebhook) { showToast('Set the worklist webhook first', 'warning'); return; }
+    sendToWebhook('worklist', lines.join('\n'));
+    showToast('Worklist sent', 'success');
+}
+
+function openWorklistWebhook() {
+    editingWebhookProjectId = null;
+    webhookProjectName.textContent = 'Weekly worklists';
+    webhookInput.value = data.worklistWebhook || '';
+    webhookModal.classList.add('open');
 }
 
 function deleteSubtask(taskId, stid) {
@@ -1308,6 +1864,11 @@ function openNotesModal(taskId) {
     const task = tasks.find(t => t.id === taskId);
     if (!task) return;
     editingTaskId = taskId;
+    modalTaskTitle.value = task.title;
+    modalTaskStart.value = task.start || task.due || '';
+    modalTaskDue.value = task.due || '';
+    modalTaskPriority.value = task.priority || 'medium';
+    modalTaskStatus.value = task.completed ? 'completed' : 'pending';
     modalNotesText.value = task.notes || '';
     modalOverlay.classList.add('open');
 }
@@ -1317,6 +1878,17 @@ function saveNotes() {
     const tasks = getTasks();
     const task = tasks.find(t => t.id === editingTaskId);
     if (!task) return;
+    const title = modalTaskTitle.value.trim();
+    if (!title) { showToast('Please enter a task title', 'error'); return; }
+    const wasCompleted = task.completed;
+    task.title = title;
+    task.start = modalTaskStart.value || task.due || '';
+    task.due = modalTaskDue.value || '';
+    task.priority = modalTaskPriority.value;
+    task.completed = modalTaskStatus.value === 'completed';
+    task.progressPercent = task.completed ? 100 : 0;
+    task.completedAt = task.completed ? (task.completedAt || new Date().toISOString()) : '';
+    if (wasCompleted !== task.completed) logActivity(`${task.completed ? 'Completed' : 'Reopened'} task: ${task.title}`);
     task.notes = modalNotesText.value;
     saveData();
     modalOverlay.classList.remove('open');
@@ -1335,7 +1907,13 @@ function openWebhookModal() {
 }
 
 function saveWebhook() {
-    if (!editingWebhookProjectId) return;
+    if (!editingWebhookProjectId) {
+        data.worklistWebhook = webhookInput.value.trim();
+        saveData();
+        webhookModal.classList.remove('open');
+        showToast(data.worklistWebhook ? 'Worklist webhook saved' : 'Worklist webhook removed', 'success');
+        return;
+    }
     const proj = data.projects[editingWebhookProjectId];
     if (!proj) return;
     proj.webhook = webhookInput.value.trim();
@@ -1417,33 +1995,26 @@ function checkForMorningReport() {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
-    if (hours === 9 && minutes === 0) {
+    if ((hours === 9 || hours === 17) && minutes === 0) {
+        const reportMode = hours === 9 ? 'today' : 'done';
+        const reportKey = `lastWorklistReport-${reportMode}`;
         const lastSent = localStorage.getItem('lastDailyReportSent');
         const today = now.toDateString();
-        if (lastSent !== today) {
-            sendDailyReport();
-            localStorage.setItem('lastDailyReportSent', today);
+        if (lastSent !== `${today}-${reportMode}`) {
+            sendWorklist(reportMode);
+            localStorage.setItem(reportKey, today);
+            localStorage.setItem('lastDailyReportSent', `${today}-${reportMode}`);
         }
     }
 }
 
 // ===== INIT =====
-function init() {
+async function init() {
     loadData();
+    const projects = Object.values(data.projects);
+    const shouldLoadTracker = projects.length === 0 || projects.every(project => ['Work Projects', 'Personal Projects'].includes(project.name));
+    if (shouldLoadTracker) await loadPreviousWork(true);
     render();
-
-    // Check webhook status
-    let hasAnyWebhook = false;
-    for (const pid in data.projects) {
-        if (data.projects[pid].webhook) { hasAnyWebhook = true; break; }
-    }
-    if (hasAnyWebhook) {
-        statusDot.className = 'status-dot';
-        statusText.textContent = '✅ Webhooks configured';
-    } else {
-        statusDot.className = 'status-dot inactive';
-        statusText.textContent = '⚠️ No webhooks set';
-    }
 
     // Start automation checker (every 30 seconds)
     setInterval(checkForMorningReport, 30000);
@@ -1455,6 +2026,10 @@ function init() {
 
     addTaskBtn.addEventListener('click', addTask);
     taskTitleInput.addEventListener('keypress', e => { if (e.key === 'Enter') addTask(); });
+    addTaskToggle.addEventListener('click', () => {
+        addTaskForm.classList.toggle('is-hidden');
+        if (!addTaskForm.classList.contains('is-hidden')) taskTitleInput.focus();
+    });
 
     deleteProjectBtn.addEventListener('click', function() {
         const proj = getCurrentProject();
@@ -1480,51 +2055,30 @@ function init() {
     modalCancelBtn.addEventListener('click', () => modalOverlay.classList.remove('open'));
 
     projectWebhookBtn.addEventListener('click', openWebhookModal);
+    worklistWebhookBtn.addEventListener('click', openWorklistWebhook);
 
     webhookSaveBtn.addEventListener('click', saveWebhook);
     webhookCancelBtn.addEventListener('click', () => webhookModal.classList.remove('open'));
-
-    sendNowBtn.addEventListener('click', sendDailyReport);
+    sendWorklistBtn.addEventListener('click', () => sendWorklist(currentWorklistMode));
 
     searchInput.addEventListener('input', render);
     filterPriority.addEventListener('change', render);
     filterStatus.addEventListener('change', render);
     filterTag.addEventListener('change', render);
-
-    exportBtn.addEventListener('click', function() {
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `dashboard-backup-${new Date().toISOString().slice(0,10)}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        showToast('Data exported!', 'success');
-    });
-
-    importBtn.addEventListener('click', () => importFileInput.click());
-    importFileInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            try {
-                const imported = JSON.parse(ev.target.result);
-                if (imported.projects) {
-                    data = imported;
-                    saveData();
-                    render();
-                    showToast('Data imported successfully!', 'success');
-                } else {
-                    showToast('Invalid file format', 'error');
-                }
-            } catch(err) {
-                showToast('Error reading file: ' + err.message, 'error');
-            }
-        };
-        reader.readAsText(file);
-        this.value = '';
-    });
+    sortTasks.addEventListener('change', render);
+    editProjectBtn.addEventListener('click', openProjectNameModal);
+    projectNameSaveBtn.addEventListener('click', saveProjectName);
+    projectNameCancelBtn.addEventListener('click', () => projectNameModal.classList.remove('open'));
+    projectNameInput.addEventListener('keypress', e => { if (e.key === 'Enter') saveProjectName(); });
+    myCalendarBtn.addEventListener('click', () => calendarModal.classList.add('open'));
+    calendarCloseBtn.addEventListener('click', () => calendarModal.classList.remove('open'));
+    activityBtn.addEventListener('click', () => activityModal.classList.add('open'));
+    activityCloseBtn.addEventListener('click', () => activityModal.classList.remove('open'));
+    weeklyTasksBtn.addEventListener('click', () => openWorklist('week'));
+    overdueTasksBtn.addEventListener('click', () => openWorklist('overdue'));
+    todayTasksBtn.addEventListener('click', () => openWorklist('today'));
+    doneTodayBtn.addEventListener('click', () => openWorklist('done'));
+    worklistCloseBtn.addEventListener('click', () => worklistModal.classList.remove('open'));
 
     // Close modals on overlay click
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
@@ -1544,3 +2098,4 @@ function init() {
 document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
+</html>
