@@ -68,6 +68,24 @@ header.scrolled {
   margin: 0 auto;
   padding: 0 2rem;
   text-align: center;
+  position: relative;
+}
+
+.header-login {
+  position: absolute;
+  top: 0.35rem;
+  right: 2rem;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.header-login:hover,
+.header-login:focus {
+  color: var(--sepia);
 }
 
 header .site-name {
@@ -174,6 +192,7 @@ nav li {
 .header-social { display: none; }
 
 @media (max-width: 700px) {
+  .header-login { right: 1rem; }
   nav ul { gap: 1.25rem; }
   header .site-tagline {
     white-space: normal;
