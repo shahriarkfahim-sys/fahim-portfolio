@@ -636,8 +636,11 @@
             .banner-right { width: 100%; justify-content: center; }
         }
     </style>
+    <script src="auth.js"></script>
 </head>
 <body>
+<script>requireDashboardAuth();</script>
+<button type="button" onclick="signOut()" style="position:fixed;top:16px;right:20px;z-index:20;padding:8px 14px;border:1px solid var(--border-color);border-radius:40px;background:var(--bg-secondary);color:var(--text-secondary);cursor:pointer;">Sign out</button>
 
 <!-- ===== APP ===== -->
 <div class="app-container">

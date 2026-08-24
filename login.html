@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in | Shahriar K Fahim</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-page { min-height: 100vh; display: grid; place-items: center; padding: 2rem; }
+    .login-panel { width: min(100%, 430px); border: 1px solid var(--rule); padding: 2.5rem; background: rgba(245, 240, 230, 0.88); box-shadow: 0 1rem 2.5rem rgba(26, 18, 8, 0.1); }
+    .login-kicker { color: var(--sepia); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; }
+    .login-panel h1 { margin: 0.5rem 0 0.4rem; font-size: 2.2rem; font-weight: 400; }
+    .login-copy { color: var(--muted); font-style: italic; margin-bottom: 1.8rem; }
+    .login-field { display: block; margin-bottom: 1rem; color: var(--ink-light); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .login-field input { display: block; width: 100%; margin-top: 0.35rem; padding: 0.75rem; border: 1px solid var(--rule); background: var(--parchment); color: var(--ink); font: inherit; font-size: 0.95rem; letter-spacing: 0; text-transform: none; }
+    .login-field input:focus { outline: 2px solid var(--sepia-light); outline-offset: 2px; }
+    .login-button { width: 100%; margin-top: 0.5rem; padding: 0.8rem; border: 1px solid var(--ink); background: var(--ink); color: var(--parchment); cursor: pointer; font: inherit; letter-spacing: 0.16em; text-transform: uppercase; }
+    .login-button:hover { background: var(--sepia); border-color: var(--sepia); }
+    .login-error { margin-top: 1rem; color: #9f2f20; font-size: 0.82rem; }
+    .login-credentials { margin-top: 1.8rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.78rem; }
+    .login-credentials strong { color: var(--ink-light); font-weight: 400; }
+    .back-link { display: inline-block; margin-top: 1.5rem; color: var(--sepia); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-panel" aria-labelledby="loginTitle">
+      <span class="login-kicker">Private workspace</span>
+      <h1 id="loginTitle">Welcome back</h1>
+      <p class="login-copy">Sign in to open the project dashboard.</p>
+      <form id="loginForm">
+        <label class="login-field" for="username">Username
+          <input id="username" name="username" autocomplete="username" required>
+        </label>
+        <label class="login-field" for="password">Password
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="login-button" type="submit">Sign in</button>
+        <p class="login-error" id="loginError" role="alert" hidden></p>
+      </form>
+      <p class="login-credentials">Demo credentials: <strong>fahim</strong> / <strong>Fahim@2026!</strong></p>
+      <a class="back-link" href="/">Back to portfolio</a>
+    </section>
+  </main>
+  <script src="auth.js"></script>
+  <script>setupLoginForm();</script>
+</body>
+</html>

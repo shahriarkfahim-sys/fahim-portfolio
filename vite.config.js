@@ -8,7 +8,7 @@ function copyStaticFiles() {
     closeBundle() {
       // These files are served directly rather than imported by the Vite HTML
       // entry points, so they need to be included in the deployment output.
-      const files = ['site.js', 'uploads', 'assets/photos'];
+      const files = ['site.js', 'auth.js', 'login.html', 'uploads', 'assets/photos'];
 
       for (const file of files) {
         const source = resolve(file);
